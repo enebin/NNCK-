@@ -43,7 +43,7 @@ class CameraViewModel: ObservableObject {
     @Published var cameraAuth: SessionSetupResult = .success
     @Published var albumAuth: SessionSetupResult = .success
     
-    let debug = true
+    let debug = false
     
     var notYetPermitted: Bool {
         return self.debug ? !self.debug : self.cameraAuth != .success || self.albumAuth != .success
@@ -52,7 +52,8 @@ class CameraViewModel: ObservableObject {
     // MARK: - 세팅
     func configure() {
         model.requestAndCheckPermissions()
-        model.getAllPhotos()
+        model.fetchPhoto()
+//        model.getAllPhotos()
     }
     
     // MARK: - 내부값 수정하는 메소드들

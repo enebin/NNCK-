@@ -235,7 +235,7 @@ class Camera: NSObject, ObservableObject {
         print("[Camera]: Photo's taken")
     }
     
-    func fetchPhoto() -> PHFetchResult<PHAsset> {
+    func fetchPhoto() {
         /// 페치 및 로컬 페치 데이터 업데이트, 에셋 리턴
         // 이미지 페치 옵션
         let fetchOptions = PHFetchOptions()
@@ -243,23 +243,37 @@ class Camera: NSObject, ObservableObject {
 
         let results: PHFetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
         self.photoAssets = results
+    }
+    
+    func requestImage(asset: PHAsset) -> UIImage? {
+        let size = CGSize(width: 700, height: 700) //You can change size here
+        let requestOptions = PHImageRequestOptions()
+        let image: UIImage?
+        requestOptions.isSynchronous = true
+        requestOptions.deliveryMode = .highQualityFormat
+        requestOptions.isNetworkAccessAllowed = true
         
-        return results
+        PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions) { (image, _) in
+                return image
+        }
     }
     
     // TODO: 찍은사진 갤러리 뷰
     func getAllPhotos() {
-        let results = fetchPhoto()
+        fetchPhoto()
         
         let size = CGSize(width: 700, height: 700) //You can change size here
         let requestOptions = PHImageRequestOptions()
         requestOptions.isSynchronous = true
         requestOptions.deliveryMode = .highQualityFormat
+        requestOptions.isNetworkAccessAllowed = true
         
         DispatchQueue.main.async {
             if results.count > 0 {
+                
                 var photoResult = [UIImage]()
-                for i in 0..<results.count {
+//                for i in 0..<results.count {
+                for i in 0..<20 {
                     let asset = results.object(at: i)
                     PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions) { (image, _) in
                         if let image = image {
@@ -322,10 +336,10 @@ class Camera: NSObject, ObservableObject {
         }, completionHandler: {success, error in
             if success {
                 self.isDeleted = true
+                self.fetchPhoto()
             } else {
                 self.isDeleted = false
             }
-            self.getAllPhotos()
         })
     }
 }

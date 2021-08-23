@@ -203,7 +203,7 @@ struct CameraView: View {
                    in: 0...10)
                 .padding(10)
                 .background(Capsule().fill(Color.black.opacity(0.3)))
-                .accentColor(.catpink)
+                .accentColor(.pink)
                 .frame(width: 150)
         }
     }
@@ -248,7 +248,7 @@ struct ConditionalButton: View {
     var body: some View {
         Image(systemName: !condition ? imageName[0] : imageName[1])
             .font(.system(size: 25))
-            .foregroundColor(!condition ? .catgreen : .white)
+            .foregroundColor(!condition ? .green : .white)
             .padding(10)
             .padding(.trailing, trainPadding)
             .contentShape(Rectangle())

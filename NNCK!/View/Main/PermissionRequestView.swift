@@ -15,7 +15,7 @@ struct PermissionRequestView: View {
     
     var body: some View {
         ZStack {
-            Color.catgreen.opacity(0.9).ignoresSafeArea()
+            Color.green.opacity(0.8).ignoresSafeArea()
             VStack {
                 Text(informationTitle)
                     .underline(color: Color.yellow)

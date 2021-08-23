@@ -26,6 +26,7 @@
 		9B49D10426D365F50021E14C /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D10026D365F50021E14C /* SettingView.swift */; };
 		9B49D10526D365F50021E14C /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D10126D365F50021E14C /* CameraView.swift */; };
 		9B49D10626D365F50021E14C /* SoundButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D10226D365F50021E14C /* SoundButtonView.swift */; };
+		9B49D10826D3A37A0021E14C /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D10726D3A37A0021E14C /* Photo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		9B49D10026D365F50021E14C /* SettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		9B49D10126D365F50021E14C /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		9B49D10226D365F50021E14C /* SoundButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundButtonView.swift; sourceTree = "<group>"; };
+		9B49D10726D3A37A0021E14C /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 			children = (
 				9B49D0EA26D33EFA0021E14C /* Camera.swift */,
 				9B49D0EB26D33EFA0021E14C /* Sound.swift */,
+				9B49D10726D3A37A0021E14C /* Photo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				9B49D0F626D33EFA0021E14C /* LaserEffectView.swift in Sources */,
 				9B49D0F826D33EFA0021E14C /* Sound.swift in Sources */,
 				9B49D0FA26D33F030021E14C /* Extensions.swift in Sources */,
+				9B49D10826D3A37A0021E14C /* Photo.swift in Sources */,
 				9B49D0F526D33EFA0021E14C /* PermissionRequestView.swift in Sources */,
 				9B49D0C926D33EEF0021E14C /* NNCK_App.swift in Sources */,
 				9B49D10426D365F50021E14C /* SettingView.swift in Sources */,
