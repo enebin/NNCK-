@@ -11,6 +11,20 @@
 		9B49D0CB26D33EEF0021E14C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0CA26D33EEF0021E14C /* ContentView.swift */; };
 		9B49D0CD26D33EF00021E14C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B49D0CC26D33EF00021E14C /* Assets.xcassets */; };
 		9B49D0D026D33EF00021E14C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B49D0CF26D33EF00021E14C /* Preview Assets.xcassets */; };
+		9B49D0EC26D33EFA0021E14C /* catsound_clipped.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9B49D0D926D33EFA0021E14C /* catsound_clipped.mp4 */; };
+		9B49D0ED26D33EFA0021E14C /* catsound_clipped2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9B49D0DA26D33EFA0021E14C /* catsound_clipped2.mp4 */; };
+		9B49D0EE26D33EFA0021E14C /* bird-clipped.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9B49D0DB26D33EFA0021E14C /* bird-clipped.mp4 */; };
+		9B49D0EF26D33EFA0021E14C /* CameraVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0DD26D33EFA0021E14C /* CameraVIewModel.swift */; };
+		9B49D0F026D33EFA0021E14C /* SoundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0DE26D33EFA0021E14C /* SoundViewModel.swift */; };
+		9B49D0F126D33EFA0021E14C /* SoundButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0E226D33EFA0021E14C /* SoundButtonView.swift */; };
+		9B49D0F226D33EFA0021E14C /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0E326D33EFA0021E14C /* AlbumView.swift */; };
+		9B49D0F326D33EFA0021E14C /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0E426D33EFA0021E14C /* CameraView.swift */; };
+		9B49D0F426D33EFA0021E14C /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0E526D33EFA0021E14C /* SettingView.swift */; };
+		9B49D0F526D33EFA0021E14C /* PermissionRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0E626D33EFA0021E14C /* PermissionRequestView.swift */; };
+		9B49D0F626D33EFA0021E14C /* LaserEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0E826D33EFA0021E14C /* LaserEffectView.swift */; };
+		9B49D0F726D33EFA0021E14C /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0EA26D33EFA0021E14C /* Camera.swift */; };
+		9B49D0F826D33EFA0021E14C /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0EB26D33EFA0021E14C /* Sound.swift */; };
+		9B49D0FA26D33F030021E14C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0F926D33F030021E14C /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +34,20 @@
 		9B49D0CC26D33EF00021E14C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9B49D0CF26D33EF00021E14C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9B49D0D126D33EF00021E14C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B49D0D926D33EFA0021E14C /* catsound_clipped.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = catsound_clipped.mp4; sourceTree = "<group>"; };
+		9B49D0DA26D33EFA0021E14C /* catsound_clipped2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = catsound_clipped2.mp4; sourceTree = "<group>"; };
+		9B49D0DB26D33EFA0021E14C /* bird-clipped.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "bird-clipped.mp4"; sourceTree = "<group>"; };
+		9B49D0DD26D33EFA0021E14C /* CameraVIewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraVIewModel.swift; sourceTree = "<group>"; };
+		9B49D0DE26D33EFA0021E14C /* SoundViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundViewModel.swift; sourceTree = "<group>"; };
+		9B49D0E226D33EFA0021E14C /* SoundButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundButtonView.swift; sourceTree = "<group>"; };
+		9B49D0E326D33EFA0021E14C /* AlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
+		9B49D0E426D33EFA0021E14C /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		9B49D0E526D33EFA0021E14C /* SettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		9B49D0E626D33EFA0021E14C /* PermissionRequestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionRequestView.swift; sourceTree = "<group>"; };
+		9B49D0E826D33EFA0021E14C /* LaserEffectView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaserEffectView.swift; sourceTree = "<group>"; };
+		9B49D0EA26D33EFA0021E14C /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		9B49D0EB26D33EFA0021E14C /* Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
+		9B49D0F926D33F030021E14C /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,10 +80,15 @@
 		9B49D0C726D33EEF0021E14C /* NNCK! */ = {
 			isa = PBXGroup;
 			children = (
+				9B49D0D726D33EFA0021E14C /* Data */,
+				9B49D0DF26D33EFA0021E14C /* View */,
+				9B49D0DC26D33EFA0021E14C /* ViewModel */,
+				9B49D0E926D33EFA0021E14C /* Model */,
 				9B49D0C826D33EEF0021E14C /* NNCK_App.swift */,
 				9B49D0CA26D33EEF0021E14C /* ContentView.swift */,
 				9B49D0CC26D33EF00021E14C /* Assets.xcassets */,
 				9B49D0D126D33EF00021E14C /* Info.plist */,
+				9B49D0F926D33F030021E14C /* Extensions.swift */,
 				9B49D0CE26D33EF00021E14C /* Preview Content */,
 			);
 			path = "NNCK!";
@@ -67,6 +100,79 @@
 				9B49D0CF26D33EF00021E14C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9B49D0D726D33EFA0021E14C /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				9B49D0D826D33EFA0021E14C /* Sounds */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		9B49D0D826D33EFA0021E14C /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				9B49D0D926D33EFA0021E14C /* catsound_clipped.mp4 */,
+				9B49D0DA26D33EFA0021E14C /* catsound_clipped2.mp4 */,
+				9B49D0DB26D33EFA0021E14C /* bird-clipped.mp4 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		9B49D0DC26D33EFA0021E14C /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9B49D0DD26D33EFA0021E14C /* CameraVIewModel.swift */,
+				9B49D0DE26D33EFA0021E14C /* SoundViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9B49D0DF26D33EFA0021E14C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9B49D0E026D33EFA0021E14C /* Main */,
+				9B49D0E726D33EFA0021E14C /* Effects */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9B49D0E026D33EFA0021E14C /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				9B49D0E126D33EFA0021E14C /* Camera */,
+				9B49D0E626D33EFA0021E14C /* PermissionRequestView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		9B49D0E126D33EFA0021E14C /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				9B49D0E426D33EFA0021E14C /* CameraView.swift */,
+				9B49D0E326D33EFA0021E14C /* AlbumView.swift */,
+				9B49D0E526D33EFA0021E14C /* SettingView.swift */,
+				9B49D0E226D33EFA0021E14C /* SoundButtonView.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		9B49D0E726D33EFA0021E14C /* Effects */ = {
+			isa = PBXGroup;
+			children = (
+				9B49D0E826D33EFA0021E14C /* LaserEffectView.swift */,
+			);
+			path = Effects;
+			sourceTree = "<group>";
+		};
+		9B49D0E926D33EFA0021E14C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9B49D0EA26D33EFA0021E14C /* Camera.swift */,
+				9B49D0EB26D33EFA0021E14C /* Sound.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,8 +232,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B49D0EE26D33EFA0021E14C /* bird-clipped.mp4 in Resources */,
 				9B49D0D026D33EF00021E14C /* Preview Assets.xcassets in Resources */,
 				9B49D0CD26D33EF00021E14C /* Assets.xcassets in Resources */,
+				9B49D0EC26D33EFA0021E14C /* catsound_clipped.mp4 in Resources */,
+				9B49D0ED26D33EFA0021E14C /* catsound_clipped2.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,8 +247,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B49D0F726D33EFA0021E14C /* Camera.swift in Sources */,
+				9B49D0F226D33EFA0021E14C /* AlbumView.swift in Sources */,
+				9B49D0F326D33EFA0021E14C /* CameraView.swift in Sources */,
+				9B49D0F026D33EFA0021E14C /* SoundViewModel.swift in Sources */,
+				9B49D0F126D33EFA0021E14C /* SoundButtonView.swift in Sources */,
 				9B49D0CB26D33EEF0021E14C /* ContentView.swift in Sources */,
+				9B49D0F626D33EFA0021E14C /* LaserEffectView.swift in Sources */,
+				9B49D0F826D33EFA0021E14C /* Sound.swift in Sources */,
+				9B49D0FA26D33F030021E14C /* Extensions.swift in Sources */,
+				9B49D0F426D33EFA0021E14C /* SettingView.swift in Sources */,
+				9B49D0F526D33EFA0021E14C /* PermissionRequestView.swift in Sources */,
 				9B49D0C926D33EEF0021E14C /* NNCK_App.swift in Sources */,
+				9B49D0EF26D33EFA0021E14C /* CameraVIewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
