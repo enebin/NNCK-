@@ -12,171 +12,78 @@ struct AlbumView: View {
     @Binding var showAlbum: Bool
     @State var selectedPhotoIndex: Int = 0
     @State var draggedOffset = CGSize.zero
-    
-    @Namespace var namespace
-    
-    @State var show = false
-    @State var selected: Int = 0
-    
-    
-    var test: some View {
-        LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
-            ForEach(1..<20) { index in
-                Image(systemName: "person")
-                    .frame(width: 100, height: 100)
-                    .background(
-                        Rectangle().matchedGeometryEffect(id: index, in: namespace)
-                    )
-                    .onTapGesture {
-                        withAnimation(.easeInOut(duration: 0.2)) {
-                            show.toggle()
-                            selected = index
-                        }
-                    }
-            }
-        }
-    }
-    
-    var AlbumGrid: some View {
-        let spacing: CGFloat = viewModel.isSelectionMode ? 6 : 2
-        
-        return LazyVGrid(columns: [GridItem(.adaptive(minimum: 80), spacing: spacing)], spacing: spacing) {
-            ForEach(viewModel.allPhotos.indices, id: \.self) { index in
-                let photo = viewModel.allPhotos[index]
-                let elem = albumElement(selectedPhotoIndex: $selectedPhotoIndex, show: $show, namespace: namespace, index: index)
-                elem.environmentObject(viewModel)
-                    .clipped()
-                    .aspectRatio(1, contentMode: .fit)
-            }
-        }
-    }
+
     
     var body: some View {
         ZStack {
-            if show == false {
-                ScrollView {
-                    AlbumGrid
-//                    (namespace: namespace, show: $show, selected: $selected)
-                }
-            } else { imageBody }
-        }
-    }
-    
-//    var body: some View {
-//        ZStack {
-//            if show == false {
-//                ScrollView {
-//                    test
-////                    (namespace: namespace, show: $show, selected: $selected)
-//                }
-//            } else { imageBody }
-//        }
-//    }
-    
-    var imageBody: some View {
-        let differenceParameter = abs(draggedOffset.height/2000)
-
-        return Image("pawpaw")
-            .resizable()
-            .scaledToFit()
-            .foregroundColor(.white)
-            .frame(maxWidth: 500, maxHeight: 500)
-            .background(Rectangle().fill(Color.gray))
-            .scaleEffect(1 - differenceParameter)
-            .matchedGeometryEffect(id: selected, in: namespace)
-            .opacity(1 - Double(differenceParameter) * 3)
-            .offset(y: draggedOffset.height)
-            .onTapGesture {
-                withAnimation(.easeInOut(duration: 0.2)) {
-                    show.toggle()
+            // 셀렉션모드에 따라 배경색 변화
+            if viewModel.isSelectionMode {
+                Color.white.ignoresSafeArea()
+            } else {
+                Color.black.ignoresSafeArea()
+            }
+            
+            Group {
+                if viewModel.showLargeImage && viewModel.selectedPhoto != nil {
+                    // 헤더버튼 종류변화
+                    if viewModel.hideHeader == false {
+                        VStack {
+                            Header
+                            Spacer()
+                        }
+                        .zIndex(1.0)
+                        .transition(.asymmetric(insertion: .move(edge: .top), removal: .opacity))
+                    }
+                    
+                    // 큰 미리보기
+                    TabView(selection: $selectedPhotoIndex) {
+                        ForEach(0..<viewModel.allPhotos.count) { index in
+                            let photo = viewModel.allPhotos[index]
+                            LargeImageView(photo: photo)
+                                .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                                            .onChanged { value in
+                                                draggedOffset = value.translation
+                                            }
+                                            .onEnded{ value in
+                                                if draggedOffset.height > 50 {
+                                                    viewModel.showLargeImage = false
+                                                }
+                                                draggedOffset = CGSize.zero
+                                            }
+                                )
+                                .environmentObject(viewModel)
+                                .tag(index)
+                        }
+                    }
+                    .onAppear {
+                        UIScrollView.appearance().bounces = false
+                    }
+                    .onDisappear {
+                        UIScrollView.appearance().bounces = true
+                    }
+                    .tabViewStyle(PageTabViewStyle())
+                    .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+                } else {
+                    VStack {
+                        Header
+                        ScrollView {
+                            AlbumGrid
+                                .onAppear {
+                                    UIScrollView.appearance().bounces = true
+                                }
+                        }
+                    }
                 }
             }
-            .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                        .onChanged { value in
-                            draggedOffset = value.translation
-                        }
-                        .onEnded({ value in
-                            if draggedOffset.height > 50 {
-                                withAnimation(.easeInOut(duration: 0.2)) {
-                                    show = false
-                                }
-                            }
-                            draggedOffset = CGSize.zero
-                        }))
+            .offset(y: draggedOffset.height/2)
+        }
+        .animation(.easeInOut(duration: 0.3))
     }
-    
-    //    var body: some View {
-    //        ZStack {
-    //            // 셀렉션모드에 따라 배경색 변화
-    //            if viewModel.isSelectionMode {
-    //                Color.white.ignoresSafeArea()
-    //            } else {
-    //                Color.black.ignoresSafeArea()
-    //            }
-    //
-    //            if viewModel.showLargeImage && viewModel.selectedPhoto != nil {
-    //                Group {
-    //                    // 헤더버튼 종류변화
-    //                    if viewModel.showFullScreen == false {
-    //                        VStack() {
-    //                            Header
-    //                            Spacer()
-    //                        }
-    //                        .zIndex(1.0)
-    ////                        .transition(.asymmetric(insertion: .move(edge: .top), removal: .opacity))
-    //                    }
-    //
-    //                    TabView(selection: $selectedPhotoIndex) {
-    //                        ForEach(0..<viewModel.allPhotos.count) { index in
-    //                            let photo = viewModel.allPhotos[index]
-    //                            LargeImageView(photo: photo)
-    //                                .environmentObject(viewModel)
-    //                                .tag(index)
-    //                                .matchedGeometryEffect(id: photo, in: nspace)
-    //                        }
-    //                    }
-    ////                    .onAppear {
-    ////                        UIScrollView.appearance().bounces = false
-    ////                    }
-    ////                    .onDisappear {
-    ////                        UIScrollView.appearance().bounces = true
-    ////                    }
-    //                    .tabViewStyle(PageTabViewStyle())
-    //                    .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
-    //                }
-    ////                .offset(y: draggedOffset.height / 1.5)
-    ////                .contentShape(Rectangle())
-    ////                .gesture(DragGesture(minimumDistance: 10, coordinateSpace: .local)
-    ////                            .onChanged { value in
-    ////                                draggedOffset = value.translation
-    ////                                print(draggedOffset)
-    ////                            }
-    ////                            .onEnded({ value in
-    ////                                if draggedOffset.height > 0 {
-    ////                                    viewModel.showLargeImage = false
-    ////                                }
-    ////                                draggedOffset = CGSize.zero
-    ////                            }))
-    //            } else {
-    //                VStack {
-    //                    Header
-    //                    ScrollView {
-    //                        AlbumGrid
-    //                            .zIndex(0)
-    ////                            .onAppear {
-    ////                                UIScrollView.appearance().bounces = true
-    ////                            }
-    //                    }
-    //                }
-    //            }
-    //        }
-    //        .animation(.easeInOut(duration: 0.2))
-    //    }
     
     var Header: some View {
         HStack {
             if viewModel.showLargeImage && viewModel.selectedPhoto != nil {
-                Button(action: {viewModel.showLargeImage = false; viewModel.showFullScreen = true}, label: {
+                Button(action: {viewModel.showLargeImage = false; viewModel.hideHeader = true}, label: {
                     HStack{
                         Image(systemName: "chevron.down")
                         Text("앨범")
@@ -185,18 +92,23 @@ struct AlbumView: View {
                 
                 Spacer()
                 if let selectedPhoto = viewModel.selectedPhoto {
-                    Button(action: { viewModel.deletePhoto(images: [selectedPhoto]); viewModel.showLargeImage = false },
+                    Button(action: {viewModel.deletePhoto(images: [selectedPhoto]); viewModel.showLargeImage = false},
                            label: {
-                            HStack{
-                                Image(systemName: "trash")
-                            }
-                           })
+                        HStack{
+                            Image(systemName: "trash")
+                        }
+                    })
                 }
             } else {
                 if viewModel.isSelectionMode == false {
-                    Button(action: { viewModel.setSelectionModeDefault() }) {
+                    Button(action: {
+                        withAnimation(.easeInOut(duration: 0.4)) {
+                            viewModel.setSelectionModeDefault()
+                        }
+                    }) {
                         Text("선택")
                     }
+
                 } else {
                     Button(action: { viewModel.setSelectionModeDefault() }) {
                         Text("취소")
@@ -222,32 +134,36 @@ struct AlbumView: View {
         .background(Color.black.opacity(0.6).ignoresSafeArea())
     }
     
+    var AlbumGrid: some View {
+        let spacing: CGFloat = viewModel.isSelectionMode ? 6 : 2
+        
+        return LazyVGrid(columns: [GridItem(.adaptive(minimum: 80), spacing: spacing)], spacing: spacing) {
+            ForEach(viewModel.allPhotos, id: \.self) { photo in
+                let elem = albumElement(selectedPhotoIndex: $selectedPhotoIndex, photo: photo)
+                elem.environmentObject(viewModel)
+                    .clipped()
+                    .aspectRatio(1, contentMode: .fit)
+            }
+        }
+        .transition(.scale)
+    }
 }
 
 struct albumElement: View {
     @EnvironmentObject var viewModel: CameraViewModel
     @State var checkMark = false
     @Binding var selectedPhotoIndex: Int
-    @Binding var show: Bool
-    
-    let namespace: Namespace.ID
-    var index: Int
+
+    let photo: UIImage
     
     var body: some View {
-        let photo = viewModel.allPhotos[index]
-
         GeometryReader { geometry in
             Image(uiImage: photo)
                 .resizable()
                 .scaledToFill()
                 .frame(height: geometry.size.width)
                 .contentShape(Rectangle())
-                .matchedGeometryEffect(id: photo, in: namespace)
                 .onTapGesture {
-                    withAnimation(.easeInOut(duration: 0.2)) {
-                        selectedPhotoIndex = index
-                        show.toggle()
-                    }
                     if viewModel.isSelectionMode == false {
                         // 셀렉션 모드가 아닐 때 라지 뷰 세팅
                         largeImageViewSetting()
@@ -284,17 +200,13 @@ struct albumElement: View {
     }
     
     private func largeImageViewSetting() {
-        let photo = viewModel.allPhotos[index]
-
         viewModel.selectedPhoto = photo
         selectedPhotoIndex = viewModel.allPhotos.firstIndex(of: photo) ?? 0
         viewModel.showLargeImage = true
-        viewModel.showFullScreen = false
+        viewModel.hideHeader = false
     }
     
     private func selectionModeSetting() {
-        let photo = viewModel.allPhotos[index]
-
         if checkMark == false {
             viewModel.selectedMultiplePhotos.append(photo)
             checkMark = true
@@ -307,12 +219,12 @@ struct albumElement: View {
             checkMark = false
         }
     }
-    
+
 }
 
 struct LargeImageView: View {
     @EnvironmentObject var viewModel: CameraViewModel
-    
+
     let photo: UIImage
     var body: some View {
         ZStack {
@@ -326,13 +238,13 @@ struct LargeImageView: View {
                         .frame(width: geometry.size.width, height: geometry.size.height)
                     Spacer()
                 }
-                //                .transition(.move(edge: .bottom))
+                .transition(.move(edge: .bottom))
                 .zIndex(0.9)
                 .contentShape(Rectangle())
                 .onTapGesture {
                     if viewModel.isSelectionMode != true {
-                        viewModel.showFullScreen.toggle()
-                        print(viewModel.showFullScreen)
+                        viewModel.hideHeader.toggle()
+                        print(viewModel.hideHeader)
                     } else {}
                 }
                 

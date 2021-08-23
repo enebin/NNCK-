@@ -36,7 +36,8 @@ struct CameraView: View {
                 // 권한 확인
                 if viewModel.notYetPermitted {
                     PermissionRequestView().environmentObject(viewModel)
-                        .zIndex(zIndexPriority.top.rawValue)                        .onTapGesture {}
+                        .zIndex(zIndexPriority.top.rawValue)
+                        .onTapGesture {}
                 }
                 
                 GeometryReader { geometry in
@@ -52,11 +53,6 @@ struct CameraView: View {
                                     .frame(width: geometry.size.width * 0.9, height: geometry.size.height * 0.25)
                                     .background(RoundedRectangle(cornerRadius: 20)
                                                     .fill(Color.black.opacity(0.6)))
-                                    
-                                    .onAppear{
-                                        print(viewModel.notYetPermitted)
-                                    }
-
                             }
                             Spacer()
                         }

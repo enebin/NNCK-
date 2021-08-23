@@ -22,14 +22,16 @@ class CameraViewModel: ObservableObject {
     // 앨범 관련 변수
     @Published var isSelectionMode = false
     @Published var showLargeImage = true
-    @Published var showFullScreen = false
+    @Published var hideHeader = false
     @Published var albumElements = [albumElement]()
     
     @Published var takenPhoto: UIImage?  // 찍힌 사진
     @Published var allPhotos = [UIImage]() // 저장된 모든 사진
+    @Published var photoAssets = PHFetchResult<PHAsset>() // 편집에 사용되는 에셋 데이터
     @Published var selectedPhoto: UIImage? // 앨범에서 선택한 사진
     @Published var selectedMultiplePhotos = [UIImage]() // 앨범에서 선택한 사진'들'
-    @Published var photoAssets = PHFetchResult<PHAsset>() // 편집에 사용되는 에셋 데이터
+    @Published var isDeleted = false // 삭제 되었는지?
+    
     // 사진 관련 변수
     @Published var showEffect = false
     @Published var isSilent = true
@@ -41,7 +43,7 @@ class CameraViewModel: ObservableObject {
     @Published var cameraAuth: SessionSetupResult = .success
     @Published var albumAuth: SessionSetupResult = .success
     
-    let debug = false
+    let debug = true
     
     var notYetPermitted: Bool {
         return self.debug ? !self.debug : self.cameraAuth != .success || self.albumAuth != .success
@@ -103,7 +105,7 @@ class CameraViewModel: ObservableObject {
     func setAlbumDefault() {
         isSelectionMode = false
         showLargeImage = true
-        showFullScreen = false
+        hideHeader = false
     }
     
     
@@ -129,12 +131,11 @@ class CameraViewModel: ObservableObject {
     // MARK: - 앨범 기능
     func deletePhoto(images: [UIImage]) {
         var assets = [PHAsset]()
+        var assetIndices = [Int]()
         for image in images {
-            print(image)
             guard let index = allPhotos.firstIndex(of: image) else { return }
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-//                self.allPhotos.remove(at: index)
-//            }
+            
+            assetIndices.append(index)
             assets.append(photoAssets[index])
         }
         
@@ -169,6 +170,11 @@ class CameraViewModel: ObservableObject {
         
         model.$allPhotos.sink { [weak self] (allPhotos) in
             self?.allPhotos = allPhotos
+        }
+        .store(in: &self.subscriptions)
+        
+        model.$isDeleted.sink { [weak self] (isDeleted) in
+            self?.isDeleted = isDeleted
         }
         .store(in: &self.subscriptions)
         

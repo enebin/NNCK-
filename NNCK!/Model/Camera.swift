@@ -40,6 +40,7 @@ class Camera: NSObject, ObservableObject {
     @Published var allPhotos = [UIImage]()
     @Published var imageURLs = [URL]()
     @Published var photoAssets = PHFetchResult<PHAsset>()
+    @Published var isDeleted = false
 
     @Published var cameraAuth: SessionSetupResult = .success
     @Published var albumAuth: SessionSetupResult = .success
@@ -310,20 +311,22 @@ class Camera: NSObject, ObservableObject {
                 }
             }
         })
-     
+        
         // 사진 저장하기
         print("[Camera]: Photo's saved")
     }
-        
+    
     func deletePhoto(_ assets: [PHAsset]) {
-        DispatchQueue.main.async {
-            PHPhotoLibrary.shared().performChanges({
-                            PHAssetChangeRequest.deleteAssets(assets as NSArray)
-                        }, completionHandler: {success, error in
-                            print(success ? "Success" : "Error" )
-                            self.getAllPhotos()
-                        })
-        }
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.deleteAssets(assets as NSArray)
+        }, completionHandler: {success, error in
+            if success {
+                self.isDeleted = true
+            } else {
+                self.isDeleted = false
+            }
+            self.getAllPhotos()
+        })
     }
 }
 
