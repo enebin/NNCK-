@@ -26,11 +26,13 @@ class Album: ObservableObject {
         return results
     }
     
-    func deletePhoto(assets: [PHAsset]) {
+    func deletePhoto(assets: [PHAsset], completion: @escaping () -> ()) {
         PHPhotoLibrary.shared().performChanges({
             PHAssetChangeRequest.deleteAssets(assets as NSArray)
         }, completionHandler: {success, error in
             print(success ? "sucess" : "error")
+            self.photoAssets = self.fetchPhoto()
+            completion()
         })
     }
 }
@@ -40,27 +42,33 @@ extension PHAsset {
     //https://stackoverflow.com/questions/30812057/phasset-to-uiimage
     
     var thumbnailImage : UIImage {
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.isSynchronous = false
+        requestOptions.isNetworkAccessAllowed = true
+
         var thumbnail = UIImage()
-        let imageManager = PHCachingImageManager()
-        imageManager.requestImage(for: self, targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFit, options: nil, resultHandler: { image, _ in
+        let imageManager = PHImageManager()
+        imageManager.requestImage(for: self, targetSize: CGSize(width: 150, height: 150), contentMode: .aspectFit, options: requestOptions, resultHandler: { image, _ in
             thumbnail = image!
         })
         return thumbnail
     }
     
     func originalImage(targetSize: CGSize) -> UIImage {
+        print("Original Image requested")
         let requestOptions = PHImageRequestOptions()
         requestOptions.isSynchronous = true
         requestOptions.deliveryMode = .highQualityFormat
         requestOptions.isNetworkAccessAllowed = true
-        requestOptions.resizeMode = .exact
 
-        
         var thumbnail = UIImage()
-        let imageManager = PHCachingImageManager()
-        imageManager.requestImage(for: self, targetSize: targetSize, contentMode: .aspectFit, options: requestOptions, resultHandler: { image, _ in
+
+        let imageManager = PHImageManager()
+        imageManager.requestImage(for: self, targetSize: CGSize(width: 700, height: 700), contentMode: .aspectFill, options: requestOptions) { image, info in
+            if (info?[PHImageResultIsDegradedKey] as? Bool) ?? false { print("error"); return }
             thumbnail = image!
-        })
+        }
+        
         return thumbnail
     }
 }

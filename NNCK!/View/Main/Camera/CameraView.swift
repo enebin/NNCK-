@@ -14,7 +14,7 @@ struct CameraView: View {
     @State var showSlider = false
     @State var showMusic = false
     @State var showSound = false
-    @State var showImagePicker = false
+    @State var showAlbum = false
     
     let hapticImpact = UIImpactFeedbackGenerator()
     var debug = true
@@ -121,8 +121,8 @@ struct CameraView: View {
                 }
                 .blur(radius: viewModel.notYetPermitted ? 5 : 0)
             }
-            .fullScreenCover(isPresented: $showImagePicker) {
-                NewAlbumView()
+            .fullScreenCover(isPresented: $showAlbum) {
+                NewAlbumView(showAlbum: $showAlbum)
                     .environmentObject(viewModel)
             }
             .opacity(viewModel.isTaken ? 0 : 1)
@@ -181,7 +181,7 @@ struct CameraView: View {
                     .environmentObject(viewModel)
                     .contentShape(Rectangle())
                     .onTapGesture {
-                        showImagePicker = true
+                        showAlbum = true
                     }
                 Spacer()
                 // 카메라 전환
