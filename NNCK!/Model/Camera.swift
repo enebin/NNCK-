@@ -24,8 +24,8 @@ class Camera: NSObject, ObservableObject {
     var photoData = Data(count: 0)
     
     // 사진
-    @Published var photo: UIImage?
-    
+    @Published var recentImage: UIImage?
+
     // 비디오 인풋
     var videoDeviceInput: AVCaptureDeviceInput!
     
@@ -37,19 +37,14 @@ class Camera: NSObject, ObservableObject {
     @Published var isTaken = false
     @Published var isSilent = true
     
-    @Published var allPhotos = [UIImage]()
-    @Published var imageURLs = [URL]()
-    @Published var photoAssets = PHFetchResult<PHAsset>()
-    @Published var isDeleted = false
-
     @Published var cameraAuth: SessionSetupResult = .success
     @Published var albumAuth: SessionSetupResult = .success
     @Published var flashMode: AVCaptureDevice.FlashMode = .off
+
     var errorString : String = ""
     
     // 경고창에 관한 변수들
     public var setupResult: SessionSetupResult = .success
-    var tempResult: UIImage?
     
     // MARK: - 카메라 세팅에 관한 것들
     func requestAndCheckPermissions() {
@@ -125,14 +120,6 @@ class Camera: NSObject, ObservableObject {
     
     func switchFlash() {
         flashMode = flashMode == .off ? .on : .off
-    }
-    
-    func getPhoto() -> UIImage? {
-        if let image = UIImage(data: self.photoData) {
-            return image
-        } else {
-            return nil
-        }
     }
     
     // MARK: - 카메라 기능에 관한 것들
@@ -235,61 +222,6 @@ class Camera: NSObject, ObservableObject {
         print("[Camera]: Photo's taken")
     }
     
-    func fetchPhoto() {
-        /// 페치 및 로컬 페치 데이터 업데이트, 에셋 리턴
-        // 이미지 페치 옵션
-        let fetchOptions = PHFetchOptions()
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-
-        let results: PHFetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
-        self.photoAssets = results
-    }
-    
-    func requestImage(asset: PHAsset) -> UIImage? {
-        let size = CGSize(width: 700, height: 700) //You can change size here
-        let requestOptions = PHImageRequestOptions()
-        let image: UIImage?
-        requestOptions.isSynchronous = true
-        requestOptions.deliveryMode = .highQualityFormat
-        requestOptions.isNetworkAccessAllowed = true
-        
-        PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions) { (image, _) in
-                return image
-        }
-    }
-    
-    // TODO: 찍은사진 갤러리 뷰
-    func getAllPhotos() {
-        fetchPhoto()
-        
-        let size = CGSize(width: 700, height: 700) //You can change size here
-        let requestOptions = PHImageRequestOptions()
-        requestOptions.isSynchronous = true
-        requestOptions.deliveryMode = .highQualityFormat
-        requestOptions.isNetworkAccessAllowed = true
-        
-        DispatchQueue.main.async {
-            if results.count > 0 {
-                
-                var photoResult = [UIImage]()
-//                for i in 0..<results.count {
-                for i in 0..<20 {
-                    let asset = results.object(at: i)
-                    PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFill, options: requestOptions) { (image, _) in
-                        if let image = image {
-                            photoResult.append(image)
-                        } else {
-                            print("error asset to image")
-                        }
-                        self.allPhotos = photoResult
-                    }
-                }
-            } else {
-                self.errorString = "No photos to display"
-            }
-        }
-        print(photoAssets.count, allPhotos.count)
-    }
     
     func savePhoto() {
         let watermark = UIImage(named: "pawpaw")
@@ -303,45 +235,12 @@ class Camera: NSObject, ObservableObject {
             let creationRequest = PHAssetChangeRequest.creationRequestForAsset(from: newImage)
         }, completionHandler: { success, error in
             guard success else { return }
-            
-            if let photo = UIImage(data: self.photoData) {
-                self.photo = photo
-                
-                let assets = self.fetchPhoto()
-                let requestOptions = PHImageRequestOptions()
-                requestOptions.isSynchronous = false
-                requestOptions.deliveryMode = .highQualityFormat
-                
-                guard let asset = assets.firstObject else { return }
-                DispatchQueue.main.async {
-                    PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 700, height: 700), contentMode: .aspectFill, options: requestOptions) { (image, _) in
-                        if let image = image {
-                            self.allPhotos.insert(image, at: 0)
-                            print("")
-                        } else {
-                            print("error asset to image")
-                        }
-                    }
-                }
-            }
         })
         
         // 사진 저장하기
         print("[Camera]: Photo's saved")
     }
     
-    func deletePhoto(_ assets: [PHAsset]) {
-        PHPhotoLibrary.shared().performChanges({
-            PHAssetChangeRequest.deleteAssets(assets as NSArray)
-        }, completionHandler: {success, error in
-            if success {
-                self.isDeleted = true
-                self.fetchPhoto()
-            } else {
-                self.isDeleted = false
-            }
-        })
-    }
 }
 
 extension Camera: AVCapturePhotoCaptureDelegate {
@@ -361,6 +260,7 @@ extension Camera: AVCapturePhotoCaptureDelegate {
         print("[Camera]: Photo'processed")
         
         self.photoData = imageData
+        self.recentImage = UIImage(data: imageData)
         self.savePhoto()
     }
 }

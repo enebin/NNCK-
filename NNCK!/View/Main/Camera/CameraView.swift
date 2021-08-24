@@ -122,7 +122,7 @@ struct CameraView: View {
                 .blur(radius: viewModel.notYetPermitted ? 5 : 0)
             }
             .fullScreenCover(isPresented: $showImagePicker) {
-                AlbumView(showAlbum: $showImagePicker)
+                NewAlbumView()
                     .environmentObject(viewModel)
             }
             .opacity(viewModel.isTaken ? 0 : 1)
@@ -182,7 +182,6 @@ struct CameraView: View {
                     .contentShape(Rectangle())
                     .onTapGesture {
                         showImagePicker = true
-                        viewModel.selectedPhoto = viewModel.takenPhoto
                     }
                 Spacer()
                 // 카메라 전환
@@ -221,7 +220,7 @@ struct CapturedPhotoThumbnail: View {
     @State var isTouched = false
     
     var body: some View  {
-        if let previewImage = viewModel.takenPhoto {
+        if let previewImage = viewModel.recentImage {
             Image(uiImage: previewImage)
                 .resizable()
                 .frame(width: 70, height: 70)

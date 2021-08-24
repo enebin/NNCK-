@@ -19,20 +19,8 @@ class CameraViewModel: ObservableObject {
     // 설정창 관련 변수
     @Published var showSetting = false
     
-    // 앨범 관련 변수
-    @Published var isSelectionMode = false
-    @Published var showLargeImage = true
-    @Published var hideHeader = false
-    @Published var albumElements = [albumElement]()
-    
-    @Published var takenPhoto: UIImage?  // 찍힌 사진
-    @Published var allPhotos = [UIImage]() // 저장된 모든 사진
-    @Published var photoAssets = PHFetchResult<PHAsset>() // 편집에 사용되는 에셋 데이터
-    @Published var selectedPhoto: UIImage? // 앨범에서 선택한 사진
-    @Published var selectedMultiplePhotos = [UIImage]() // 앨범에서 선택한 사진'들'
-    @Published var isDeleted = false // 삭제 되었는지?
-    
     // 사진 관련 변수
+    @Published var recentImage: UIImage?
     @Published var showEffect = false
     @Published var isSilent = true
     @Published var isTaken = false
@@ -52,15 +40,10 @@ class CameraViewModel: ObservableObject {
     // MARK: - 세팅
     func configure() {
         model.requestAndCheckPermissions()
-        model.fetchPhoto()
 //        model.getAllPhotos()
     }
     
     // MARK: - 내부값 수정하는 메소드들
-    func setSelectedPhoto(_ image: UIImage) {
-        selectedPhoto = image
-    }
-    
     func switchTaken() {
         isTaken = isTaken == true ? false : true
     }
@@ -90,26 +73,6 @@ class CameraViewModel: ObservableObject {
         model.switchFlash()
     }
     
-    // 앨범 관련
-    func switchSelectionMode() {
-        isSelectionMode = isSelectionMode == true ? false : true
-    }
-    
-    func setSelectionModeDefault() {
-        isSelectionMode = isSelectionMode == true ? false : true
-        for index in (0..<albumElements.count) {
-            albumElements[index].checkMark = false
-        }
-        selectedMultiplePhotos = [UIImage]()
-    }
-    
-    func setAlbumDefault() {
-        isSelectionMode = false
-        showLargeImage = true
-        hideHeader = false
-    }
-    
-    
     
     // MARK: - 카메라 기능
     func zoom(with factor: CGFloat) {
@@ -119,38 +82,22 @@ class CameraViewModel: ObservableObject {
     func capturePhoto() {
         print("[CameraViewcameraModel]: Photo's taken")
         model.capturePhoto()
-        
         DispatchQueue.main.async {
             self.switchTaken()
         }   // 셔터 애니메이션 딜레이는 여기서 조정 --->
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.switchTaken()
         }
-        print(photoAssets.count, allPhotos.count)
     }
     
-    // MARK: - 앨범 기능
-    func deletePhoto(images: [UIImage]) {
-        var assets = [PHAsset]()
-        var assetIndices = [Int]()
-        for image in images {
-            guard let index = allPhotos.firstIndex(of: image) else { return }
-            
-            assetIndices.append(index)
-            assets.append(photoAssets[index])
-        }
-        
-        model.deletePhoto(assets)
-        takenPhoto = nil
-    }
     
     // MARK: -시스템
     init() {
         self.session = model.session
         
-        model.$photo.sink { [weak self] (photo) in
+        model.$recentImage.sink { [weak self] (photo) in
             guard let pic = photo else { return }
-            self?.takenPhoto = pic
+            self?.recentImage = pic
         }
         .store(in: &self.subscriptions)
         
@@ -166,21 +113,6 @@ class CameraViewModel: ObservableObject {
         
         model.$albumAuth.sink { [weak self] (albumAuth) in
             self?.albumAuth = albumAuth
-        }
-        .store(in: &self.subscriptions)
-        
-        model.$allPhotos.sink { [weak self] (allPhotos) in
-            self?.allPhotos = allPhotos
-        }
-        .store(in: &self.subscriptions)
-        
-        model.$isDeleted.sink { [weak self] (isDeleted) in
-            self?.isDeleted = isDeleted
-        }
-        .store(in: &self.subscriptions)
-        
-        model.$photoAssets.sink { [weak self] (photoAssets) in
-            self?.photoAssets = photoAssets
         }
         .store(in: &self.subscriptions)
     }
