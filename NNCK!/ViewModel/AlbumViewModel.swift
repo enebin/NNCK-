@@ -31,6 +31,7 @@ class AlbumViewModel: ObservableObject {
     @Published var draggedOffset = CGSize.zero
 //    @Published var differenceParameter = abs(draggedOffset.height/2000)
 
+    let originalSize = CGSize(width: 700, height: 700)
     
     func configure() {
         DispatchQueue.main.async {

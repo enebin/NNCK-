@@ -47,7 +47,9 @@ struct NewAlbumView: View {
                     .environmentObject(viewModel)
             }
         }
-        .background(Share(isPresented: $viewModel.showShareInAlbum, data: [viewModel.chosenMultipleAssets]))
+        .background(Share(isPresented: $viewModel.showShareInAlbum, data: viewModel.chosenMultipleAssets.map({
+            $0.originalImage(targetSize: viewModel.originalSize)
+        })))
         .transition(.opacity)
         .animation(.easeInOut)
     }

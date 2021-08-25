@@ -43,12 +43,13 @@ extension PHAsset {
     
     var thumbnailImage : UIImage {
         let requestOptions = PHImageRequestOptions()
-        requestOptions.isSynchronous = false
+        requestOptions.isSynchronous = true
+        requestOptions.deliveryMode = .highQualityFormat
         requestOptions.isNetworkAccessAllowed = true
 
         var thumbnail = UIImage()
         let imageManager = PHImageManager()
-        imageManager.requestImage(for: self, targetSize: CGSize(width: 150, height: 150), contentMode: .aspectFit, options: requestOptions, resultHandler: { image, _ in
+        imageManager.requestImage(for: self, targetSize: CGSize(width: 150, height: 150), contentMode: .aspectFill, options: requestOptions, resultHandler: { image, _ in
             thumbnail = image!
         })
         return thumbnail

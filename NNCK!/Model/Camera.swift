@@ -133,10 +133,12 @@ class Camera: NSObject, ObservableObject {
         
         switch currentPosition {
         case .unspecified, .front:
+            print("후면카메라로 전환합니다.")
             preferredPosition = .back
             preferredDeviceType = .builtInWideAngleCamera
             
         case .back:
+            print("전면카메라로 전환합니다.")
             preferredPosition = .front
             preferredDeviceType = .builtInWideAngleCamera
             
@@ -159,21 +161,24 @@ class Camera: NSObject, ObservableObject {
         if let videoDevice = newVideoDevice {
             do {
                 let videoDeviceInput = try AVCaptureDeviceInput(device: videoDevice)
-                
                 self.session.beginConfiguration()
-                
+
                 // Remove the existing device input first, because AVCaptureSession doesn't support
                 // simultaneous use of the rear and front cameras.
-                self.session.removeInput(self.videoDeviceInput)
-                
+                if let inputs = session.inputs as? [AVCaptureDeviceInput] {
+                    for input in inputs {
+                        session.removeInput(input)
+                    }
+                }
                 if self.session.canAddInput(videoDeviceInput) {
                     self.session.addInput(videoDeviceInput)
                     self.videoDeviceInput = videoDeviceInput
                 } else {
                     self.session.addInput(self.videoDeviceInput)
                 }
-                
-                if let connection = self.output.connection(with: .video) {
+            
+                if let connection =
+                    self.output.connection(with: .video) {
                     if connection.isVideoStabilizationSupported {
                         connection.preferredVideoStabilizationMode = .auto
                     }
