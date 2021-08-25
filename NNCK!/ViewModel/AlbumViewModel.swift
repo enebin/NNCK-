@@ -18,13 +18,15 @@ class AlbumViewModel: ObservableObject {
     @Published var gridSpacing: CGFloat = 4
 
     @Published var takenPhoto: UIImage?  // 찍힌 사진
-    @Published var isDeleted = false // 삭제 되었는지?
     
     @Published var photoAssets = PHFetchResult<PHAsset>()
-    @Published var chosenAsset = PHAsset()
+    @Published var currentPhoto = UIImage()
+    @Published var chosenIndex = 0
     @Published var chosenMultipleAssets = [PHAsset]()
     
     @Published var showImageViewer = true
+    @Published var showShareInViewer = false
+    @Published var showShareInAlbum = false
     @Published var isSelectionMode = false
     @Published var draggedOffset = CGSize.zero
 //    @Published var differenceParameter = abs(draggedOffset.height/2000)
@@ -33,14 +35,10 @@ class AlbumViewModel: ObservableObject {
     func configure() {
         DispatchQueue.main.async {
             self.photoAssets = self.model.fetchPhoto()
-            self.chosenAsset = self.photoAssets[0]
         }
         print("[AlbumViewModel]: \(photoAssets.count) fetched count")
     }
     
-    func setSelectedPhoto(asset: PHAsset) {
-        chosenAsset = asset
-    }
     
     // 앨범 관련
     func switchSelectionMode(to result: Bool) {
@@ -50,17 +48,9 @@ class AlbumViewModel: ObservableObject {
             chosenMultipleAssets = [PHAsset]()
         }
         gridSpacing = isSelectionMode == true ? 8 : 4
-
     }
     
     // MARK: - 앨범 기능
-//    func requestImage(asset: PHAsset) -> UIImage? {
-//        let image: UIImage?
-//        image = model.requestPhoto(asset: asset)
-//        
-//        return image
-//    }
-//
         
     func deletePhoto(assets: [PHAsset]) {
         model.deletePhoto(assets: assets, completion: self.configure)

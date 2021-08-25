@@ -11,7 +11,6 @@ import PhotosUI
 struct NewAlbumView: View {
     @ObservedObject var viewModel = AlbumViewModel()
     @Binding var showAlbum: Bool
-    @State var selection = 0
     
     @Namespace var namespace
     
@@ -33,7 +32,7 @@ struct NewAlbumView: View {
                     }
             }
         }
-        .overlay(ImagePreview(selection: $selection)
+        .overlay(ImagePreview(selection: $viewModel.chosenIndex)
                     .environmentObject(viewModel))
         .background(viewModel.isSelectionMode ? Color.white.opacity(0.3) : Color.black)
         .animation(.easeInOut)
@@ -44,10 +43,11 @@ struct NewAlbumView: View {
                   spacing: viewModel.gridSpacing) {
             ForEach(0..<viewModel.photoAssets.count, id: \.self) { index in
                 let asset = viewModel.photoAssets[index]
-                AlbumElement(selection: $selection, asset: asset, index: index)
+                AlbumElement(selection: $viewModel.chosenIndex, asset: asset, index: index)
                     .environmentObject(viewModel)
             }
         }
+        .background(Share(isPresented: $viewModel.showShareInAlbum, data: [viewModel.chosenMultipleAssets]))
         .transition(.opacity)
         .animation(.easeInOut)
     }
@@ -69,7 +69,7 @@ struct NewAlbumView: View {
     
     var SelectionHeader: some View {
         HStack {
-            Button(action: {showAlbum = false}) {
+            Button(action: { viewModel.showShareInAlbum = true }) {
                 Image(systemName: "square.and.arrow.up")
                     .foregroundColor(.yellow)
             }
@@ -129,8 +129,11 @@ struct NewAlbumView: View {
                         }) {
                             Label("다중선택", systemImage: "checkmark.circle")
                         }
-                        
-                        Button(action: {}) {
+                        Button(action: {
+                            viewModel.isSelectionMode = true
+                            viewModel.chosenMultipleAssets.append(asset)
+                            viewModel.showShareInAlbum = true;
+                        }) {
                             Label("공유", systemImage: "square.and.arrow.up")
                         }
                         Divider()
@@ -143,7 +146,6 @@ struct NewAlbumView: View {
                     .onTapGesture {
                         if viewModel.isSelectionMode == false {
                             viewModel.showImageViewer = true
-                            viewModel.chosenAsset = asset
                             selection = index
                         } else {
                             if let index = viewModel.chosenMultipleAssets.firstIndex(of: asset) { // 셀렉션이 이미 되었다면
@@ -155,7 +157,6 @@ struct NewAlbumView: View {
                     }
             }
         }
-        
     }
     
     struct ImagePreview: View {
@@ -179,11 +180,14 @@ struct NewAlbumView: View {
             }
         }
         
+        /// -Tag: 각종 페이지뷰
         var TabPage: some View {
             TabView(selection: $selection) {
                 ForEach(0..<viewModel.photoAssets.count, id: \.self) { index in
+                    
                     let image = viewModel.photoAssets[index]
                         .originalImage(targetSize: CGSize(width: 700, height: 700))
+                    
                     VStack {
                         Spacer()
                         Image(uiImage: image)
@@ -208,16 +212,14 @@ struct NewAlbumView: View {
                                         }))
                         Spacer()
                     }
+                    .background(Share(isPresented: $viewModel.showShareInViewer, data: [image]))
+
                 }
             }
             .tabViewStyle(PageTabViewStyle())
             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
-            //                .onAppear {
-            //                    UIScrollView.appearance().bounces = false
-            //                }
-            //                .onDisappear {
-            //                    UIScrollView.appearance().bounces = true
-            //                }
+//            .onAppear {  UIScrollView.appearance().bounces = false }
+//            .onDisappear { UIScrollView.appearance().bounces = true }
             .background(Color.black.ignoresSafeArea(.all))
             .offset(y:viewModel.draggedOffset.height)
             //                .opacity(1 - Double(differenceParameter) * 3)
@@ -235,7 +237,7 @@ struct NewAlbumView: View {
                         .foregroundColor(.yellow)
                 }
                 Spacer()
-                Button(action: {  }) {
+                Button(action: { viewModel.showShareInViewer = true }) {
                     Image(systemName: "square.and.arrow.up")
                         .foregroundColor(.yellow)
                 }
