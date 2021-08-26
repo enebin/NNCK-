@@ -7,36 +7,41 @@
 
 import SwiftUI
 import PhotosUI
+import DequeModule
 import Combine
 
 class AlbumViewModel: ObservableObject {
     private let model = Album()
     private var subscriptions = Set<AnyCancellable>()
+    let originalSize = CGSize(width: 700, height: 700)
+    let interval = 10
     
     // 앨범 관련 변수
     @Published var hideHeader = false
     @Published var gridSpacing: CGFloat = 4
-
-    @Published var takenPhoto: UIImage?  // 찍힌 사진
     
     @Published var photoAssets = PHFetchResult<PHAsset>()
     @Published var currentPhoto = UIImage()
-    @Published var chosenIndex = 0
     @Published var chosenMultipleAssets = [PHAsset]()
+    @Published var selection = 0
     
     @Published var showImageViewer = true
-    @Published var showShareInViewer = false
-    @Published var showShareInAlbum = false
+    @Published var showShare = false
     @Published var isSelectionMode = false
     @Published var draggedOffset = CGSize.zero
 //    @Published var differenceParameter = abs(draggedOffset.height/2000)
 
-    let originalSize = CGSize(width: 700, height: 700)
+    var tempImage = [UIImage](repeating: UIImage(), count: 100)
+    
+    @Published var photoCache = cache(id: nil, image: [UIImage](repeating: UIImage(), count: 100))
+    
+    struct cache {
+        var id: Int?
+        var image = [UIImage](repeating: UIImage(), count: 100)
+    }
     
     func configure() {
-        DispatchQueue.main.async {
-            self.photoAssets = self.model.fetchPhoto()
-        }
+        self.photoAssets = self.model.fetchPhoto()
         print("[AlbumViewModel]: \(photoAssets.count) fetched count")
     }
     
@@ -51,11 +56,35 @@ class AlbumViewModel: ObservableObject {
         gridSpacing = isSelectionMode == true ? 8 : 4
     }
     
-    // MARK: - 앨범 기능
-        
     func deletePhoto(assets: [PHAsset]) {
         model.deletePhoto(assets: assets, completion: self.configure)
     }
+    
+//    func requestPhoto(index originalIndex: Int) -> UIImage {
+//        let id: Int = originalIndex / interval
+//        let index: Int = originalIndex % interval
+//
+//
+//        if photoCache.id == nil || photoCache.id != id {
+//            print(id, photoCache.id)
+//            let requestOptions = PHImageRequestOptions()
+//            requestOptions.isSynchronous = false
+//            requestOptions.deliveryMode = .highQualityFormat
+//            requestOptions.isNetworkAccessAllowed = true
+//
+//            let imageManager = PHCachingImageManager()
+//            for assetIndex in (id * interval ... id * interval + interval) {
+//                imageManager.requestImage(for: photoAssets[assetIndex], targetSize: CGSize(width: 700, height: 700), contentMode: .aspectFill, options: requestOptions) { [self] image, info in
+//                    if (info?[PHImageResultIsDegradedKey] as? Bool) ?? false { print("error"); return }
+//                    photoCache.image[assetIndex / interval] = image ?? UIImage()
+//                }
+//                print("[AlbumViewModel]: Caching is done")
+//            }
+//            photoCache.id = id
+//        }
+//
+//        return photoCache.image[index]
+//    }
     
     init() {
         configure()

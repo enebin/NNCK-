@@ -31,12 +31,10 @@ class Album: ObservableObject {
             PHAssetChangeRequest.deleteAssets(assets as NSArray)
         }, completionHandler: {success, error in
             print(success ? "sucess" : "error")
-            self.photoAssets = self.fetchPhoto()
             completion()
         })
     }
 }
-
 
 extension PHAsset {
     //https://stackoverflow.com/questions/30812057/phasset-to-uiimage
@@ -48,8 +46,8 @@ extension PHAsset {
         requestOptions.isNetworkAccessAllowed = true
 
         var thumbnail = UIImage()
-        let imageManager = PHImageManager()
-        imageManager.requestImage(for: self, targetSize: CGSize(width: 150, height: 150), contentMode: .aspectFill, options: requestOptions, resultHandler: { image, _ in
+        let imageManager = PHCachingImageManager()
+        imageManager.requestImage(for: self, targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFill, options: requestOptions, resultHandler: { image, _ in
             thumbnail = image!
         })
         return thumbnail
@@ -57,14 +55,16 @@ extension PHAsset {
     
     func originalImage(targetSize: CGSize) -> UIImage {
         print("Original Image requested")
+        print(self)
+       
         let requestOptions = PHImageRequestOptions()
         requestOptions.isSynchronous = true
         requestOptions.deliveryMode = .highQualityFormat
         requestOptions.isNetworkAccessAllowed = true
 
         var thumbnail = UIImage()
-
-        let imageManager = PHImageManager()
+        
+        let imageManager = PHCachingImageManager()
         imageManager.requestImage(for: self, targetSize: CGSize(width: 700, height: 700), contentMode: .aspectFill, options: requestOptions) { image, info in
             if (info?[PHImageResultIsDegradedKey] as? Bool) ?? false { print("error"); return }
             thumbnail = image!
@@ -96,3 +96,4 @@ struct Share: UIViewControllerRepresentable {
         }
     }
 }
+

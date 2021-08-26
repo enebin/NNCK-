@@ -7,13 +7,11 @@
 
 import SwiftUI
 import PhotosUI
+import SwiftUIPager
 
 struct NewAlbumView: View {
     @ObservedObject var viewModel = AlbumViewModel()
     @Binding var showAlbum: Bool
-    
-    @Namespace var namespace
-    
     
     var body: some View {
         VStack {
@@ -21,10 +19,11 @@ struct NewAlbumView: View {
                 if viewModel.isSelectionMode {
                     SelectionHeader
                 } else {
-                    MainHeader }
+                    MainHeader
+                }
             }
             .padding(15)
-            
+
             ScrollView {
                 AlbumGrid
                     .onAppear {
@@ -32,9 +31,13 @@ struct NewAlbumView: View {
                     }
             }
         }
-        .overlay(ImagePreview(selection: $viewModel.chosenIndex)
+        .overlay(ImagePreview(selection: $viewModel.selection)
                     .environmentObject(viewModel))
         .background(viewModel.isSelectionMode ? Color.white.opacity(0.3) : Color.black)
+        .background(Share(isPresented: $viewModel.showShare,
+                          data: viewModel.chosenMultipleAssets.map({
+            $0.originalImage(targetSize: viewModel.originalSize)
+        })))
         .animation(.easeInOut)
     }
     
@@ -43,13 +46,10 @@ struct NewAlbumView: View {
                   spacing: viewModel.gridSpacing) {
             ForEach(0..<viewModel.photoAssets.count, id: \.self) { index in
                 let asset = viewModel.photoAssets[index]
-                AlbumElement(selection: $viewModel.chosenIndex, asset: asset, index: index)
+                AlbumElement(selection: $viewModel.selection, asset: asset, index: index)
                     .environmentObject(viewModel)
             }
         }
-        .background(Share(isPresented: $viewModel.showShareInAlbum, data: viewModel.chosenMultipleAssets.map({
-            $0.originalImage(targetSize: viewModel.originalSize)
-        })))
         .transition(.opacity)
         .animation(.easeInOut)
     }
@@ -71,7 +71,7 @@ struct NewAlbumView: View {
     
     var SelectionHeader: some View {
         HStack {
-            Button(action: { viewModel.showShareInAlbum = true }) {
+            Button(action: { viewModel.showShare = true }) {
                 Image(systemName: "square.and.arrow.up")
                     .foregroundColor(.yellow)
             }
@@ -118,6 +118,7 @@ struct NewAlbumView: View {
                 }
                 Spacer()
             }
+            .transition(.identity)
         }
         
         var thumbnailImage: some View {
@@ -134,7 +135,7 @@ struct NewAlbumView: View {
                         Button(action: {
                             viewModel.isSelectionMode = true
                             viewModel.chosenMultipleAssets.append(asset)
-                            viewModel.showShareInAlbum = true;
+                            viewModel.showShare = true;
                         }) {
                             Label("공유", systemImage: "square.and.arrow.up")
                         }
@@ -175,61 +176,90 @@ struct NewAlbumView: View {
                         Spacer()
                     }
                     .zIndex(1.0)
-                    TabPage
+                    tabpager().environmentObject(viewModel)
                 }
                 .transition(.asymmetric(insertion: .opacity, removal: .move(edge: .bottom)))
-                .animation(.easeInOut(duration: 0.3))
+                .animation(.easeInOut(duration: 0.4))
             }
         }
-        
-        /// -Tag: 각종 페이지뷰
         var TabPage: some View {
-            TabView(selection: $selection) {
+            return TabView(selection: $viewModel.selection) {
                 ForEach(0..<viewModel.photoAssets.count, id: \.self) { index in
-                    
-                    let image = viewModel.photoAssets[index]
-                        .originalImage(targetSize: CGSize(width: 700, height: 700))
-                    
                     VStack {
                         Spacer()
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                            .onTapGesture {
-                                viewModel.showImageViewer = false
-                            }
-                            .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                                        .onChanged { value in
-                                            DispatchQueue.main.async {
-                                                viewModel.draggedOffset = value.translation
-                                                print(viewModel.draggedOffset)
-                                            }
-                                        }
-                                        .onEnded({ value in
-                                            if viewModel.draggedOffset.height > 50 {
-                                                viewModel.showImageViewer = false
-                                            }
-                                            viewModel.draggedOffset = CGSize.zero
-                                        }))
+                        ChildImageView(index: index)
                         Spacer()
                     }
-                    .background(Share(isPresented: $viewModel.showShareInViewer, data: [image]))
-
                 }
             }
             .tabViewStyle(PageTabViewStyle())
             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
-//            .onAppear {  UIScrollView.appearance().bounces = false }
-//            .onDisappear { UIScrollView.appearance().bounces = true }
+            .onAppear {  UIScrollView.appearance().bounces = false }
+            .onDisappear { UIScrollView.appearance().bounces = true }
             .background(Color.black.ignoresSafeArea(.all))
             .offset(y:viewModel.draggedOffset.height)
             //                .opacity(1 - Double(differenceParameter) * 3)
         }
         
+        struct tabpager: View {
+            @EnvironmentObject var viewModel: AlbumViewModel
+            
+            var body: some View {
+                let page: Page = .withIndex(viewModel.selection)
+                Pager(page: page, data: (0..<viewModel.photoAssets.count), id: \.self) { index in
+                    VStack {
+                        Spacer()
+                        ChildImageView(index: index)
+                        Spacer()
+                    }
+                }
+                .pagingPriority(.simultaneous)
+                .sensitivity(.high)
+                .draggingAnimation(.standard(duration: 0.2))
+                .onPageChanged { index in
+                }
+            }
+        }
+        
+        struct ChildImageView : View {
+            @EnvironmentObject var viewModel: AlbumViewModel
+//            @State var image: UIImage = UIImage()
+
+            let index: Int
+            
+            var body: some View {
+                let image = viewModel.photoAssets[index].originalImage(targetSize: viewModel.originalSize)
+                Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+//                    .onChange(of: viewModel.selection, perform: { newIndex in
+//                        if viewModel.selection == index || viewModel.selection == index-1 || viewModel.selection == index+1 {
+//                            image = viewModel.photoAssets[index].originalImage(targetSize: viewModel.originalSize)
+//                        }
+//                    })
+                    .onTapGesture {
+                        viewModel.showImageViewer = false
+                    }
+//                            .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+//                                        .onChanged { value in
+//                                            DispatchQueue.main.async {
+//                                                viewModel.draggedOffset = value.translation
+//                                                print(viewModel.draggedOffset)
+//                                            }
+//                                        }
+//                                        .onEnded({ value in
+//                                            if viewModel.draggedOffset.height > 50 {
+//                                                viewModel.showImageViewer = false
+//                                            }
+//                                            viewModel.draggedOffset = CGSize.zero
+//                                        }))
+            }
+        }
+        
         var PreviewHeader: some View {
             HStack {
-                Button(action: {viewModel.showImageViewer = false}) {
+                Button(action: {viewModel.showImageViewer = false; viewModel.switchSelectionMode(to: false)}) {
                     Image(systemName: "chevron.down")
                         .foregroundColor(.yellow)
                 }
@@ -239,7 +269,7 @@ struct NewAlbumView: View {
                         .foregroundColor(.yellow)
                 }
                 Spacer()
-                Button(action: { viewModel.showShareInViewer = true }) {
+                Button(action: { viewModel.showShare = true; viewModel.chosenMultipleAssets.append(viewModel.photoAssets[selection]) }) {
                     Image(systemName: "square.and.arrow.up")
                         .foregroundColor(.yellow)
                 }

@@ -270,21 +270,6 @@ extension Camera: AVCapturePhotoCaptureDelegate {
     }
 }
 
-//extension Camera : PHPhotoLibraryChangeObserver {
-//    func registerPhotoLibrary() {
-//        PHPhotoLibrary.shared().register(self)
-//    }
-//
-//    func photoLibraryDidChange(_ changeInstance: PHChange) {
-//        let asset = self.fetchPhoto()
-//        let changes = changeInstance.changeDetails(for: asset)
-//        let fetchResult = changes?.fetchResultAfterChanges
-//        OperationQueue.main.addOperation {
-////            self.tableView.reloadSections(IndexSet(0...0), with: .automatic)
-//        }
-//    }
-//}
-
 extension UIImage {
     // 워터마크 오버레이 헬퍼 함수
     func overlayWith(image: UIImage, posX: CGFloat, posY: CGFloat) -> UIImage {
