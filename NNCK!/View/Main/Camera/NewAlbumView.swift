@@ -26,9 +26,6 @@ struct NewAlbumView: View {
 
             ScrollView {
                 AlbumGrid
-                    .onAppear {
-                        UIScrollView.appearance().alwaysBounceVertical = true
-                    }
             }
         }
         .overlay(ImagePreview(selection: $viewModel.selection)
@@ -165,31 +162,54 @@ struct NewAlbumView: View {
     struct ImagePreview: View {
         @EnvironmentObject var viewModel: AlbumViewModel
         @Binding var selection: Int
+        @State var hidePreviewHeader = false
+        @State var drag = CGSize.zero
         
         var body: some View {
             if viewModel.showImageViewer {
                 ZStack {
                     VStack {
-                        PreviewHeader
-                            .padding(15)
-                            .background(Color.black.opacity(0.5))
+                        if hidePreviewHeader == false {
+                            PreviewHeader
+                                .padding(15)
+                                .background(Color.black.opacity(0.5))
+                                .transition(.move(edge: .top))
+                        }
                         Spacer()
                     }
                     .zIndex(1.0)
-                    tabpager().environmentObject(viewModel)
+                    
+                    TabPage
                 }
                 .transition(.asymmetric(insertion: .opacity, removal: .move(edge: .bottom)))
                 .animation(.easeInOut(duration: 0.4))
             }
         }
+
         var TabPage: some View {
             return TabView(selection: $viewModel.selection) {
                 ForEach(0..<viewModel.photoAssets.count, id: \.self) { index in
                     VStack {
                         Spacer()
-                        ChildImageView(index: index)
+                        ChildImageView(hidePreviewHeader: $hidePreviewHeader, index: index)
                         Spacer()
                     }
+                    .offset(y: drag.height)
+                    .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                                .onChanged { value in
+                                    withAnimation(.easeInOut) {
+                                        drag = value.translation
+                                    }
+                                    hidePreviewHeader = true
+                                    print(drag)
+                                }
+                                .onEnded { value in
+                                    if drag.height > 100 {
+                                        viewModel.showImageViewer = false
+                                    }
+                                    hidePreviewHeader = false
+                                    drag = CGSize.zero
+                                })
                 }
             }
             .tabViewStyle(PageTabViewStyle())
@@ -197,64 +217,9 @@ struct NewAlbumView: View {
             .onAppear {  UIScrollView.appearance().bounces = false }
             .onDisappear { UIScrollView.appearance().bounces = true }
             .background(Color.black.ignoresSafeArea(.all))
-            .offset(y:viewModel.draggedOffset.height)
-            //                .opacity(1 - Double(differenceParameter) * 3)
-        }
-        
-        struct tabpager: View {
-            @EnvironmentObject var viewModel: AlbumViewModel
-            
-            var body: some View {
-                let page: Page = .withIndex(viewModel.selection)
-                Pager(page: page, data: (0..<viewModel.photoAssets.count), id: \.self) { index in
-                    VStack {
-                        Spacer()
-                        ChildImageView(index: index)
-                        Spacer()
-                    }
-                }
-                .pagingPriority(.simultaneous)
-                .sensitivity(.high)
-                .draggingAnimation(.standard(duration: 0.2))
-                .onPageChanged { index in
-                }
-            }
-        }
-        
-        struct ChildImageView : View {
-            @EnvironmentObject var viewModel: AlbumViewModel
-//            @State var image: UIImage = UIImage()
+//            .opacity(1 - Double(differenceParameter) * 3)
 
-            let index: Int
-            
-            var body: some View {
-                let image = viewModel.photoAssets[index].originalImage(targetSize: viewModel.originalSize)
-                Image(uiImage: image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-//                    .onChange(of: viewModel.selection, perform: { newIndex in
-//                        if viewModel.selection == index || viewModel.selection == index-1 || viewModel.selection == index+1 {
-//                            image = viewModel.photoAssets[index].originalImage(targetSize: viewModel.originalSize)
-//                        }
-//                    })
-                    .onTapGesture {
-                        viewModel.showImageViewer = false
-                    }
-//                            .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-//                                        .onChanged { value in
-//                                            DispatchQueue.main.async {
-//                                                viewModel.draggedOffset = value.translation
-//                                                print(viewModel.draggedOffset)
-//                                            }
-//                                        }
-//                                        .onEnded({ value in
-//                                            if viewModel.draggedOffset.height > 50 {
-//                                                viewModel.showImageViewer = false
-//                                            }
-//                                            viewModel.draggedOffset = CGSize.zero
-//                                        }))
-            }
+
         }
         
         var PreviewHeader: some View {
@@ -275,6 +240,27 @@ struct NewAlbumView: View {
                 }
             }
             .font(.system(size: 20))
+        }
+        
+    }
+    
+    struct ChildImageView : View {
+        @EnvironmentObject var viewModel: AlbumViewModel
+        @Binding var hidePreviewHeader: Bool
+
+        let index: Int
+        
+        var body: some View {
+            let image = viewModel.photoAssets[index].originalImage(targetSize: viewModel.originalSize)
+            Image(uiImage: image)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                .onTapGesture {
+                    viewModel.showImageViewer = false
+                }
+                
+
         }
     }
 }

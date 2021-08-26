@@ -30,6 +30,7 @@
 		9B49D10826D3A37A0021E14C /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D10726D3A37A0021E14C /* Album.swift */; };
 		9B49D10A26D3AB9E0021E14C /* AlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D10926D3AB9E0021E14C /* AlbumViewModel.swift */; };
 		9B50CDBB26D7255D00D6D91F /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 9B50CDBA26D7255D00D6D91F /* SwiftUIPager */; };
+		9B50CDDC26D7341600D6D91F /* Tappage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CDDB26D7341600D6D91F /* Tappage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		9B49D10226D365F50021E14C /* SoundButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundButtonView.swift; sourceTree = "<group>"; };
 		9B49D10726D3A37A0021E14C /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		9B49D10926D3AB9E0021E14C /* AlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModel.swift; sourceTree = "<group>"; };
+		9B50CDDB26D7341600D6D91F /* Tappage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tappage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,7 +166,6 @@
 			children = (
 				9B49D10126D365F50021E14C /* CameraView.swift */,
 				9B49D10026D365F50021E14C /* SettingView.swift */,
-				9B49D0FF26D365F50021E14C /* AlbumView.swift */,
 				9B49D0FD26D349E90021E14C /* NewAlbumView.swift */,
 				9B49D10226D365F50021E14C /* SoundButtonView.swift */,
 			);
@@ -192,6 +193,8 @@
 		9B50CDBC26D7288A00D6D91F /* Tomb */ = {
 			isa = PBXGroup;
 			children = (
+				9B49D0FF26D365F50021E14C /* AlbumView.swift */,
+				9B50CDDB26D7341600D6D91F /* Tappage.swift */,
 			);
 			path = Tomb;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				9B49D0FA26D33F030021E14C /* Extensions.swift in Sources */,
 				9B49D10826D3A37A0021E14C /* Album.swift in Sources */,
 				9B49D0F526D33EFA0021E14C /* PermissionRequestView.swift in Sources */,
+				9B50CDDC26D7341600D6D91F /* Tappage.swift in Sources */,
 				9B49D0C926D33EEF0021E14C /* NNCK_App.swift in Sources */,
 				9B49D10A26D3AB9E0021E14C /* AlbumViewModel.swift in Sources */,
 				9B49D10426D365F50021E14C /* SettingView.swift in Sources */,
