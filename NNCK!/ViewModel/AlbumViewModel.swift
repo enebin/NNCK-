@@ -23,15 +23,16 @@ class AlbumViewModel: ObservableObject {
     
     @Published var photoAssets = PHFetchResult<PHAsset>()
     @Published var currentPhoto = UIImage()
-    @Published var chosenMultipleAssets = [PHAsset]()
+    @Published var chosenMultipleAssets: [PHAsset] = [PHAsset]()
     
     @Published var showImageViewer = true
     @Published var showShare = false
     @Published var isSelectionMode = false
-
     
     func configure() {
-        self.photoAssets = self.model.fetchPhoto()
+        DispatchQueue.main.async {
+            self.photoAssets = self.model.fetchPhoto()
+        }
         print("[AlbumViewModel]: \(photoAssets.count) fetched count")
     }
     
@@ -47,7 +48,12 @@ class AlbumViewModel: ObservableObject {
     }
     
     func deletePhoto(assets: [PHAsset]) {
-        model.deletePhoto(assets: assets, completion: self.configure)
+        model.deletePhoto(assets: assets, ifSucess: {
+            DispatchQueue.main.async {
+                self.chosenMultipleAssets = [PHAsset]()
+                self.configure()
+            }
+        })
     }
     
     init() {

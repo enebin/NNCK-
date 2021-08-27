@@ -11,6 +11,7 @@ import PhotosUI
 
 class Album: ObservableObject {
     @Published var photoAssets = PHFetchResult<PHAsset>()
+    let thumbnailSize = CGSize(width: 200, height: 200)
 
 
     func fetchPhoto() -> PHFetchResult<PHAsset> {
@@ -22,16 +23,57 @@ class Album: ObservableObject {
         let results: PHFetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
         self.photoAssets = results
         
+//        cacheThumbnail(assets: results)
+//        cacheImages(assets: results)
         print("[AlbumModel]: \(photoAssets.count) fetched count")
         return results
     }
     
-    func deletePhoto(assets: [PHAsset], completion: @escaping () -> ()) {
+        func cacheImages(assets: PHFetchResult<PHAsset>) {
+            var tempAssets = [PHAsset]()
+            for index in 0..<assets.count {
+                tempAssets.append(assets[index])
+            }
+    
+            let requestOptions = PHImageRequestOptions()
+            let imageManager = PHCachingImageManager()
+
+            requestOptions.isSynchronous = true
+            requestOptions.deliveryMode = .highQualityFormat
+            requestOptions.isNetworkAccessAllowed = true
+            let bigSize = CGSize(width: 700, height: 700)
+                    imageManager.startCachingImages(for: tempAssets, targetSize: bigSize, contentMode: .aspectFill, options: requestOptions)
+    
+            print("[AlbumModel]: Caching is done. Count: \(tempAssets.count)")
+        }
+
+    func cacheThumbnail(assets: PHFetchResult<PHAsset>) {
+        var tempAssets = [PHAsset]()
+        for index in 0..<assets.count {
+            tempAssets.append(assets[index])
+        }
+
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.isSynchronous = true
+        requestOptions.deliveryMode = .highQualityFormat
+        requestOptions.isNetworkAccessAllowed = true
+
+        let imageManager = PHCachingImageManager()
+        imageManager.startCachingImages(for: tempAssets, targetSize: CGSize(width: 200, height: 200), contentMode: .aspectFill, options: requestOptions)
+
+        print("[AlbumModel]: Caching is done. Count: \(tempAssets.count)")
+    }
+
+    func deletePhoto(assets: [PHAsset], ifSucess: @escaping () -> ()) {
         PHPhotoLibrary.shared().performChanges({
             PHAssetChangeRequest.deleteAssets(assets as NSArray)
         }, completionHandler: {success, error in
-            print(success ? "sucess" : "error")
-            completion()
+            if success {
+                ifSucess()
+                print("[AlbumModel]: Delete sequence's done sucessfully")
+            } else {
+                print("[AlbumModel]: Error or cancellation during delete sequence")
+            }
         })
     }
 }
@@ -41,13 +83,14 @@ extension PHAsset {
     
     var thumbnailImage : UIImage {
         let requestOptions = PHImageRequestOptions()
+        let imageManager = PHCachingImageManager()
+
         requestOptions.isSynchronous = true
         requestOptions.deliveryMode = .highQualityFormat
         requestOptions.isNetworkAccessAllowed = true
 
         var thumbnail = UIImage()
-        let imageManager = PHCachingImageManager()
-        imageManager.requestImage(for: self, targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFill, options: requestOptions, resultHandler: { image, _ in
+        imageManager.requestImage(for: self, targetSize: CGSize(width: 200, height: 200), contentMode: .aspectFill, options: requestOptions, resultHandler: { image, _ in
             thumbnail = image!
         })
         return thumbnail
@@ -63,7 +106,6 @@ extension PHAsset {
         requestOptions.isNetworkAccessAllowed = true
 
         var thumbnail = UIImage()
-        
         let imageManager = PHCachingImageManager()
         imageManager.requestImage(for: self, targetSize: CGSize(width: 700, height: 700), contentMode: .aspectFill, options: requestOptions) { image, info in
             if (info?[PHImageResultIsDegradedKey] as? Bool) ?? false { print("error"); return }

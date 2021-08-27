@@ -16,7 +16,6 @@ struct CameraView: View {
     @State var showSound = false
     @State var showAlbum = false
     
-    let hapticImpact = UIImpactFeedbackGenerator()
     var debug = true
     
     private func collapseAll() {
@@ -72,7 +71,6 @@ struct CameraView: View {
                             .position(x: geometry.size.width/2+20, y: geometry.size.height/2-30)
                             .onTapGesture {
                                 viewModel.capturePhoto()
-                                hapticImpact.impactOccurred()
                                 collapseAll()
                             }
                             .gesture( // Zoom에 관한 함수구문
@@ -169,7 +167,6 @@ struct CameraView: View {
             // 셔터 버튼
             Button(action: {
                     viewModel.capturePhoto()
-                    hapticImpact.impactOccurred()
                     collapseAll() },
                    label: {
                     Circle().stroke(lineWidth: 6)

@@ -16,6 +16,9 @@ class CameraViewModel: ObservableObject {
     private var subscriptions = Set<AnyCancellable>()
     let session: AVCaptureSession
     
+    private var isCameraBusy = false
+    private let hapticImpact = UIImpactFeedbackGenerator()
+    
     // 설정창 관련 변수
     @Published var showSetting = false
     
@@ -80,13 +83,18 @@ class CameraViewModel: ObservableObject {
     }
     
     func capturePhoto() {
-        print("[CameraViewcameraModel]: Photo's taken")
-        model.capturePhoto()
-        DispatchQueue.main.async {
-            self.switchTaken()
-        }   // 셔터 애니메이션 딜레이는 여기서 조정 --->
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            self.switchTaken()
+        if isCameraBusy == false {
+            print("[CameraViewModel]: Photo's taken")
+            model.capturePhoto()
+            hapticImpact.impactOccurred()
+            DispatchQueue.main.async {
+                self.switchTaken()
+            }   // 셔터 애니메이션 딜레이는 여기서 조정 --->
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.switchTaken()
+            }
+        } else {
+            print("[CameraViewModel] !!Error!! Camera is busy")
         }
     }
     
@@ -113,6 +121,11 @@ class CameraViewModel: ObservableObject {
         
         model.$albumAuth.sink { [weak self] (albumAuth) in
             self?.albumAuth = albumAuth
+        }
+        .store(in: &self.subscriptions)
+        
+        model.$isCameraBusy.sink { [weak self] (isCameraBusy) in
+            self?.isCameraBusy = isCameraBusy
         }
         .store(in: &self.subscriptions)
     }

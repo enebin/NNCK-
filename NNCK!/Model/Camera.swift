@@ -40,6 +40,8 @@ class Camera: NSObject, ObservableObject {
     @Published var cameraAuth: SessionSetupResult = .success
     @Published var albumAuth: SessionSetupResult = .success
     @Published var flashMode: AVCaptureDevice.FlashMode = .off
+    @Published var isCameraBusy = false
+
 
     var errorString : String = ""
     
@@ -237,7 +239,7 @@ class Camera: NSObject, ObservableObject {
                                          posY: UIScreen.main.bounds.maxY*2.6)
         
         PHPhotoLibrary.shared().performChanges({
-            let creationRequest = PHAssetChangeRequest.creationRequestForAsset(from: newImage)
+            _ = PHAssetChangeRequest.creationRequestForAsset(from: newImage)
         }, completionHandler: { success, error in
             guard success else { return }
         })
@@ -249,6 +251,10 @@ class Camera: NSObject, ObservableObject {
 }
 
 extension Camera: AVCapturePhotoCaptureDelegate {
+    func photoOutput(_ output: AVCapturePhotoOutput, willBeginCaptureFor resolvedSettings: AVCaptureResolvedPhotoSettings) {
+        self.isCameraBusy = true
+    }
+    
     func photoOutput(_ output: AVCapturePhotoOutput, willCapturePhotoFor resolvedSettings: AVCaptureResolvedPhotoSettings) {
         if self.isSilent {
             print("[Camera]: Silent sound activated")
@@ -262,11 +268,12 @@ extension Camera: AVCapturePhotoCaptureDelegate {
     }
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         guard let imageData = photo.fileDataRepresentation() else { return }
-        print("[Camera]: Photo'processed")
+        print("[CameraModel]: Capture routine's done")
         
         self.photoData = imageData
         self.recentImage = UIImage(data: imageData)
         self.savePhoto()
+        self.isCameraBusy = false
     }
 }
 
