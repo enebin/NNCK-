@@ -247,8 +247,20 @@ struct NewAlbumView: View {
             .onAppear {  UIScrollView.appearance().bounces = false }
             .onDisappear { UIScrollView.appearance().bounces = true }
             .background(Color.black.ignoresSafeArea(.all))
-
-
+        }
+        
+        var TempTabPage: some View {
+            let interval = 3
+            return CustomPager(pageCount: interval, currentIndex: $viewModel.selection) {
+                let startPoint =  viewModel.selection
+                ForEach(startPoint..<startPoint+interval, id: \.self) { index in
+                    VStack {
+                        Spacer()
+                        ChildImageView(hidePreviewHeader: $hidePreviewHeader, index: index)
+                        Spacer()
+                    }
+                }
+            }
         }
         
         var PreviewHeader: some View {
@@ -276,11 +288,10 @@ struct NewAlbumView: View {
     struct ChildImageView : View {
         @EnvironmentObject var viewModel: AlbumViewModel
         @Binding var hidePreviewHeader: Bool
-        
-        let index: Int
         @State var imageScale: CGFloat = 1
         @State var drag = CGSize.zero
         
+        let index: Int
         var body: some View {
             let image = viewModel.photoAssets[index].originalImage(targetSize: viewModel.originalSize)
             Image(uiImage: image)
@@ -307,18 +318,21 @@ struct NewAlbumView: View {
                                             MagnificationGesture()
                                             .onChanged({ (value) in
                                                 imageScale = value
+                                                hidePreviewHeader = true
                                             }).onEnded({ (_) in
                                                 withAnimation(.spring()){
                                                     imageScale = 1
                                                 }
+                                                hidePreviewHeader = true
                                             }))
                         // Double To Zoom...
-                        
                         .simultaneously(with:
                                             TapGesture(count: 2).onEnded({
                                                 withAnimation{
                                                     imageScale = imageScale > 1 ? 1 : 4
                                                 }
+                                                hidePreviewHeader = imageScale > 1 ?
+                                                    true : false
                                             }))
                 )
                 .onTapGesture {

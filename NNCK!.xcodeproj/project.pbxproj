@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B26B65F26D9D3390083D76E /* CustomPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B26B65E26D9D3390083D76E /* CustomPager.swift */; };
 		9B321ABD26D902D8007D632C /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 9B321ABC26D902D8007D632C /* SwiftUIPager */; };
 		9B49D0C926D33EEF0021E14C /* NNCK_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0C826D33EEF0021E14C /* NNCK_App.swift */; };
 		9B49D0CB26D33EEF0021E14C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0CA26D33EEF0021E14C /* ContentView.swift */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B26B65E26D9D3390083D76E /* CustomPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPager.swift; sourceTree = "<group>"; };
 		9B49D0C526D33EEF0021E14C /* NNCK!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NNCK!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B49D0C826D33EEF0021E14C /* NNCK_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NNCK_App.swift; sourceTree = "<group>"; };
 		9B49D0CA26D33EEF0021E14C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				9B49D0CC26D33EF00021E14C /* Assets.xcassets */,
 				9B49D0D126D33EF00021E14C /* Info.plist */,
 				9BBEC0F326D7A3FA0027853B /* CustomContextView.swift */,
+				9B26B65E26D9D3390083D76E /* CustomPager.swift */,
 				9B50CDBC26D7288A00D6D91F /* Tomb */,
 				9B49D0CE26D33EF00021E14C /* Preview Content */,
 			);
@@ -286,6 +289,7 @@
 				9B49D0CB26D33EEF0021E14C /* ContentView.swift in Sources */,
 				9B49D0F626D33EFA0021E14C /* LaserEffectView.swift in Sources */,
 				9BBEC0F426D7A3FA0027853B /* CustomContextView.swift in Sources */,
+				9B26B65F26D9D3390083D76E /* CustomPager.swift in Sources */,
 				9B49D0F826D33EFA0021E14C /* Sound.swift in Sources */,
 				9B49D10826D3A37A0021E14C /* Album.swift in Sources */,
 				9B49D0F526D33EFA0021E14C /* PermissionRequestView.swift in Sources */,
