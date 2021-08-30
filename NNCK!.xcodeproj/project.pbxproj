@@ -10,6 +10,7 @@
 		9B26B65F26D9D3390083D76E /* CustomPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B26B65E26D9D3390083D76E /* CustomPager.swift */; };
 		9B2B8A1C26DC9B3700EA2CED /* gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A1B26DC9B3700EA2CED /* gesture.swift */; };
 		9B2B8A1E26DCABE300EA2CED /* FirstLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A1D26DCABE300EA2CED /* FirstLaunch.swift */; };
+		9B2B8A2126DCBABD00EA2CED /* SoundSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A2026DCBABD00EA2CED /* SoundSetting.swift */; };
 		9B321ABD26D902D8007D632C /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 9B321ABC26D902D8007D632C /* SwiftUIPager */; };
 		9B49D0C926D33EEF0021E14C /* NNCK_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0C826D33EEF0021E14C /* NNCK_App.swift */; };
 		9B49D0CB26D33EEF0021E14C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0CA26D33EEF0021E14C /* ContentView.swift */; };
@@ -40,6 +41,7 @@
 		9B26B65E26D9D3390083D76E /* CustomPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPager.swift; sourceTree = "<group>"; };
 		9B2B8A1B26DC9B3700EA2CED /* gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gesture.swift; sourceTree = "<group>"; };
 		9B2B8A1D26DCABE300EA2CED /* FirstLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunch.swift; sourceTree = "<group>"; };
+		9B2B8A2026DCBABD00EA2CED /* SoundSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSetting.swift; sourceTree = "<group>"; };
 		9B49D0C526D33EEF0021E14C /* NNCK!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NNCK!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B49D0C826D33EEF0021E14C /* NNCK_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NNCK_App.swift; sourceTree = "<group>"; };
 		9B49D0CA26D33EEF0021E14C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -79,6 +81,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B2B8A1F26DCBAB000EA2CED /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				9B2B8A2026DCBABD00EA2CED /* SoundSetting.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		9B49D0BC26D33EEF0021E14C = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +164,7 @@
 		9B49D0DF26D33EFA0021E14C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9B2B8A1F26DCBAB000EA2CED /* Setting */,
 				9B49D0E026D33EFA0021E14C /* Main */,
 				9B49D0E726D33EFA0021E14C /* Effects */,
 			);
@@ -299,6 +310,7 @@
 				9B26B65F26D9D3390083D76E /* CustomPager.swift in Sources */,
 				9B49D0F826D33EFA0021E14C /* Sound.swift in Sources */,
 				9B49D10826D3A37A0021E14C /* Album.swift in Sources */,
+				9B2B8A2126DCBABD00EA2CED /* SoundSetting.swift in Sources */,
 				9B49D0F526D33EFA0021E14C /* PermissionRequestView.swift in Sources */,
 				9B50CDDC26D7341600D6D91F /* Tappage.swift in Sources */,
 				9B49D0C926D33EEF0021E14C /* NNCK_App.swift in Sources */,

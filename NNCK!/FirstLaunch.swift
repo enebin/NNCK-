@@ -28,3 +28,35 @@ extension FirstLaunch {
         return FirstLaunch(getWasLaunchedBefore: { return false }, setWasLaunchedBefore: { _ in })
     }
 }
+
+struct FirstView: View {
+    var body: some View {
+        TabView {
+//            TutorialView(emoji: "🎫", title: "")
+
+        }
+        .tabViewStyle(PageTabViewStyle())
+        .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .interactive))
+    }
+    
+    struct TutorialView: View {
+        let emoji: String
+        let title: String
+        let text: String
+        
+        var body: some View {
+            VStack {
+                Text(emoji).font(.system(size: 60))
+                Text(text).font(.system(size: 30))
+                Text(text).font(.system(size: 30))
+
+            }
+        }
+    }
+}
+
+struct FirstView_Previews: PreviewProvider {
+    static var previews: some View {
+        FirstView()
+    }
+}

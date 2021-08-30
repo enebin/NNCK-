@@ -47,12 +47,12 @@ struct CameraView: View {
                             Header
                                 .padding()
                             
-                            if viewModel.showSetting {
-                                SettingView()
-                                    .frame(width: geometry.size.width * 0.9, height: geometry.size.height * 0.25)
-                                    .background(RoundedRectangle(cornerRadius: 20)
-                                                    .fill(Color.black.opacity(0.6)))
-                            }
+//                            if viewModel.showSetting {
+//                                SettingView()
+//                                    .frame(width: geometry.size.width * 0.9, height: geometry.size.height * 0.25)
+//                                    .background(RoundedRectangle(cornerRadius: 20)
+//                                                    .fill(Color.black.opacity(0.6)))
+//                            }
                             Spacer()
                         }
                         HStack {
@@ -119,6 +119,24 @@ struct CameraView: View {
                 }
                 .blur(radius: viewModel.notYetPermitted ? 5 : 0)
             }
+            .sheet(isPresented: $viewModel.showSetting) {
+                VStack {
+                    ZStack {
+                        HStack {
+                            Spacer()
+                            Text("설정").bold()
+                            Spacer()
+                        }
+                        HStack {
+                            Spacer()
+                            Button(action: { viewModel.showSetting = false },
+                                   label: { Text("완료") })
+                        }
+                    }
+                    .padding(.top)
+                    SoundSetting()
+                }
+            }
             .fullScreenCover(isPresented: $showAlbum) {
                 NewAlbumView(showAlbum: $showAlbum)
                     .environmentObject(viewModel)
@@ -128,7 +146,6 @@ struct CameraView: View {
             .navigationBarHidden(true)
         }
         .accentColor(.black)
-
     }
     
     var Header: some View {

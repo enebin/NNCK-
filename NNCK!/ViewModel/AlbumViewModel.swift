@@ -7,7 +7,6 @@
 
 import SwiftUI
 import PhotosUI
-import DequeModule
 import Combine
 
 class AlbumViewModel: ObservableObject {
