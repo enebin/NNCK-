@@ -150,7 +150,7 @@ struct CameraView: View {
     }
     
     var Lefter: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 10) {
             SoundButtonView()
                 .environmentObject(viewModel)
             
@@ -247,8 +247,10 @@ struct CapturedPhotoThumbnail: View {
         if let previewImage = viewModel.recentImage {
             Image(uiImage: previewImage)
                 .resizable()
+                .scaledToFill()
                 .frame(width: 70, height: 70)
                 .clipShape(RoundedRectangle(cornerRadius: 15))
+                .aspectRatio(1, contentMode: .fit)
         } else {
             RoundedRectangle(cornerRadius: 15)
                 .stroke(lineWidth: 3)
@@ -271,9 +273,8 @@ struct ConditionalButton: View {
     var body: some View {
         Image(systemName: !condition ? imageName[0] : imageName[1])
             .font(.system(size: 25))
-            .foregroundColor(!condition ? .green : .white)
-            .padding(10)
-            .padding(.trailing, trainPadding)
+            .foregroundColor(!condition ? .catmint : .white)
+            .frame(width: 40, height: 50)
             .contentShape(Rectangle())
             .onTapGesture {
                 action()
