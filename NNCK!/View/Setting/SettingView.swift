@@ -19,13 +19,28 @@ struct SettingView: View {
                 }
             }
             
-            Section(header: Text("사운드 슬롯")) {
-                Text("Sound")
-                Text("Sound")
-                Text("Sound")
+            Section(header: Text("카메라 배경색")) {
+                Text("석탄 블랙")
+                    .foregroundColor(.white)
+                    .listRowBackground(Color.flatblack)
+                Text("분필 화이트")
+                    .foregroundColor(.black)
+                    .listRowBackground(Color.white)
+                Text("유치원 옐로우")
+                    .foregroundColor(.black)
+                    .listRowBackground(Color.yellow)
+                Text("용달 블루")
+                Text("쌈무 그린")
+                Text("옥상 그린")
+                Text("다라이 레드")
+                Text("마미손 핑크")
+                Text("기타 등등")
+
+
+
             }
         }
-        .listStyle(InsetGroupedListStyle())
+        .listStyle(SidebarListStyle())
     }
 }
 

@@ -21,8 +21,9 @@ extension Color {
         self.init(red: Double(r) / 0xff, green: Double(g) / 0xff, blue: Double(b) / 0xff)
     }
     
-    static let flatDarkBackground = Color(hex: "242424")
+    static let flatblack = Color("flatblack")
     static let catmint = Color("catmint")
-    static let catyellow = Color("catYellow")
+    static let flatwhite = Color("flatwhite")
+    
     static let catpink = Color("catPink")
 }
