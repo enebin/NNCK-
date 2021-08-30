@@ -11,6 +11,7 @@ import SwiftUIPager
 
 struct NewAlbumView: View {
     @StateObject var viewModel = AlbumViewModel()
+    @State var selection = 0
     @Binding var showAlbum: Bool
     
     var body: some View {
@@ -27,7 +28,7 @@ struct NewAlbumView: View {
                 AlbumGrid
             }
         }
-        .overlay(ImagePreview(selection: $viewModel.selection)
+        .overlay(ImagePreview(selection: $selection)
                     .environmentObject(viewModel))
         .background(viewModel.isSelectionMode ? Color.white.opacity(0.3) : Color.black)
         .background(Share(isPresented: $viewModel.showShare,
@@ -36,10 +37,6 @@ struct NewAlbumView: View {
         })))
         .animation(.easeInOut(duration: 0.35))
     }
-
-//    var PageView: some View {
-//        Pager(page: <#T##Page#>, data: <#T##RandomAccessCollection#>, id: <#T##KeyPath<_, _>#>, content: <#T##(_) -> _#>)
-//    }
     
     var AlbumGrid: some View {
         LazyVGrid(columns: [GridItem(.flexible(minimum: 80), spacing: viewModel.gridSpacing),
@@ -48,7 +45,7 @@ struct NewAlbumView: View {
                   spacing: viewModel.gridSpacing) {
             ForEach(0..<viewModel.photoAssets.count, id: \.self) { index in
                 let asset = viewModel.photoAssets[index]
-                AlbumElement(selection: $viewModel.selection, asset: asset, index: index)
+                AlbumElement(selection: $selection, asset: asset, index: index)
                     .environmentObject(viewModel)
             }
         }
@@ -124,48 +121,6 @@ struct NewAlbumView: View {
         
         var thumbnailImage: some View {
             GeometryReader { geometry in
-//                CustomContextMenu {
-//                    Image(uiImage: asset.thumbnailImage)
-//                        .resizable()
-//                        .scaledToFill()
-//                        .frame(height: geometry.size.width)
-//                        .contentShape(Rectangle())
-//                        .onTapGesture {
-//                            if viewModel.isSelectionMode == false {
-//                                viewModel.showImageViewer = true
-//                                selection = index
-//                            } else {
-//                                if let index = viewModel.chosenMultipleAssets.firstIndex(of: asset) { // 셀렉션이 이미 되었다면
-//                                    viewModel.chosenMultipleAssets.remove(at: index)
-//                                } else {
-//                                    viewModel.chosenMultipleAssets.append(asset)
-//                                }
-//                            }
-//                        }
-//                } preview: {
-//                    Image(uiImage: asset.originalImage(targetSize: viewModel.originalSize))
-//                } actions: {
-//
-//                    let multiSelection = UIAction(title: "다중선택",image: UIImage(systemName: "checkmark.circle")) { _ in
-//                        viewModel.isSelectionMode = true
-//                        viewModel.chosenMultipleAssets.append(asset)
-//                    }
-//
-//                    let share = UIAction(title: "공유",image: UIImage(systemName: "square.and.arrow.up")) { _ in
-//                        viewModel.isSelectionMode = true
-//                        viewModel.chosenMultipleAssets.append(asset)
-//                        viewModel.showShare = true;
-//                    }
-//
-//                    let delete = UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
-//                        viewModel.deletePhoto(assets: [asset])
-//                    }
-//
-//                    return UIMenu(title: "",children: [multiSelection, share, delete])
-//                } onEnd: {
-//                    viewModel.showImageViewer = true
-//                }
-                
                 Image(uiImage: asset.thumbnailImage)
                     .resizable()
                     .scaledToFill()
@@ -219,20 +174,18 @@ struct NewAlbumView: View {
                             PreviewHeader
                                 .padding(15)
                                 .background(Color.black.opacity(0.5))
-//                                .transition(.move(edge: .top))
                         }
                         Spacer()
                     }
                     .zIndex(1.0)
                     TabPage
-//                        .opacity(1 - Double(drag.height)/500)
                 }
-                .transition(.asymmetric(insertion: .scale, removal: .opacity))
+                .transition(.asymmetric(insertion: .opacity, removal: .move(edge: .bottom)))
             }
         }
 
         var TabPage: some View {
-            return TabView(selection: $viewModel.selection) {
+            return TabView(selection: $selection) {
                 ForEach(0..<viewModel.photoAssets.count, id: \.self) { index in
                     VStack {
                         Spacer()
@@ -244,24 +197,11 @@ struct NewAlbumView: View {
             }
             .tabViewStyle(PageTabViewStyle())
             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
-            .onAppear {  UIScrollView.appearance().bounces = false }
-            .onDisappear { UIScrollView.appearance().bounces = true }
+//            .onAppear {  UIScrollView.appearance().bounces = false }
+//            .onDisappear { UIScrollView.appearance().bounces = true }
             .background(Color.black.ignoresSafeArea(.all))
         }
         
-        var TempTabPage: some View {
-            let interval = 3
-            return CustomPager(pageCount: interval, currentIndex: $viewModel.selection) {
-                let startPoint =  viewModel.selection
-                ForEach(startPoint..<startPoint+interval, id: \.self) { index in
-                    VStack {
-                        Spacer()
-                        ChildImageView(hidePreviewHeader: $hidePreviewHeader, index: index)
-                        Spacer()
-                    }
-                }
-            }
-        }
         
         var PreviewHeader: some View {
             HStack {
@@ -282,7 +222,6 @@ struct NewAlbumView: View {
             }
             .font(.system(size: 20))
         }
-        
     }
     
     struct ChildImageView : View {
@@ -291,6 +230,8 @@ struct NewAlbumView: View {
         @State var imageScale: CGFloat = 1
         @State var drag = CGSize.zero
         
+        let haptic = UIImpactFeedbackGenerator(style: .light)
+
         let index: Int
         var body: some View {
             let image = viewModel.photoAssets[index].originalImage(targetSize: viewModel.originalSize)
@@ -298,46 +239,28 @@ struct NewAlbumView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                .offset(y: drag.height / 2.5)
-                .scaleEffect(imageScale > 1 ? imageScale : 1)
-                .gesture(
-                    DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                        .onChanged { value in
-                            drag = value.translation
-                            hidePreviewHeader = true
-                        }
-                        .onEnded { value in
-                            if drag.height > 100 {
-                                viewModel.showImageViewer = false
-                            }
-                            hidePreviewHeader = false
-                            drag = CGSize.zero
-                        }
-                        .simultaneously(with:
-                                            // Magnifying Gesture...
-                                            MagnificationGesture()
-                                            .onChanged({ (value) in
-                                                imageScale = value
-                                                hidePreviewHeader = true
-                                            }).onEnded({ (_) in
-                                                withAnimation(.spring()){
-                                                    imageScale = 1
-                                                }
-                                                hidePreviewHeader = true
-                                            }))
-                        // Double To Zoom...
-                        .simultaneously(with:
-                                            TapGesture(count: 2).onEnded({
-                                                withAnimation{
-                                                    imageScale = imageScale > 1 ? 1 : 4
-                                                }
-                                                hidePreviewHeader = imageScale > 1 ?
-                                                    true : false
-                                            }))
-                )
-                .onTapGesture {
-                    viewModel.showImageViewer = false
-                }
+                .scaleEffect(imageScale)
+                .gesture(TapGesture(count: 2).onEnded({
+                    withAnimation{
+                        imageScale = imageScale > 1 ? 1 : 4
+                    }
+                    hidePreviewHeader = imageScale > 1 ?
+                        true : false
+                }))
+                .simultaneousGesture(TapGesture(count: 1).onEnded({
+                    hidePreviewHeader.toggle()
+                }))
+                .simultaneousGesture(MagnificationGesture()
+                                        .onChanged({ (value) in
+                                            imageScale = value
+                                            hidePreviewHeader = true
+                                        }).onEnded({ (_) in
+                                            withAnimation(.spring()){
+                                                imageScale = 1
+                                            }
+                                            haptic.impactOccurred()
+                                            hidePreviewHeader = false
+                                        }))
         }
     }
 }

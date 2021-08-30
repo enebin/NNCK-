@@ -28,6 +28,7 @@ struct CustomPager<Content: View>: View {
     let content: Content
 
     @GestureState private var offsetX: CGFloat = 0
+    
     init(pageCount: Int, currentIndex: Binding<Int>, @ViewBuilder content: () -> Content) {
         self.pageCount = pageCount
         self._currentIndex = currentIndex
@@ -36,8 +37,9 @@ struct CustomPager<Content: View>: View {
 
     var body: some View {
         GeometryReader { geometry in
-            HStack(spacing: 0) {
-                self.content.frame(width: geometry.size.width)
+            LazyHStack(spacing: 0) {
+                self.content
+                    .frame(width: geometry.size.width)
             }
             .frame(width: geometry.size.width, alignment: .leading)
             .offset(x: -CGFloat(self.currentFloatIndex) * geometry.size.width)

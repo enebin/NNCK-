@@ -1,3 +1,4 @@
+            
 //                CustomContextMenu {
 //                    Image(uiImage: asset.thumbnailImage)
 //                        .resizable()
@@ -17,7 +18,7 @@
 //                            }
 //                        }
 //                } preview: {
-////                    Image(systemName: "person")
+//                    Image(uiImage: asset.originalImage(targetSize: viewModel.originalSize))
 //                } actions: {
 //
 //                    let multiSelection = UIAction(title: "다중선택",image: UIImage(systemName: "checkmark.circle")) { _ in
@@ -39,3 +40,4 @@
 //                } onEnd: {
 //                    viewModel.showImageViewer = true
 //                }
+                

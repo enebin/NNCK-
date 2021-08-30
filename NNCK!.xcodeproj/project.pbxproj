@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		9B26B65F26D9D3390083D76E /* CustomPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B26B65E26D9D3390083D76E /* CustomPager.swift */; };
+		9B2B8A1C26DC9B3700EA2CED /* gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A1B26DC9B3700EA2CED /* gesture.swift */; };
+		9B2B8A1E26DCABE300EA2CED /* FirstLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A1D26DCABE300EA2CED /* FirstLaunch.swift */; };
 		9B321ABD26D902D8007D632C /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 9B321ABC26D902D8007D632C /* SwiftUIPager */; };
 		9B49D0C926D33EEF0021E14C /* NNCK_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0C826D33EEF0021E14C /* NNCK_App.swift */; };
 		9B49D0CB26D33EEF0021E14C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0CA26D33EEF0021E14C /* ContentView.swift */; };
@@ -36,6 +38,8 @@
 
 /* Begin PBXFileReference section */
 		9B26B65E26D9D3390083D76E /* CustomPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPager.swift; sourceTree = "<group>"; };
+		9B2B8A1B26DC9B3700EA2CED /* gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gesture.swift; sourceTree = "<group>"; };
+		9B2B8A1D26DCABE300EA2CED /* FirstLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunch.swift; sourceTree = "<group>"; };
 		9B49D0C526D33EEF0021E14C /* NNCK!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NNCK!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B49D0C826D33EEF0021E14C /* NNCK_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NNCK_App.swift; sourceTree = "<group>"; };
 		9B49D0CA26D33EEF0021E14C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -102,6 +106,7 @@
 				9B49D0CA26D33EEF0021E14C /* ContentView.swift */,
 				9B49D0CC26D33EF00021E14C /* Assets.xcassets */,
 				9B49D0D126D33EF00021E14C /* Info.plist */,
+				9B2B8A1D26DCABE300EA2CED /* FirstLaunch.swift */,
 				9BBEC0F326D7A3FA0027853B /* CustomContextView.swift */,
 				9B26B65E26D9D3390083D76E /* CustomPager.swift */,
 				9B50CDBC26D7288A00D6D91F /* Tomb */,
@@ -199,6 +204,7 @@
 				9B49D0FF26D365F50021E14C /* AlbumView.swift */,
 				9B50CDDB26D7341600D6D91F /* Tappage.swift */,
 				9BBEC0F526D7A5330027853B /* contextmeny.swift */,
+				9B2B8A1B26DC9B3700EA2CED /* gesture.swift */,
 			);
 			path = Tomb;
 			sourceTree = "<group>";
@@ -284,6 +290,7 @@
 				9B49D10326D365F50021E14C /* AlbumView.swift in Sources */,
 				9B49D0F726D33EFA0021E14C /* Camera.swift in Sources */,
 				9B49D10526D365F50021E14C /* CameraView.swift in Sources */,
+				9B2B8A1C26DC9B3700EA2CED /* gesture.swift in Sources */,
 				9B49D0F026D33EFA0021E14C /* SoundViewModel.swift in Sources */,
 				9B49D10626D365F50021E14C /* SoundButtonView.swift in Sources */,
 				9B49D0CB26D33EEF0021E14C /* ContentView.swift in Sources */,
@@ -295,6 +302,7 @@
 				9B49D0F526D33EFA0021E14C /* PermissionRequestView.swift in Sources */,
 				9B50CDDC26D7341600D6D91F /* Tappage.swift in Sources */,
 				9B49D0C926D33EEF0021E14C /* NNCK_App.swift in Sources */,
+				9B2B8A1E26DCABE300EA2CED /* FirstLaunch.swift in Sources */,
 				9B49D10A26D3AB9E0021E14C /* AlbumViewModel.swift in Sources */,
 				9BBEC0F626D7A5330027853B /* contextmeny.swift in Sources */,
 				9B49D10426D365F50021E14C /* SettingView.swift in Sources */,
