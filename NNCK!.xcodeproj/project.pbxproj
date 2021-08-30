@@ -10,7 +10,8 @@
 		9B26B65F26D9D3390083D76E /* CustomPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B26B65E26D9D3390083D76E /* CustomPager.swift */; };
 		9B2B8A1C26DC9B3700EA2CED /* gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A1B26DC9B3700EA2CED /* gesture.swift */; };
 		9B2B8A1E26DCABE300EA2CED /* FirstLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A1D26DCABE300EA2CED /* FirstLaunch.swift */; };
-		9B2B8A2126DCBABD00EA2CED /* SoundSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A2026DCBABD00EA2CED /* SoundSetting.swift */; };
+		9B2B8A2126DCBABD00EA2CED /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A2026DCBABD00EA2CED /* SettingView.swift */; };
+		9B2B8A2326DCEA5B00EA2CED /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A2226DCEA5B00EA2CED /* SettingViewModel.swift */; };
 		9B321ABD26D902D8007D632C /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 9B321ABC26D902D8007D632C /* SwiftUIPager */; };
 		9B49D0C926D33EEF0021E14C /* NNCK_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0C826D33EEF0021E14C /* NNCK_App.swift */; };
 		9B49D0CB26D33EEF0021E14C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0CA26D33EEF0021E14C /* ContentView.swift */; };
@@ -27,7 +28,6 @@
 		9B49D0F826D33EFA0021E14C /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0EB26D33EFA0021E14C /* Sound.swift */; };
 		9B49D0FE26D349E90021E14C /* NewAlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0FD26D349E90021E14C /* NewAlbumView.swift */; };
 		9B49D10326D365F50021E14C /* AlbumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0FF26D365F50021E14C /* AlbumView.swift */; };
-		9B49D10426D365F50021E14C /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D10026D365F50021E14C /* SettingView.swift */; };
 		9B49D10526D365F50021E14C /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D10126D365F50021E14C /* CameraView.swift */; };
 		9B49D10626D365F50021E14C /* SoundButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D10226D365F50021E14C /* SoundButtonView.swift */; };
 		9B49D10826D3A37A0021E14C /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D10726D3A37A0021E14C /* Album.swift */; };
@@ -41,7 +41,8 @@
 		9B26B65E26D9D3390083D76E /* CustomPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPager.swift; sourceTree = "<group>"; };
 		9B2B8A1B26DC9B3700EA2CED /* gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gesture.swift; sourceTree = "<group>"; };
 		9B2B8A1D26DCABE300EA2CED /* FirstLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunch.swift; sourceTree = "<group>"; };
-		9B2B8A2026DCBABD00EA2CED /* SoundSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSetting.swift; sourceTree = "<group>"; };
+		9B2B8A2026DCBABD00EA2CED /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		9B2B8A2226DCEA5B00EA2CED /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		9B49D0C526D33EEF0021E14C /* NNCK!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NNCK!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B49D0C826D33EEF0021E14C /* NNCK_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NNCK_App.swift; sourceTree = "<group>"; };
 		9B49D0CA26D33EEF0021E14C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -59,7 +60,6 @@
 		9B49D0EB26D33EFA0021E14C /* Sound.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		9B49D0FD26D349E90021E14C /* NewAlbumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAlbumView.swift; sourceTree = "<group>"; };
 		9B49D0FF26D365F50021E14C /* AlbumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumView.swift; sourceTree = "<group>"; };
-		9B49D10026D365F50021E14C /* SettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		9B49D10126D365F50021E14C /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		9B49D10226D365F50021E14C /* SoundButtonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundButtonView.swift; sourceTree = "<group>"; };
 		9B49D10726D3A37A0021E14C /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 		9B2B8A1F26DCBAB000EA2CED /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				9B2B8A2026DCBABD00EA2CED /* SoundSetting.swift */,
+				9B2B8A2026DCBABD00EA2CED /* SettingView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -157,6 +157,7 @@
 				9B49D0DD26D33EFA0021E14C /* CameraVIewModel.swift */,
 				9B49D0DE26D33EFA0021E14C /* SoundViewModel.swift */,
 				9B49D10926D3AB9E0021E14C /* AlbumViewModel.swift */,
+				9B2B8A2226DCEA5B00EA2CED /* SettingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -184,7 +185,6 @@
 			isa = PBXGroup;
 			children = (
 				9B49D10126D365F50021E14C /* CameraView.swift */,
-				9B49D10026D365F50021E14C /* SettingView.swift */,
 				9B49D0FD26D349E90021E14C /* NewAlbumView.swift */,
 				9B49D10226D365F50021E14C /* SoundButtonView.swift */,
 			);
@@ -310,14 +310,14 @@
 				9B26B65F26D9D3390083D76E /* CustomPager.swift in Sources */,
 				9B49D0F826D33EFA0021E14C /* Sound.swift in Sources */,
 				9B49D10826D3A37A0021E14C /* Album.swift in Sources */,
-				9B2B8A2126DCBABD00EA2CED /* SoundSetting.swift in Sources */,
+				9B2B8A2126DCBABD00EA2CED /* SettingView.swift in Sources */,
 				9B49D0F526D33EFA0021E14C /* PermissionRequestView.swift in Sources */,
 				9B50CDDC26D7341600D6D91F /* Tappage.swift in Sources */,
 				9B49D0C926D33EEF0021E14C /* NNCK_App.swift in Sources */,
 				9B2B8A1E26DCABE300EA2CED /* FirstLaunch.swift in Sources */,
 				9B49D10A26D3AB9E0021E14C /* AlbumViewModel.swift in Sources */,
 				9BBEC0F626D7A5330027853B /* contextmeny.swift in Sources */,
-				9B49D10426D365F50021E14C /* SettingView.swift in Sources */,
+				9B2B8A2326DCEA5B00EA2CED /* SettingViewModel.swift in Sources */,
 				9B49D0EF26D33EFA0021E14C /* CameraVIewModel.swift in Sources */,
 				9B49D0FE26D349E90021E14C /* NewAlbumView.swift in Sources */,
 			);

@@ -28,14 +28,14 @@ struct NewAlbumView: View {
                 AlbumGrid
             }
         }
-        .overlay(ImagePreview(selection: $selection)
+        .overlay(ImagePreview(selection: $selection, showAlbum: $showAlbum)
                     .environmentObject(viewModel))
         .background(viewModel.isSelectionMode ? Color.white.opacity(0.3) : Color.black)
         .background(Share(isPresented: $viewModel.showShare,
                           data: viewModel.chosenMultipleAssets.map({
             $0.originalImage(targetSize: viewModel.originalSize)
         })))
-        .animation(.easeInOut(duration: 0.35))
+        .animation(.easeInOut(duration: 0.4))
     }
     
     var AlbumGrid: some View {
@@ -57,14 +57,21 @@ struct NewAlbumView: View {
             Button(action: {showAlbum = false}) {
                 Image(systemName: "xmark")
                     .foregroundColor(.yellow)
+                    .font(.system(size: 20))
             }
+            Spacer()
+            
+            Text("앨범").bold()
+                .foregroundColor(.yellow)
+                .font(.system(size: 18))
+            
             Spacer()
             Button(action: {viewModel.switchSelectionMode(to: true)}) {
                 Image(systemName: "checkmark.circle")
                     .foregroundColor(.yellow)
+                    .font(.system(size: 20))
             }
         }
-        .font(.system(size: 20))
     }
     
     var SelectionHeader: some View {
@@ -164,7 +171,10 @@ struct NewAlbumView: View {
     struct ImagePreview: View {
         @EnvironmentObject var viewModel: AlbumViewModel
         @Binding var selection: Int
+        @Binding var showAlbum: Bool
         @State var hidePreviewHeader = false
+        
+        let haptic = UIImpactFeedbackGenerator(style: .medium)
         
         var body: some View {
             if viewModel.showImageViewer {
@@ -180,7 +190,7 @@ struct NewAlbumView: View {
                     .zIndex(1.0)
                     TabPage
                 }
-                .transition(.asymmetric(insertion: .opacity, removal: .move(edge: .bottom)))
+                .transition(.asymmetric(insertion: .opacity, removal: .opacity))
             }
         }
 
@@ -197,30 +207,45 @@ struct NewAlbumView: View {
             }
             .tabViewStyle(PageTabViewStyle())
             .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
-//            .onAppear {  UIScrollView.appearance().bounces = false }
-//            .onDisappear { UIScrollView.appearance().bounces = true }
             .background(Color.black.ignoresSafeArea(.all))
         }
         
         
         var PreviewHeader: some View {
-            HStack {
-                Button(action: {viewModel.showImageViewer = false; viewModel.switchSelectionMode(to: false)}) {
-                    Image(systemName: "chevron.down")
-                        .foregroundColor(.yellow)
+            ZStack {
+                HStack {
+                    Image(systemName: "chevron.left")
+                        .font(.system(size: 20))
+                    Text("앨범")
+                        .font(.system(size: 18))
+                    Spacer()
                 }
-                Spacer()
-                Button(action: { viewModel.deletePhoto(assets: [viewModel.photoAssets[selection]]) }) {
-                    Image(systemName: "trash")
-                        .foregroundColor(.yellow)
+                .foregroundColor(.yellow)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    viewModel.showImageViewer = false
+                    viewModel.switchSelectionMode(to: false)
                 }
-                Spacer()
-                Button(action: { viewModel.showShare = true; viewModel.chosenMultipleAssets.append(viewModel.photoAssets[selection]) }) {
-                    Image(systemName: "square.and.arrow.up")
-                        .foregroundColor(.yellow)
+            
+                HStack {
+                    Spacer()
+                    Button(action: { viewModel.deletePhoto(assets: [viewModel.photoAssets[selection]]) }) {
+                        Image(systemName: "trash")
+                            .foregroundColor(.yellow)
+                    }
+                    Spacer()
                 }
+                .font(.system(size: 20))
+                
+                HStack {
+                    Spacer()
+                    Button(action: { viewModel.showShare = true; viewModel.chosenMultipleAssets.append(viewModel.photoAssets[selection]) }) {
+                        Image(systemName: "square.and.arrow.up")
+                            .foregroundColor(.yellow)
+                    }
+                }
+                .font(.system(size: 20))
             }
-            .font(.system(size: 20))
         }
     }
     

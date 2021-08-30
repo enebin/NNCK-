@@ -46,13 +46,6 @@ struct CameraView: View {
                             // Header buttons
                             Header
                                 .padding()
-                            
-//                            if viewModel.showSetting {
-//                                SettingView()
-//                                    .frame(width: geometry.size.width * 0.9, height: geometry.size.height * 0.25)
-//                                    .background(RoundedRectangle(cornerRadius: 20)
-//                                                    .fill(Color.black.opacity(0.6)))
-//                            }
                             Spacer()
                         }
                         HStack {
@@ -120,24 +113,12 @@ struct CameraView: View {
                 .blur(radius: viewModel.notYetPermitted ? 5 : 0)
             }
             .sheet(isPresented: $viewModel.showSetting) {
-                VStack {
-                    ZStack {
-                        HStack {
-                            Spacer()
-                            Text("설정").bold()
-                            Spacer()
-                        }
-                        HStack {
-                            Spacer()
-                            Button(action: { viewModel.showSetting = false },
-                                   label: { Text("완료") })
-                        }
-                    }
-                    .padding(.top)
-                    SoundSetting()
+                NavigationView {
+                    SettingSheetView
+                        .navigationBarHidden(true)
                 }
             }
-            .fullScreenCover(isPresented: $showAlbum) {
+            .sheet(isPresented: $showAlbum) {
                 NewAlbumView(showAlbum: $showAlbum)
                     .environmentObject(viewModel)
             }
@@ -150,7 +131,13 @@ struct CameraView: View {
     
     var Header: some View {
         HStack {
-            Button(action: {viewModel.switchSetting(); collapseAll()}, label: {Image(systemName: "ellipsis.circle")})
+            Image(systemName: "ellipsis.circle")
+                .frame(width: 50, height: 50)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    viewModel.switchSetting()
+                    collapseAll()
+                }
             
             Spacer()
             Button(action: {viewModel.switchScreenSize(); collapseAll()}, label: {Image(systemName: "squareshape.controlhandles.on.squareshape.controlhandles")})
@@ -218,6 +205,29 @@ struct CameraView: View {
                 .background(Capsule().fill(Color.black.opacity(0.3)))
                 .accentColor(.pink)
                 .frame(width: 150)
+        }
+    }
+    
+    var SettingSheetView: some View {
+        VStack {
+            ZStack {
+                HStack {
+                    Spacer()
+                    Text("설정").bold()
+                    Spacer()
+                }
+                HStack {
+                    Spacer()
+                    Text("완료").foregroundColor(.blue)
+                        .padding(.horizontal)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            viewModel.showSetting = false
+                        }
+                }
+            }
+            .padding(.top)
+            SettingView()
         }
     }
     
