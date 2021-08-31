@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CameraView: View {
     @ObservedObject var viewModel = CameraViewModel()
+    @StateObject var soundViewModel = SoundViewModel()
+    @StateObject var settingViewModel = SettingViewModel()
     
     @State var currentZoomFactor: CGFloat = 1.0
     @State var showSlider = false
@@ -40,7 +42,7 @@ struct CameraView: View {
                 }
                 
                 GeometryReader { geometry in
-                    Color.yellow.ignoresSafeArea()
+                    viewModel.backgroundColor.ignoresSafeArea()
                     ZStack {
                         VStack(spacing: 0) {
                             // Header buttons
@@ -117,6 +119,7 @@ struct CameraView: View {
                     SettingSheetView
                         .navigationBarHidden(true)
                 }
+                .accentColor(.black)
             }
             .sheet(isPresented: $showAlbum) {
                 NewAlbumView(showAlbum: $showAlbum)
@@ -153,6 +156,7 @@ struct CameraView: View {
         VStack(alignment: .leading, spacing: 10) {
             SoundButtonView()
                 .environmentObject(viewModel)
+                .environmentObject(soundViewModel)
             
             ConditionalButton(action: { viewModel.switchSilent(); collapseAll() }, longPressAction: { viewModel.switchSilent() }, condition: viewModel.isSilent, imageName: ["speaker.fill", "speaker.slash"])
             
@@ -228,6 +232,9 @@ struct CameraView: View {
             }
             .padding(.top)
             SettingView()
+                .environmentObject(viewModel)
+                .environmentObject(settingViewModel)
+                .environmentObject(soundViewModel)
         }
     }
     

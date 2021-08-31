@@ -8,7 +8,6 @@ import AVFoundation
 import PhotosUI
 import Combine
 
-
 /// TODO : - 공유기능
 class CameraViewModel: ObservableObject {
     // 카메라 관련 세션
@@ -33,6 +32,9 @@ class CameraViewModel: ObservableObject {
     @Published var screenSize = ScreenSize.Fullscreen
     @Published var cameraAuth: SessionSetupResult = .success
     @Published var albumAuth: SessionSetupResult = .success
+    
+    // 디자인 관련 변수
+    @Published var backgroundColor = Color.yellow
     
     let debug = false
     
@@ -75,7 +77,6 @@ class CameraViewModel: ObservableObject {
     func switchFlashMode() {
         model.switchFlash()
     }
-    
     
     // MARK: - 카메라 기능
     func zoom(with factor: CGFloat) {

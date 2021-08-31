@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SoundButtonView: View {
     @EnvironmentObject var setting: CameraViewModel
-    @ObservedObject var viewModel = SoundViewModel()
+    @EnvironmentObject var viewModel: SoundViewModel
     
     var body: some View {
         HStack {

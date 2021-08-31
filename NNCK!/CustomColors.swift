@@ -22,8 +22,9 @@ extension Color {
     }
     
     static let flatblack = Color("flatblack")
-    static let catmint = Color("catmint")
     static let flatwhite = Color("flatwhite")
-    
-    static let catpink = Color("catPink")
+    static let flatblue = Color("newblue")
+    static let flatgreen = Color("newgreen")
+    static let flatred = Color("flatred")
+    static let catmint = Color("catmint")
 }

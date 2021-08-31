@@ -8,39 +8,80 @@
 import SwiftUI
 
 struct SettingView: View {
+    @EnvironmentObject var soundSettting: SoundViewModel
+    @EnvironmentObject var cameraSetting: CameraViewModel
+    @EnvironmentObject var viewModel: SettingViewModel
     
     var body: some View {
         List {
-            Section(header: Text("커스텀 사운드")) {
-                ForEach(0..<5) { index in
+            Section(header: Text("사운드")) {
+                ForEach(0..<3) { index in
                     NavigationLink(
-                        destination: Text("Destination"),
+                        destination: Text("사운드 고르기"),
                         label: { Text("\(index+1). Sound") })
                 }
             }
             
             Section(header: Text("카메라 배경색")) {
-                Text("석탄 블랙")
+                ForEach(viewModel.colors.indices) { index in
+                    let colorStruct = viewModel.colors[index]
+                    ZStack {
+                        HStack {
+                            colorStruct.description
+                                .foregroundColor(colorStruct.forgroundColor)
+                            Spacer()
+                        }
+
+                        if viewModel.pickedColorIndex == index {
+                            HStack {
+                                Spacer()
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(.blue)
+                                    .background(Circle().fill(Color.white))
+                                    .padding(3)
+                            }
+                        }
+                    }
+                    .transition(.scale)
+                    .listRowBackground(colorStruct.backgroundColor)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        withAnimation(.spring()){
+                            viewModel.pickedColorIndex = index
+                            cameraSetting.backgroundColor = colorStruct.backgroundColor
+                        }
+                    }
+                }
+                
+                ColorPicker("커스텀 칼-라", selection: $cameraSetting.backgroundColor)
+                    .font(.system(size: 15, weight: .bold))
                     .foregroundColor(.white)
-                    .listRowBackground(Color.flatblack)
-                Text("분필 화이트")
-                    .foregroundColor(.black)
-                    .listRowBackground(Color.white)
-                Text("유치원 옐로우")
-                    .foregroundColor(.black)
-                    .listRowBackground(Color.yellow)
-                Text("용달 블루")
-                Text("쌈무 그린")
-                Text("옥상 그린")
-                Text("다라이 레드")
-                Text("마미손 핑크")
-                Text("기타 등등")
-
-
-
+                    .navigationBarHidden(true)
+                    .listRowBackground(
+                        LinearGradient(
+                            gradient: .init(colors: [Color(red: 0.12, green: 0.08, blue: 0.22),
+                                                     Color(red: 0.26, green: 0.2, blue: 0.44)]),
+                            startPoint: .init(x: 0, y: 0),
+                            endPoint: .init(x: 1, y: 0)
+                        )
+                        .opacity(0.7)
+                    )
             }
         }
         .listStyle(SidebarListStyle())
+        
+    }
+}
+
+struct ColorPickerView: View {
+    @State private var bgColor = Color.catmint
+    
+    var body: some View {
+        ColorPicker("색상 설정", selection: $bgColor)
+            .frame(width: 200, height: 200)
+            .foregroundColor(.black)
+            .padding(.horizontal, 30)
+            .navigationBarHidden(true)
     }
 }
 
