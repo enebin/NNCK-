@@ -7,11 +7,10 @@
 
 import Foundation
 import AVFoundation
+import MediaPlayer
+import SwiftUI
 
 struct SoundPlayer {
-    /// TODO: -오토스캔할 수 있게 바꿔놓기
-    /// TODO: -로컬 파일 추가 가능하게 바꿔놓기
-    
     var sounds: Array<Sound> = [
         Sound(name: "catsound_clipped", id: UUID()),
         Sound(name: "bird-clipped", id: UUID()),
@@ -104,3 +103,49 @@ struct SoundPlayer {
         }
     }
 }
+
+//struct MusicPicker: UIViewControllerRepresentable {
+//
+//    @Environment(\.presentationMode) var presentationMode
+//    @EnvironmentObject var player: AudioPlayer
+//
+//    class Coordinator: NSObject, UINavigationControllerDelegate, MPMediaPickerControllerDelegate {
+//
+//        var parent: MusicPicker
+//
+//        init(_ parent: MusicPicker) {
+//            self.parent = parent
+//        }
+//
+//        func mediaPicker(_ mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
+//
+//            let selectedSong = mediaItemCollection.items
+//
+//            if (selectedSong.count) > 0 {
+//                let songItem = selectedSong[0]
+//                parent.setSong(song: songItem)
+//                mediaPicker.dismiss(animated: true, completion: nil)
+//            }
+//        }
+//    }
+//
+//    func setSong(song: MPMediaItem) {
+//        player.setAudioTrack(son
+//                                : song)
+//    }
+//
+//    func makeCoordinator() -> Coordinator {
+//        Coordinator(self)
+//    }
+//
+//    func makeUIViewController(context: UIViewControllerRepresentableContext<MusicPicker>) -> MPMediaPickerController {
+//        let picker = MPMediaPickerController()
+//        picker.allowsPickingMultipleItems = false
+//        picker.delegate = context.coordinator
+//        return picker
+//    }
+//
+//    func updateUIViewController(_ uiViewController: MPMediaPickerController, context: UIViewControllerRepresentableContext<MusicPicker>) {
+//    }
+//
+//}

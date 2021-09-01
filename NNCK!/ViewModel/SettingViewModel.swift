@@ -8,12 +8,12 @@
 import SwiftUI
 
 class SettingViewModel: ObservableObject {
-    @Published var pickedColorIndex: Int = 2
+    @Published var pickedColorIndex: Int = 0
     
     let colors = [
+        BackgroundColor(description: "유치원 옐로우", foregroundColor: .black, backgroundColor: .yellow),
         BackgroundColor(description: "석탄 블랙", foregroundColor: .white, backgroundColor: .flatblack),
         BackgroundColor(description: "분필 화이트", foregroundColor: .black, backgroundColor: .flatwhite),
-        BackgroundColor(description: "유치원 옐로우", foregroundColor: .black, backgroundColor: .yellow),
         BackgroundColor(description: "용달 블루", foregroundColor: .white, backgroundColor: .flatblue),
         BackgroundColor(description: "쌈무 그린", foregroundColor: .black, backgroundColor: .flatgreen),
         BackgroundColor(description: "소화기 레드", foregroundColor: .white, backgroundColor: .flatred)

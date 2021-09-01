@@ -14,6 +14,26 @@ struct SettingView: View {
     
     var body: some View {
         List {
+            Section(header: Text("카메라 기능")) {
+                Toggle("무음 모드(셔터소리 X)",
+                       isOn:.init(
+                        get: { cameraSetting.isSilent },
+                        set: { status in
+                            cameraSetting.switchSilent()
+                            print("changed")
+                        }
+                       ))
+            }
+            
+            Section(header: Text("애니메이션")) {
+                ForEach(0..<3) { index in
+                    NavigationLink(
+                        destination: Text("사운드 고르기"),
+                        label: { Text("Animation") })
+                }
+            }
+            
+            
             Section(header: Text("사운드")) {
                 ForEach(0..<3) { index in
                     NavigationLink(
@@ -52,20 +72,20 @@ struct SettingView: View {
                         }
                     }
                 }
-                
-                ColorPicker("커스텀 칼-라", selection: $cameraSetting.backgroundColor)
-                    .font(.system(size: 15, weight: .bold))
-                    .foregroundColor(.white)
-                    .navigationBarHidden(true)
-                    .listRowBackground(
-                        LinearGradient(
-                            gradient: .init(colors: [Color(red: 0.12, green: 0.08, blue: 0.22),
-                                                     Color(red: 0.26, green: 0.2, blue: 0.44)]),
-                            startPoint: .init(x: 0, y: 0),
-                            endPoint: .init(x: 1, y: 0)
-                        )
-                        .opacity(0.7)
-                    )
+//
+//                ColorPicker("커스텀 칼-라", selection: $cameraSetting.backgroundColor)
+//                    .font(.system(size: 15, weight: .bold))
+//                    .foregroundColor(.white)
+//                    .navigationBarHidden(true)
+//                    .listRowBackground(
+//                        LinearGradient(
+//                            gradient: .init(colors: [Color(red: 0.12, green: 0.08, blue: 0.22),
+//                                                     Color(red: 0.26, green: 0.2, blue: 0.44)]),
+//                            startPoint: .init(x: 0, y: 0),
+//                            endPoint: .init(x: 1, y: 0)
+//                        )
+//                        .opacity(0.7)
+//                    )
             }
         }
         .listStyle(SidebarListStyle())

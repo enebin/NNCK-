@@ -13,6 +13,7 @@ struct CameraView: View {
     @StateObject var settingViewModel = SettingViewModel()
     
     @State var currentZoomFactor: CGFloat = 1.0
+    @State var lastScale:CGFloat = 1.0
     @State var showSlider = false
     @State var showMusic = false
     @State var showSound = false
@@ -68,23 +69,38 @@ struct CameraView: View {
                                 viewModel.capturePhoto()
                                 collapseAll()
                             }
-                            .gesture( // Zoom에 관한 함수구문
-                                DragGesture().onChanged({ (val) in
-                                    //  Only accept vertical drag
-                                    if abs(val.translation.height) > abs(val.translation.width) {
-                                        //  Get the percentage of vertical screen space covered by drag
-                                        let percentage: CGFloat = -(val.translation.height / geometry.size.height)
-                                        //  Calculate new zoom factor
-                                        let calc = currentZoomFactor + percentage
-                                        //  Limit zoom factor to a maximum of 5x and a minimum of 1x
-                                        let zoomFactor: CGFloat = min(max(calc, 1), 5)
-                                        //  Store the newly calculated zoom factor
-                                        currentZoomFactor = zoomFactor
-                                        //  Sets the zoom factor to the capture device session
-                                        viewModel.zoom(with: zoomFactor)
-                                    }
-                                })
-                            )
+                            .gesture(MagnificationGesture()
+                                        .onChanged { val in
+                                            let delta = val / self.lastScale
+                                            self.lastScale = val
+                                            
+                                            let newScale = currentZoomFactor * delta
+                                            currentZoomFactor = newScale
+                                            let zoomFactor: CGFloat = min(max(currentZoomFactor, 1), 5)
+                                            viewModel.zoom(with: zoomFactor)
+                                        }
+                                        .onEnded { _ in
+                                            self.lastScale = 1.0
+                                        }
+                                     )
+                        
+//                            .gesture( // Zoom에 관한 함수구문
+//                                DragGesture().onChanged({ (val) in
+//                                    //  Only accept vertical drag
+//                                    if abs(val.translation.height) > abs(val.translation.width) {
+//                                        //  Get the percentage of vertical screen space covered by drag
+//                                        let percentage: CGFloat = -(val.translation.height / geometry.size.height)
+//                                        //  Calculate new zoom factor
+//                                        let calc = currentZoomFactor + percentage
+//                                        //  Limit zoom factor to a maximum of 5x and a minimum of 1x
+//                                        let zoomFactor: CGFloat = min(max(calc, 1), 5)
+//                                        //  Store the newly calculated zoom factor
+//                                        currentZoomFactor = zoomFactor
+//                                        //  Sets the zoom factor to the capture device session
+//                                        viewModel.zoom(with: zoomFactor)
+//                                    }
+//                                })
+//                            )
                         Spacer()
                     }
                     .zIndex(zIndexPriority.middle.rawValue)
@@ -134,7 +150,7 @@ struct CameraView: View {
     
     var Header: some View {
         HStack {
-            Image(systemName: "ellipsis.circle")
+            Image(systemName: "gearshape")
                 .frame(width: 50, height: 50)
                 .contentShape(Rectangle())
                 .onTapGesture {
@@ -157,9 +173,9 @@ struct CameraView: View {
             SoundButtonView()
                 .environmentObject(viewModel)
                 .environmentObject(soundViewModel)
-            
-            ConditionalButton(action: { viewModel.switchSilent(); collapseAll() }, longPressAction: { viewModel.switchSilent() }, condition: viewModel.isSilent, imageName: ["speaker.fill", "speaker.slash"])
-            
+//
+//            ConditionalButton(action: { viewModel.switchSilent(); collapseAll() }, longPressAction: { viewModel.switchSilent() }, condition: viewModel.isSilent, imageName: ["speaker.fill", "speaker.slash"])
+//
             HStack {
                 ConditionalButton(action: { viewModel.switchShowEffect(); collapseAll() }, longPressAction: { showSlider.toggle() }, condition: !viewModel.showEffect, imageName: ["sparkles", "sparkles"])
                 if showSlider {
@@ -200,7 +216,7 @@ struct CameraView: View {
     }
     
     var EffectSlider: some View {
-        VStack {
+        HStack {
             Text("⏩ \(viewModel.animationSpeed==10 ? 10/0 : viewModel.animationSpeed, specifier: "%.1f")")
                 .font(.system(size: 15))
             Slider(value: $viewModel.animationSpeed,
@@ -209,6 +225,7 @@ struct CameraView: View {
                 .background(Capsule().fill(Color.black.opacity(0.3)))
                 .accentColor(.pink)
                 .frame(width: 150)
+            Text("+")
         }
     }
     
