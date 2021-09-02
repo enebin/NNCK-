@@ -1,13 +1,13 @@
 //
-//  LaserEffectView.swift
-//  CatCalling
+//  LadybugEffectView.swift
+//  NNCK!
 //
-//  Created by 이영빈 on 2021/08/11.
+//  Created by 이영빈 on 2021/09/01.
 //
 
 import SwiftUI
 
-struct LaserEffectView: View {
+struct LadybugEffectView: View {
     @EnvironmentObject var setting: CameraViewModel
     @State var offset: CGSize = .zero
 
@@ -22,8 +22,8 @@ struct LaserEffectView: View {
         ).autoconnect()
         
         VStack {
-            Circle()
-                .foregroundColor(.red)
+            Image("ladybug")
+                .resizable()
                 .frame(width: 25, height: 25, alignment: .center)
                 .offset(offset)
         }
@@ -42,8 +42,8 @@ struct LaserEffectView: View {
 }
 
 
-struct LaserEffectView_Previews: PreviewProvider {
+struct LadybugEffectView_Previews: PreviewProvider {
     static var previews: some View {
-        LaserEffectView()
+        LadybugEffectView()
     }
 }

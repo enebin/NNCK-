@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B12E32B26DF92A400898156 /* DragZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B12E32A26DF92A400898156 /* DragZoom.swift */; };
+		9B12E32D26DF9B8200898156 /* LadybugEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B12E32C26DF9B8200898156 /* LadybugEffectView.swift */; };
 		9B26B65F26D9D3390083D76E /* CustomPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B26B65E26D9D3390083D76E /* CustomPager.swift */; };
 		9B2B8A1C26DC9B3700EA2CED /* gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A1B26DC9B3700EA2CED /* gesture.swift */; };
 		9B2B8A1E26DCABE300EA2CED /* FirstLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A1D26DCABE300EA2CED /* FirstLaunch.swift */; };
@@ -39,6 +41,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B12E32A26DF92A400898156 /* DragZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragZoom.swift; sourceTree = "<group>"; };
+		9B12E32C26DF9B8200898156 /* LadybugEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadybugEffectView.swift; sourceTree = "<group>"; };
 		9B26B65E26D9D3390083D76E /* CustomPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPager.swift; sourceTree = "<group>"; };
 		9B2B8A1B26DC9B3700EA2CED /* gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gesture.swift; sourceTree = "<group>"; };
 		9B2B8A1D26DCABE300EA2CED /* FirstLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunch.swift; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				9B49D0E826D33EFA0021E14C /* LaserEffectView.swift */,
+				9B12E32C26DF9B8200898156 /* LadybugEffectView.swift */,
 			);
 			path = Effects;
 			sourceTree = "<group>";
@@ -219,6 +224,7 @@
 				9B50CDDB26D7341600D6D91F /* Tappage.swift */,
 				9BBEC0F526D7A5330027853B /* contextmeny.swift */,
 				9B2B8A1B26DC9B3700EA2CED /* gesture.swift */,
+				9B12E32A26DF92A400898156 /* DragZoom.swift */,
 			);
 			path = Tomb;
 			sourceTree = "<group>";
@@ -313,11 +319,13 @@
 				9B26B65F26D9D3390083D76E /* CustomPager.swift in Sources */,
 				9B49D0F826D33EFA0021E14C /* Sound.swift in Sources */,
 				9B49D10826D3A37A0021E14C /* Album.swift in Sources */,
+				9B12E32B26DF92A400898156 /* DragZoom.swift in Sources */,
 				9B2B8A2126DCBABD00EA2CED /* SettingView.swift in Sources */,
 				9B2B8A2526DCF4B700EA2CED /* CustomColors.swift in Sources */,
 				9B49D0F526D33EFA0021E14C /* PermissionRequestView.swift in Sources */,
 				9B50CDDC26D7341600D6D91F /* Tappage.swift in Sources */,
 				9B49D0C926D33EEF0021E14C /* NNCK_App.swift in Sources */,
+				9B12E32D26DF9B8200898156 /* LadybugEffectView.swift in Sources */,
 				9B2B8A1E26DCABE300EA2CED /* FirstLaunch.swift in Sources */,
 				9B49D10A26D3AB9E0021E14C /* AlbumViewModel.swift in Sources */,
 				9BBEC0F626D7A5330027853B /* contextmeny.swift in Sources */,

@@ -10,7 +10,7 @@ import Combine
 
 /// TODO : - 공유기능
 class CameraViewModel: ObservableObject {
-    // 카메라 관련 세션
+    // 카메라 관련
     private let model = Camera()
     private var subscriptions = Set<AnyCancellable>()
     let session: AVCaptureSession
@@ -20,10 +20,11 @@ class CameraViewModel: ObservableObject {
     
     // 설정창 관련 변수
     @Published var showSetting = false
+    @Published var showEffect = false
+    @Published var effectType: Effects = .laser
     
     // 사진 관련 변수
     @Published var recentImage: UIImage?
-    @Published var showEffect = false
     @Published var isSilent = true
     @Published var isTaken = false
     @Published var animationSpeed: Double = 5
@@ -149,6 +150,11 @@ class CameraViewModel: ObservableObject {
                 return [0, 0]
             }
         }
+    }
+    
+    public enum Effects: CaseIterable {
+        case laser
+        case ladybug
     }
 }
 

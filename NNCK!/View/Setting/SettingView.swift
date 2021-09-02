@@ -13,6 +13,28 @@ struct SettingView: View {
     @EnvironmentObject var viewModel: SettingViewModel
     
     var body: some View {
+        VStack {
+            ZStack {
+                HStack {
+                    Spacer()
+                    Text("설정").bold()
+                    Spacer()
+                }
+                HStack {
+                    Spacer()
+                    Text("완료").foregroundColor(.blue)
+                        .padding(.horizontal)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            cameraSetting.showSetting = false
+                        }
+                }
+            }
+            .padding(.top)
+        }
+    }
+    
+    var settingBody: some View {
         List {
             Section(header: Text("카메라 기능")) {
                 Toggle("무음 모드(셔터소리 X)",
@@ -51,7 +73,7 @@ struct SettingView: View {
                                 .foregroundColor(colorStruct.forgroundColor)
                             Spacer()
                         }
-
+                        
                         if viewModel.pickedColorIndex == index {
                             HStack {
                                 Spacer()
@@ -72,24 +94,23 @@ struct SettingView: View {
                         }
                     }
                 }
-//
-//                ColorPicker("커스텀 칼-라", selection: $cameraSetting.backgroundColor)
-//                    .font(.system(size: 15, weight: .bold))
-//                    .foregroundColor(.white)
-//                    .navigationBarHidden(true)
-//                    .listRowBackground(
-//                        LinearGradient(
-//                            gradient: .init(colors: [Color(red: 0.12, green: 0.08, blue: 0.22),
-//                                                     Color(red: 0.26, green: 0.2, blue: 0.44)]),
-//                            startPoint: .init(x: 0, y: 0),
-//                            endPoint: .init(x: 1, y: 0)
-//                        )
-//                        .opacity(0.7)
-//                    )
+                //
+                //                ColorPicker("커스텀 칼-라", selection: $cameraSetting.backgroundColor)
+                //                    .font(.system(size: 15, weight: .bold))
+                //                    .foregroundColor(.white)
+                //                    .navigationBarHidden(true)
+                //                    .listRowBackground(
+                //                        LinearGradient(
+                //                            gradient: .init(colors: [Color(red: 0.12, green: 0.08, blue: 0.22),
+                //                                                     Color(red: 0.26, green: 0.2, blue: 0.44)]),
+                //                            startPoint: .init(x: 0, y: 0),
+                //                            endPoint: .init(x: 1, y: 0)
+                //                        )
+                //                        .opacity(0.7)
+                //                    )
             }
         }
         .listStyle(SidebarListStyle())
-        
     }
 }
 

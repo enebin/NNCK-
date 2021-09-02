@@ -29,10 +29,18 @@ struct CameraView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                if viewModel.showEffect {  // 이펙트를 보일지 결정
-                    LaserEffectView()
-                        .environmentObject(self.viewModel)
-                        .zIndex(zIndexPriority.top.rawValue)
+                // 이펙트를 보일지 결정
+                if viewModel.showEffect {
+                    switch(viewModel.effectType) {
+                    case .laser:
+                        LaserEffectView()
+                            .environmentObject(self.viewModel)
+                            .zIndex(zIndexPriority.top.rawValue)
+                    case .ladybug:
+                        LadybugEffectView()
+                            .environmentObject(self.viewModel)
+                            .zIndex(zIndexPriority.top.rawValue)
+                    }
                 }
                 
                 // 권한 확인
@@ -42,8 +50,10 @@ struct CameraView: View {
                         .onTapGesture {}
                 }
                 
+                // 기능부
                 GeometryReader { geometry in
                     viewModel.backgroundColor.ignoresSafeArea()
+                    // 왼쪽 기능 버튼
                     ZStack {
                         VStack(spacing: 0) {
                             // Header buttons
@@ -58,54 +68,38 @@ struct CameraView: View {
                     }
                     .zIndex(zIndexPriority.midHigh.rawValue)
                     
+                    // 사진 촬영부
                     HStack {
                         Spacer()
                         Rectangle()
                             .fill(Color.red.opacity(0))
                             .contentShape(Rectangle())
-                            .frame(width: geometry.size.width * 0.85, height: geometry.size.height * 0.75)
-                            .position(x: geometry.size.width/2+20, y: geometry.size.height/2-30)
-                            .onTapGesture {
-                                viewModel.capturePhoto()
-                                collapseAll()
-                            }
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .position(x: geometry.size.width/2, y: geometry.size.height/2)
                             .gesture(MagnificationGesture()
                                         .onChanged { val in
-                                            let delta = val / self.lastScale
-                                            self.lastScale = val
+                                            let delta = val / lastScale
+                                            lastScale = val
                                             
-                                            let newScale = currentZoomFactor * delta
-                                            currentZoomFactor = newScale
-                                            let zoomFactor: CGFloat = min(max(currentZoomFactor, 1), 5)
+                                            print(lastScale)
+                                            let newScale = min(max(currentZoomFactor * delta, 1), 5)
+                                            let zoomFactor: CGFloat = newScale
                                             viewModel.zoom(with: zoomFactor)
+                                            currentZoomFactor = newScale
                                         }
                                         .onEnded { _ in
                                             self.lastScale = 1.0
                                         }
                                      )
-                        
-//                            .gesture( // Zoom에 관한 함수구문
-//                                DragGesture().onChanged({ (val) in
-//                                    //  Only accept vertical drag
-//                                    if abs(val.translation.height) > abs(val.translation.width) {
-//                                        //  Get the percentage of vertical screen space covered by drag
-//                                        let percentage: CGFloat = -(val.translation.height / geometry.size.height)
-//                                        //  Calculate new zoom factor
-//                                        let calc = currentZoomFactor + percentage
-//                                        //  Limit zoom factor to a maximum of 5x and a minimum of 1x
-//                                        let zoomFactor: CGFloat = min(max(calc, 1), 5)
-//                                        //  Store the newly calculated zoom factor
-//                                        currentZoomFactor = zoomFactor
-//                                        //  Sets the zoom factor to the capture device session
-//                                        viewModel.zoom(with: zoomFactor)
-//                                    }
-//                                })
-//                            )
+                            .gesture(TapGesture().onEnded {
+                                viewModel.capturePhoto()
+                                collapseAll()
+                            })
                         Spacer()
                     }
                     .zIndex(zIndexPriority.middle.rawValue)
                     
-                    // 카메라 미리보기 ~ 아래버튼
+                    // 카메라 미리보기
                     ZStack {
                         let screenSizes = viewModel.screenSize.getSize(geometry: geometry)
                         let width = screenSizes[0]
@@ -119,20 +113,26 @@ struct CameraView: View {
                             .position(x: viewModel.screenSize == .Fullscreen ? width / 2 : width + 50,
                                       y: viewModel.screenSize == .Fullscreen ? height / 2 : height+30)
                             .frame(width: width, height: height)
-                        
-                        // Footer Buttons
-                        VStack {
-                            Spacer()
-                            Footer
-                        }
-                        .padding()
+                            .zIndex(zIndexPriority.low.rawValue)
                     }
+                    .zIndex(zIndexPriority.low.rawValue)
+                    
+                    // 아래 버튼들
+                    VStack {
+                        Spacer()
+                        Footer
+                    }
+                    .zIndex(zIndexPriority.midHigh.rawValue)
+                    .padding()
                 }
                 .blur(radius: viewModel.notYetPermitted ? 5 : 0)
             }
             .sheet(isPresented: $viewModel.showSetting) {
                 NavigationView {
-                    SettingSheetView
+                    SettingView()
+                        .environmentObject(viewModel)
+                        .environmentObject(settingViewModel)
+                        .environmentObject(soundViewModel)
                         .navigationBarHidden(true)
                 }
                 .accentColor(.black)
@@ -170,14 +170,16 @@ struct CameraView: View {
     
     var Lefter: some View {
         VStack(alignment: .leading, spacing: 10) {
+            // 사운드 버튼
             SoundButtonView()
                 .environmentObject(viewModel)
                 .environmentObject(soundViewModel)
-//
-//            ConditionalButton(action: { viewModel.switchSilent(); collapseAll() }, longPressAction: { viewModel.switchSilent() }, condition: viewModel.isSilent, imageName: ["speaker.fill", "speaker.slash"])
-//
+            
+            // 이펙트 버튼과 스피드 슬라이더
             HStack {
-                ConditionalButton(action: { viewModel.switchShowEffect(); collapseAll() }, longPressAction: { showSlider.toggle() }, condition: !viewModel.showEffect, imageName: ["sparkles", "sparkles"])
+                ConditionalButton(action: { viewModel.switchShowEffect(); collapseAll() },
+                                  longPressAction: { showSlider.toggle() },
+                                  condition: !viewModel.showEffect, imageName: ["sparkles", "sparkles"])
                 if showSlider {
                     EffectSlider
                         .transition(.move(edge: .leading).combined(with: .opacity))
@@ -226,32 +228,6 @@ struct CameraView: View {
                 .accentColor(.pink)
                 .frame(width: 150)
             Text("+")
-        }
-    }
-    
-    var SettingSheetView: some View {
-        VStack {
-            ZStack {
-                HStack {
-                    Spacer()
-                    Text("설정").bold()
-                    Spacer()
-                }
-                HStack {
-                    Spacer()
-                    Text("완료").foregroundColor(.blue)
-                        .padding(.horizontal)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            viewModel.showSetting = false
-                        }
-                }
-            }
-            .padding(.top)
-            SettingView()
-                .environmentObject(viewModel)
-                .environmentObject(settingViewModel)
-                .environmentObject(soundViewModel)
         }
     }
     
