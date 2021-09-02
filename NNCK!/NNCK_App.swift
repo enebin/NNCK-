@@ -11,7 +11,7 @@ import SwiftUI
 struct NNCK_App: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Airview()
         }
     }
 }

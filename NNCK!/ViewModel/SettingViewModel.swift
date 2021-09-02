@@ -9,6 +9,7 @@ import SwiftUI
 
 class SettingViewModel: ObservableObject {
     @Published var pickedColorIndex: Int = 0
+    @Published var pickedAnimationIndex: Int = 0
     
     let colors = [
         BackgroundColor(description: "유치원 옐로우", foregroundColor: .black, backgroundColor: .yellow),
@@ -18,7 +19,33 @@ class SettingViewModel: ObservableObject {
         BackgroundColor(description: "쌈무 그린", foregroundColor: .black, backgroundColor: .flatgreen),
         BackgroundColor(description: "소화기 레드", foregroundColor: .white, backgroundColor: .flatred)
     ]
+    
+    let animations = [
+        Effects.laser,
+        Effects.ladybug
+    ]
 }
+
+public enum Effects: String, CaseIterable {
+    case laser = "레이저 🔴"
+    case ladybug = "무당벌레 🐞"
+    case mouse = "찍찍이 🐹"
+    case dodgeball = "도망가는 공 "
+    
+    func getShape() -> String {
+        switch self {
+        case .laser:
+            return "🔴"
+        case .ladybug:
+            return "🐞"
+        case .mouse:
+            return "🐹"
+        case .dodgeball:
+            return ""
+        }
+    }
+}
+
 
 struct BackgroundColor {
     let description: Text

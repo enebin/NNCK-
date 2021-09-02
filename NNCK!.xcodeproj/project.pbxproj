@@ -15,6 +15,9 @@
 		9B2B8A2126DCBABD00EA2CED /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A2026DCBABD00EA2CED /* SettingView.swift */; };
 		9B2B8A2326DCEA5B00EA2CED /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A2226DCEA5B00EA2CED /* SettingViewModel.swift */; };
 		9B2B8A2526DCF4B700EA2CED /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A2426DCF4B700EA2CED /* CustomColors.swift */; };
+		9B2E7DA426E087E0007CE2EC /* CustomPathDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2E7DA326E087E0007CE2EC /* CustomPathDrawer.swift */; };
+		9B2E7DA626E09A37007CE2EC /* AntEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2E7DA526E09A37007CE2EC /* AntEffectView.swift */; };
+		9B2E7DA826E09B0E007CE2EC /* HuntingEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2E7DA726E09B0E007CE2EC /* HuntingEffect.swift */; };
 		9B321ABD26D902D8007D632C /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 9B321ABC26D902D8007D632C /* SwiftUIPager */; };
 		9B49D0C926D33EEF0021E14C /* NNCK_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0C826D33EEF0021E14C /* NNCK_App.swift */; };
 		9B49D0CB26D33EEF0021E14C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0CA26D33EEF0021E14C /* ContentView.swift */; };
@@ -49,6 +52,9 @@
 		9B2B8A2026DCBABD00EA2CED /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		9B2B8A2226DCEA5B00EA2CED /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		9B2B8A2426DCF4B700EA2CED /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
+		9B2E7DA326E087E0007CE2EC /* CustomPathDrawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPathDrawer.swift; sourceTree = "<group>"; };
+		9B2E7DA526E09A37007CE2EC /* AntEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntEffectView.swift; sourceTree = "<group>"; };
+		9B2E7DA726E09B0E007CE2EC /* HuntingEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntingEffect.swift; sourceTree = "<group>"; };
 		9B49D0C526D33EEF0021E14C /* NNCK!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NNCK!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B49D0C826D33EEF0021E14C /* NNCK_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NNCK_App.swift; sourceTree = "<group>"; };
 		9B49D0CA26D33EEF0021E14C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -126,6 +132,7 @@
 				9BBEC0F326D7A3FA0027853B /* CustomContextView.swift */,
 				9B26B65E26D9D3390083D76E /* CustomPager.swift */,
 				9B2B8A2426DCF4B700EA2CED /* CustomColors.swift */,
+				9B2E7DA326E087E0007CE2EC /* CustomPathDrawer.swift */,
 				9B50CDBC26D7288A00D6D91F /* Tomb */,
 				9B49D0CE26D33EF00021E14C /* Preview Content */,
 			);
@@ -172,7 +179,6 @@
 		9B49D0DF26D33EFA0021E14C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9B2B8A1F26DCBAB000EA2CED /* Setting */,
 				9B49D0E026D33EFA0021E14C /* Main */,
 				9B49D0E726D33EFA0021E14C /* Effects */,
 			);
@@ -182,6 +188,7 @@
 		9B49D0E026D33EFA0021E14C /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				9B2B8A1F26DCBAB000EA2CED /* Setting */,
 				9B49D0E126D33EFA0021E14C /* Camera */,
 				9B49D0E626D33EFA0021E14C /* PermissionRequestView.swift */,
 			);
@@ -203,6 +210,7 @@
 			children = (
 				9B49D0E826D33EFA0021E14C /* LaserEffectView.swift */,
 				9B12E32C26DF9B8200898156 /* LadybugEffectView.swift */,
+				9B2E7DA526E09A37007CE2EC /* AntEffectView.swift */,
 			);
 			path = Effects;
 			sourceTree = "<group>";
@@ -210,6 +218,7 @@
 		9B49D0E926D33EFA0021E14C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9B2E7DA726E09B0E007CE2EC /* HuntingEffect.swift */,
 				9B49D0EA26D33EFA0021E14C /* Camera.swift */,
 				9B49D10726D3A37A0021E14C /* Album.swift */,
 				9B49D0EB26D33EFA0021E14C /* Sound.swift */,
@@ -322,6 +331,7 @@
 				9B12E32B26DF92A400898156 /* DragZoom.swift in Sources */,
 				9B2B8A2126DCBABD00EA2CED /* SettingView.swift in Sources */,
 				9B2B8A2526DCF4B700EA2CED /* CustomColors.swift in Sources */,
+				9B2E7DA426E087E0007CE2EC /* CustomPathDrawer.swift in Sources */,
 				9B49D0F526D33EFA0021E14C /* PermissionRequestView.swift in Sources */,
 				9B50CDDC26D7341600D6D91F /* Tappage.swift in Sources */,
 				9B49D0C926D33EEF0021E14C /* NNCK_App.swift in Sources */,
@@ -332,6 +342,8 @@
 				9B2B8A2326DCEA5B00EA2CED /* SettingViewModel.swift in Sources */,
 				9B49D0EF26D33EFA0021E14C /* CameraVIewModel.swift in Sources */,
 				9B49D0FE26D349E90021E14C /* NewAlbumView.swift in Sources */,
+				9B2E7DA826E09B0E007CE2EC /* HuntingEffect.swift in Sources */,
+				9B2E7DA626E09A37007CE2EC /* AntEffectView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

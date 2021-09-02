@@ -14,6 +14,7 @@ struct SettingView: View {
     
     var body: some View {
         VStack {
+            // 헤더 부분
             ZStack {
                 HStack {
                     Spacer()
@@ -31,6 +32,9 @@ struct SettingView: View {
                 }
             }
             .padding(.top)
+            
+            // 세팅 바디 부분
+            settingBody
         }
     }
     
@@ -48,13 +52,37 @@ struct SettingView: View {
             }
             
             Section(header: Text("애니메이션")) {
-                ForEach(0..<3) { index in
-                    NavigationLink(
-                        destination: Text("사운드 고르기"),
-                        label: { Text("Animation") })
+                ForEach(viewModel.animations.indices) { index in
+                    let effect = viewModel.animations[index]
+                    let description = effect.rawValue
+                    
+                    ZStack {
+                        HStack {
+                            Text(description)
+                            Spacer()
+                        }
+                        
+                        if viewModel.pickedAnimationIndex == index {
+                            HStack {
+                                Spacer()
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(.blue)
+                                    .background(Circle().fill(Color.white))
+                                    .padding(3)
+                                    .transition(.scale)
+                            }
+                        }
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        withAnimation(.spring()){
+                            viewModel.pickedAnimationIndex = index
+                            cameraSetting.effectType = effect
+                        }
+                    }
+                    
                 }
             }
-            
             
             Section(header: Text("사운드")) {
                 ForEach(0..<3) { index in
@@ -67,6 +95,7 @@ struct SettingView: View {
             Section(header: Text("카메라 배경색")) {
                 ForEach(viewModel.colors.indices) { index in
                     let colorStruct = viewModel.colors[index]
+                    
                     ZStack {
                         HStack {
                             colorStruct.description
@@ -81,10 +110,10 @@ struct SettingView: View {
                                     .foregroundColor(.blue)
                                     .background(Circle().fill(Color.white))
                                     .padding(3)
+                                    .transition(.scale)
                             }
                         }
                     }
-                    .transition(.scale)
                     .listRowBackground(colorStruct.backgroundColor)
                     .contentShape(Rectangle())
                     .onTapGesture {
@@ -94,20 +123,6 @@ struct SettingView: View {
                         }
                     }
                 }
-                //
-                //                ColorPicker("커스텀 칼-라", selection: $cameraSetting.backgroundColor)
-                //                    .font(.system(size: 15, weight: .bold))
-                //                    .foregroundColor(.white)
-                //                    .navigationBarHidden(true)
-                //                    .listRowBackground(
-                //                        LinearGradient(
-                //                            gradient: .init(colors: [Color(red: 0.12, green: 0.08, blue: 0.22),
-                //                                                     Color(red: 0.26, green: 0.2, blue: 0.44)]),
-                //                            startPoint: .init(x: 0, y: 0),
-                //                            endPoint: .init(x: 1, y: 0)
-                //                        )
-                //                        .opacity(0.7)
-                //                    )
             }
         }
         .listStyle(SidebarListStyle())

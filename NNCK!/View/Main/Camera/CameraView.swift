@@ -40,6 +40,10 @@ struct CameraView: View {
                         LadybugEffectView()
                             .environmentObject(self.viewModel)
                             .zIndex(zIndexPriority.top.rawValue)
+                    case .mouse:
+                        VStack{}
+                    case .dodgeball:
+                        VStack{}
                     }
                 }
                 
@@ -177,7 +181,9 @@ struct CameraView: View {
             
             // 이펙트 버튼과 스피드 슬라이더
             HStack {
-                ConditionalButton(action: { viewModel.switchShowEffect(); collapseAll() },
+                ConditionalButton(action: {
+                                    viewModel.switchShowEffect();
+                                    collapseAll() },
                                   longPressAction: { showSlider.toggle() },
                                   condition: !viewModel.showEffect, imageName: ["sparkles", "sparkles"])
                 if showSlider {

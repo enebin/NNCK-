@@ -11,9 +11,9 @@ import Combine
 /// TODO : - 공유기능
 class CameraViewModel: ObservableObject {
     // 카메라 관련
+    let session: AVCaptureSession
     private let model = Camera()
     private var subscriptions = Set<AnyCancellable>()
-    let session: AVCaptureSession
     
     private var isCameraBusy = false
     private let hapticImpact = UIImpactFeedbackGenerator()
@@ -131,31 +131,6 @@ class CameraViewModel: ObservableObject {
         }
         .store(in: &self.subscriptions)
     }
-    
-    public enum ScreenSize: CaseIterable {
-        case Fullscreen
-        case Minimize
-        case Hide
-        
-        func getSize(geometry: GeometryProxy) -> [CGFloat] {
-            let width = geometry.size.width
-            let height = geometry.size.height
-            switch self {
-            case .Fullscreen:
-                return [width, height]
-            case .Minimize:
-                let width_3 = width/3
-                return [width_3, width_3*(7/4)]
-            case .Hide:
-                return [0, 0]
-            }
-        }
-    }
-    
-    public enum Effects: CaseIterable {
-        case laser
-        case ladybug
-    }
 }
 
 struct CameraPreview: UIViewRepresentable {
@@ -187,7 +162,25 @@ struct CameraPreview: UIViewRepresentable {
     }
 }
 
-
+public enum ScreenSize: CaseIterable {
+    case Fullscreen
+    case Minimize
+    case Hide
+    
+    func getSize(geometry: GeometryProxy) -> [CGFloat] {
+        let width = geometry.size.width
+        let height = geometry.size.height
+        switch self {
+        case .Fullscreen:
+            return [width, height]
+        case .Minimize:
+            let width_3 = width/3
+            return [width_3, width_3*(7/4)]
+        case .Hide:
+            return [0, 0]
+        }
+    }
+}
 extension CaseIterable where Self: Equatable {
     func next() -> Self {
         let all = Self.allCases
