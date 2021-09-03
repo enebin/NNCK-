@@ -30,22 +30,27 @@ struct CameraView: View {
         NavigationView {
             ZStack {
                 // 이펙트를 보일지 결정
-                if viewModel.showEffect {
-                    switch(viewModel.effectType) {
-                    case .laser:
-                        LaserEffectView()
-                            .environmentObject(self.viewModel)
-                            .zIndex(zIndexPriority.top.rawValue)
-                    case .ladybug:
-                        LadybugEffectView()
-                            .environmentObject(self.viewModel)
-                            .zIndex(zIndexPriority.top.rawValue)
-                    case .mouse:
-                        VStack{}
-                    case .dodgeball:
-                        VStack{}
+                Group {
+                    if viewModel.showEffect {
+                        switch(viewModel.effectType) {
+                        case .laser:
+                            ForEach(0..<viewModel.numOfEffect, id: \.self) {
+                                LaserEffectView()
+                                    .environmentObject(self.viewModel)
+                            }
+                        case .ladybug:
+                            LadybugEffectView()
+                                .environmentObject(self.viewModel)
+                        case .mouse:
+                            AntEffectView()
+                                .environmentObject(self.viewModel)
+                        case .dodgeball:
+                            DodgeballEffectView()
+                                .environmentObject(self.viewModel)
+                        }
                     }
                 }
+                .zIndex(zIndexPriority.top.rawValue)
                 
                 // 권한 확인
                 if viewModel.notYetPermitted {
@@ -104,22 +109,19 @@ struct CameraView: View {
                     .zIndex(zIndexPriority.middle.rawValue)
                     
                     // 카메라 미리보기
-                    ZStack {
-                        let screenSizes = viewModel.screenSize.getSize(geometry: geometry)
-                        let width = screenSizes[0]
-                        let height = screenSizes[1]
-                        
-                        CameraPreview(session: viewModel.session)
-                            .onAppear {
-                                viewModel.configure()
-                            }
-                            .ignoresSafeArea()
-                            .position(x: viewModel.screenSize == .Fullscreen ? width / 2 : width + 50,
-                                      y: viewModel.screenSize == .Fullscreen ? height / 2 : height+30)
-                            .frame(width: width, height: height)
-                            .zIndex(zIndexPriority.low.rawValue)
-                    }
-                    .zIndex(zIndexPriority.low.rawValue)
+                    let screenSizes = viewModel.screenSize.getSize(geometry: geometry)
+                    let width = screenSizes[0]
+                    let height = screenSizes[1]
+                    
+                    CameraPreview(session: viewModel.session)
+                        .onAppear {
+                            viewModel.configure()
+                        }
+                        .ignoresSafeArea()
+                        .offset(x: viewModel.screenSize == .Fullscreen ? 0 : UIScreen.main.bounds.width - width,
+                                y: viewModel.screenSize == .Fullscreen ? 0 : UIScreen.main.bounds.height - height * 1.5)
+                        .frame(width: width, height: height)
+                        .zIndex(zIndexPriority.low.rawValue)
                     
                     // 아래 버튼들
                     VStack {

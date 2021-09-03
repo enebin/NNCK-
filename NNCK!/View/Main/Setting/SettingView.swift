@@ -51,18 +51,40 @@ struct SettingView: View {
                        ))
             }
             
-            Section(header: Text("애니메이션")) {
-                ForEach(viewModel.animations.indices) { index in
-                    let effect = viewModel.animations[index]
+            Section(header: Text("애니메이션 개수")) {
+                HStack {
+                    Text("-")
+                        .foregroundColor(.blue)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            cameraSetting.numOfEffect -= 1
+                        }
+                    Spacer()
+                    Text("\(cameraSetting.numOfEffect)")
+                    Spacer()
+                    Text("+")
+                        .foregroundColor(.blue)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            cameraSetting.numOfEffect += 1
+                        }
+                }
+            }
+            
+            Section(header: Text("애니메이션 종류")) {
+                ForEach(Effects.allCases, id: \.self) { effect in
                     let description = effect.rawValue
+                    let shape = effect.getShape()
                     
                     ZStack {
                         HStack {
                             Text(description)
                             Spacer()
+                            Text(shape)
+                                .padding(.trailing, 15)
                         }
                         
-                        if viewModel.pickedAnimationIndex == index {
+                        if viewModel.pickedAnimationIndex == effect {
                             HStack {
                                 Spacer()
                                 Image(systemName: "checkmark.circle.fill")
@@ -76,7 +98,7 @@ struct SettingView: View {
                     .contentShape(Rectangle())
                     .onTapGesture {
                         withAnimation(.spring()){
-                            viewModel.pickedAnimationIndex = index
+                            viewModel.pickedAnimationIndex = effect
                             cameraSetting.effectType = effect
                         }
                     }
@@ -95,7 +117,6 @@ struct SettingView: View {
             Section(header: Text("카메라 배경색")) {
                 ForEach(viewModel.colors.indices) { index in
                     let colorStruct = viewModel.colors[index]
-                    
                     ZStack {
                         HStack {
                             colorStruct.description

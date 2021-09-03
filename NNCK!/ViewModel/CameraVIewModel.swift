@@ -22,6 +22,7 @@ class CameraViewModel: ObservableObject {
     @Published var showSetting = false
     @Published var showEffect = false
     @Published var effectType: Effects = .laser
+    @Published var numOfEffect = 1
     
     // 사진 관련 변수
     @Published var recentImage: UIImage?

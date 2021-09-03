@@ -18,7 +18,6 @@
 		9B2E7DA426E087E0007CE2EC /* CustomPathDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2E7DA326E087E0007CE2EC /* CustomPathDrawer.swift */; };
 		9B2E7DA626E09A37007CE2EC /* AntEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2E7DA526E09A37007CE2EC /* AntEffectView.swift */; };
 		9B2E7DA826E09B0E007CE2EC /* HuntingEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2E7DA726E09B0E007CE2EC /* HuntingEffect.swift */; };
-		9B321ABD26D902D8007D632C /* SwiftUIPager in Frameworks */ = {isa = PBXBuildFile; productRef = 9B321ABC26D902D8007D632C /* SwiftUIPager */; };
 		9B49D0C926D33EEF0021E14C /* NNCK_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0C826D33EEF0021E14C /* NNCK_App.swift */; };
 		9B49D0CB26D33EEF0021E14C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0CA26D33EEF0021E14C /* ContentView.swift */; };
 		9B49D0CD26D33EF00021E14C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B49D0CC26D33EF00021E14C /* Assets.xcassets */; };
@@ -41,6 +40,9 @@
 		9B50CDDC26D7341600D6D91F /* Tappage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CDDB26D7341600D6D91F /* Tappage.swift */; };
 		9BBEC0F426D7A3FA0027853B /* CustomContextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBEC0F326D7A3FA0027853B /* CustomContextView.swift */; };
 		9BBEC0F626D7A5330027853B /* contextmeny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBEC0F526D7A5330027853B /* contextmeny.swift */; };
+		9BD4954A26E0E11B00932187 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9BD4954926E0E11B00932187 /* SDWebImageSwiftUI */; };
+		9BD4956826E0EB7900932187 /* FLAnimatedImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9BD4956726E0EB7900932187 /* FLAnimatedImage */; };
+		9BD4956E26E1BA0B00932187 /* DodgeBallEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD4956D26E1BA0B00932187 /* DodgeBallEffectView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +81,7 @@
 		9B50CDDB26D7341600D6D91F /* Tappage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tappage.swift; sourceTree = "<group>"; };
 		9BBEC0F326D7A3FA0027853B /* CustomContextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomContextView.swift; sourceTree = "<group>"; };
 		9BBEC0F526D7A5330027853B /* contextmeny.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = contextmeny.swift; sourceTree = "<group>"; };
+		9BD4956D26E1BA0B00932187 /* DodgeBallEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DodgeBallEffectView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +89,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B321ABD26D902D8007D632C /* SwiftUIPager in Frameworks */,
+				9BD4954A26E0E11B00932187 /* SDWebImageSwiftUI in Frameworks */,
+				9BD4956826E0EB7900932187 /* FLAnimatedImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,11 +132,7 @@
 				9B49D0CA26D33EEF0021E14C /* ContentView.swift */,
 				9B49D0CC26D33EF00021E14C /* Assets.xcassets */,
 				9B49D0D126D33EF00021E14C /* Info.plist */,
-				9B2B8A1D26DCABE300EA2CED /* FirstLaunch.swift */,
-				9BBEC0F326D7A3FA0027853B /* CustomContextView.swift */,
-				9B26B65E26D9D3390083D76E /* CustomPager.swift */,
-				9B2B8A2426DCF4B700EA2CED /* CustomColors.swift */,
-				9B2E7DA326E087E0007CE2EC /* CustomPathDrawer.swift */,
+				9BD4956C26E1AFEB00932187 /* Customs */,
 				9B50CDBC26D7288A00D6D91F /* Tomb */,
 				9B49D0CE26D33EF00021E14C /* Preview Content */,
 			);
@@ -209,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				9B49D0E826D33EFA0021E14C /* LaserEffectView.swift */,
+				9BD4956D26E1BA0B00932187 /* DodgeBallEffectView.swift */,
 				9B12E32C26DF9B8200898156 /* LadybugEffectView.swift */,
 				9B2E7DA526E09A37007CE2EC /* AntEffectView.swift */,
 			);
@@ -238,6 +239,18 @@
 			path = Tomb;
 			sourceTree = "<group>";
 		};
+		9BD4956C26E1AFEB00932187 /* Customs */ = {
+			isa = PBXGroup;
+			children = (
+				9B2B8A1D26DCABE300EA2CED /* FirstLaunch.swift */,
+				9BBEC0F326D7A3FA0027853B /* CustomContextView.swift */,
+				9B26B65E26D9D3390083D76E /* CustomPager.swift */,
+				9B2B8A2426DCF4B700EA2CED /* CustomColors.swift */,
+				9B2E7DA326E087E0007CE2EC /* CustomPathDrawer.swift */,
+			);
+			path = Customs;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -255,7 +268,8 @@
 			);
 			name = "NNCK!";
 			packageProductDependencies = (
-				9B321ABC26D902D8007D632C /* SwiftUIPager */,
+				9BD4954926E0E11B00932187 /* SDWebImageSwiftUI */,
+				9BD4956726E0EB7900932187 /* FLAnimatedImage */,
 			);
 			productName = "NNCK!";
 			productReference = 9B49D0C526D33EEF0021E14C /* NNCK!.app */;
@@ -285,7 +299,8 @@
 			);
 			mainGroup = 9B49D0BC26D33EEF0021E14C;
 			packageReferences = (
-				9B321ABB26D902D8007D632C /* XCRemoteSwiftPackageReference "SwiftUIPager" */,
+				9BD4954826E0E11B00932187 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				9BD4956626E0EB7900932187 /* XCRemoteSwiftPackageReference "FLAnimatedImage" */,
 			);
 			productRefGroup = 9B49D0C626D33EEF0021E14C /* Products */;
 			projectDirPath = "";
@@ -335,6 +350,7 @@
 				9B49D0F526D33EFA0021E14C /* PermissionRequestView.swift in Sources */,
 				9B50CDDC26D7341600D6D91F /* Tappage.swift in Sources */,
 				9B49D0C926D33EEF0021E14C /* NNCK_App.swift in Sources */,
+				9BD4956E26E1BA0B00932187 /* DodgeBallEffectView.swift in Sources */,
 				9B12E32D26DF9B8200898156 /* LadybugEffectView.swift in Sources */,
 				9B2B8A1E26DCABE300EA2CED /* FirstLaunch.swift in Sources */,
 				9B49D10A26D3AB9E0021E14C /* AlbumViewModel.swift in Sources */,
@@ -534,21 +550,34 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		9B321ABB26D902D8007D632C /* XCRemoteSwiftPackageReference "SwiftUIPager" */ = {
+		9BD4954826E0E11B00932187 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/fermoya/SwiftUIPager";
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.3.1;
+				minimumVersion = 2.0.2;
+			};
+		};
+		9BD4956626E0EB7900932187 /* XCRemoteSwiftPackageReference "FLAnimatedImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Flipboard/FLAnimatedImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.16;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9B321ABC26D902D8007D632C /* SwiftUIPager */ = {
+		9BD4954926E0E11B00932187 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9B321ABB26D902D8007D632C /* XCRemoteSwiftPackageReference "SwiftUIPager" */;
-			productName = SwiftUIPager;
+			package = 9BD4954826E0E11B00932187 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+		9BD4956726E0EB7900932187 /* FLAnimatedImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9BD4956626E0EB7900932187 /* XCRemoteSwiftPackageReference "FLAnimatedImage" */;
+			productName = FLAnimatedImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
