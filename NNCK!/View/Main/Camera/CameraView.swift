@@ -34,10 +34,8 @@ struct CameraView: View {
                     if viewModel.showEffect {
                         switch(viewModel.effectType) {
                         case .laser:
-                            ForEach(0..<viewModel.numOfEffect, id: \.self) {
-                                LaserEffectView()
-                                    .environmentObject(self.viewModel)
-                            }
+                            LaserEffectView()
+                                .environmentObject(self.viewModel)
                         case .ladybug:
                             LadybugEffectView()
                                 .environmentObject(self.viewModel)

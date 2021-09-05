@@ -80,6 +80,22 @@ class CameraViewModel: ObservableObject {
         model.switchFlash()
     }
     
+    func increaseEffectNo() {
+        if numOfEffect >= 6 {
+            return
+        } else {
+            self.numOfEffect = self.numOfEffect + 1
+        }
+    }
+    
+    func decreaseEffectNo() {
+        if numOfEffect <= 1 {
+            return
+        } else {
+            self.numOfEffect = self.numOfEffect - 1
+        }
+    }
+    
     // MARK: - 카메라 기능
     func zoom(with factor: CGFloat) {
         model.zoom(factor)

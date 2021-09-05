@@ -8,7 +8,6 @@
 import SwiftUI
 import SDWebImageSwiftUI
 import FLAnimatedImage
-import SwiftyGif
 
 struct AntEffectView: View {
     @EnvironmentObject var setting: CameraViewModel

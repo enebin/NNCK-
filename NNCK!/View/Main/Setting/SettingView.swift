@@ -54,21 +54,24 @@ struct SettingView: View {
             Section(header: Text("애니메이션 개수")) {
                 HStack {
                     Text("-")
-                        .foregroundColor(.blue)
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            cameraSetting.numOfEffect -= 1
+                            cameraSetting.decreaseEffectNo()
                         }
+                        .padding(.horizontal)
+                    
                     Spacer()
                     Text("\(cameraSetting.numOfEffect)")
+                    
                     Spacer()
                     Text("+")
-                        .foregroundColor(.blue)
                         .contentShape(Rectangle())
                         .onTapGesture {
-                            cameraSetting.numOfEffect += 1
+                            cameraSetting.increaseEffectNo()
                         }
+                        .padding(.horizontal)
                 }
+                .accentColor(.blue)
             }
             
             Section(header: Text("애니메이션 종류")) {
@@ -106,13 +109,13 @@ struct SettingView: View {
                 }
             }
             
-            Section(header: Text("사운드")) {
-                ForEach(0..<3) { index in
-                    NavigationLink(
-                        destination: Text("사운드 고르기"),
-                        label: { Text("\(index+1). Sound") })
-                }
-            }
+//            Section(header: Text("사운드")) {
+//                ForEach(0..<3) { index in
+//                    NavigationLink(
+//                        destination: Text("사운드 고르기"),
+//                        label: { Text("\(index+1). Sound") })
+//                }
+//            }
             
             Section(header: Text("카메라 배경색")) {
                 ForEach(viewModel.colors.indices) { index in

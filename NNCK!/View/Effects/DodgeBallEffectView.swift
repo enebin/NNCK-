@@ -12,7 +12,7 @@ struct DodgeballEffectView: View {
     @State var offset: CGSize = .zero
     @State var timer: Timer.TimerPublisher = Timer.publish (every: 5, on: .main, in: .common)
 
-    let interval: Double = 4
+    let interval: Double = 3
     
     var body: some View {
         VStack {
@@ -20,22 +20,23 @@ struct DodgeballEffectView: View {
                 .font(.system(size: 35))
                 .padding(5)
                 .border(Color.red)
-                .offset(offset)
                 .contentShape(Rectangle())
-        }
-        .onTapGesture {
-            print("Tapped")
-            cancelTimer()
-            let widthBound = UIScreen.main.bounds.width / 2
-            let heightBound = UIScreen.main.bounds.height / 2
-            let randomOffset = CGSize(
-                width: CGFloat.random(in: -widthBound...widthBound),
-                height: CGFloat.random(in: -heightBound...heightBound)
-            )
-            withAnimation {
-                self.offset = randomOffset
-            }
-            fireTimer()
+                .onTapGesture {
+                    print("Tapped")
+                    cancelTimer()
+                    let widthBound = UIScreen.main.bounds.width / 2
+                    let heightBound = UIScreen.main.bounds.height / 2
+                    let randomOffset = CGSize(
+                        width: CGFloat.random(in: -widthBound...widthBound),
+                        height: CGFloat.random(in: -heightBound...heightBound)
+                    )
+                    withAnimation {
+                        self.offset = randomOffset
+                    }
+                    fireTimer()
+                }
+                .offset(offset)
+
         }
         .onReceive(timer) { (_) in
             let widthBound = UIScreen.main.bounds.width / 2

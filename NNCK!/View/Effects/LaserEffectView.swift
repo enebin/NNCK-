@@ -9,13 +9,25 @@ import SwiftUI
 
 struct LaserEffectView: View {
     @EnvironmentObject var setting: CameraViewModel
-    @State var offset: CGSize = .zero
 
     var body: some View {
-        let interval = setting.animationSpeed
+        ZStack {
+            ForEach(0..<setting.numOfEffect, id: \.self) { _ in
+                EffectBody()
+                    .environmentObject(setting)
+            }
+        }
+    }
+}
 
+struct EffectBody: View {
+    @EnvironmentObject var setting: CameraViewModel
+    @State var offset: CGSize = .zero
+    
+    var body: some View {
+        let interval = setting.animationSpeed
         let timer = Timer.publish(
-            every: -(1/5) * interval + 2,       // Second
+            every: -(1/5) * interval + Double.random(in: 2...3),       // Second
             tolerance: interval==0 ? 0 : 0.1, // Gives tolerance so that SwiftUI makes optimization
             on: .main,      // Main Thread
             in: .common     // Common Loop

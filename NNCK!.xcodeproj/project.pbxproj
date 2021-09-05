@@ -208,10 +208,10 @@
 		9B49D0E726D33EFA0021E14C /* Effects */ = {
 			isa = PBXGroup;
 			children = (
-				9B49D0E826D33EFA0021E14C /* LaserEffectView.swift */,
+				9B2E7DA526E09A37007CE2EC /* AntEffectView.swift */,
 				9BD4956D26E1BA0B00932187 /* DodgeBallEffectView.swift */,
 				9B12E32C26DF9B8200898156 /* LadybugEffectView.swift */,
-				9B2E7DA526E09A37007CE2EC /* AntEffectView.swift */,
+				9B49D0E826D33EFA0021E14C /* LaserEffectView.swift */,
 			);
 			path = Effects;
 			sourceTree = "<group>";
