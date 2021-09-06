@@ -7,10 +7,9 @@
 
 import SwiftUI
 import PhotosUI
-import SwiftUIPager
 
 struct NewAlbumView: View {
-    @StateObject var viewModel = AlbumViewModel()
+    @EnvironmentObject var viewModel: AlbumViewModel
     @State var selection = 0
     @Binding var showAlbum: Bool
     

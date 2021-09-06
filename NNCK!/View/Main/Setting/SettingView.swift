@@ -59,8 +59,8 @@ struct SettingView: View {
                         .onTapGesture {
                             cameraSetting.decreaseEffectNo()
                         }
-                        .padding(.horizontal)
-                    
+                        .padding(.trailing)
+
                     Spacer()
                     Text("\(cameraSetting.numOfEffect)")
                     
@@ -70,7 +70,7 @@ struct SettingView: View {
                         .onTapGesture {
                             cameraSetting.increaseEffectNo()
                         }
-                        .padding(.horizontal)
+                        .padding(.leading)
                 }
                 .accentColor(.blue)
                 
@@ -81,12 +81,12 @@ struct SettingView: View {
                     
                     HStack {
                         Text("-")
+                            .padding(.trailing)
                         Slider(value: $cameraSetting.animationSpeed,
                                in: 0...10)
-                            .padding(10)
                             .accentColor(.pink)
-                            .frame(width: 150)
                         Text("+")
+                            .padding(.leading)
                     }
                 }
             }

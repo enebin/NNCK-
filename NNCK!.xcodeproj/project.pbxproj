@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -41,12 +41,16 @@
 		9B50CDDC26D7341600D6D91F /* Tappage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CDDB26D7341600D6D91F /* Tappage.swift */; };
 		9BBEC0F426D7A3FA0027853B /* CustomContextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBEC0F326D7A3FA0027853B /* CustomContextView.swift */; };
 		9BBEC0F626D7A5330027853B /* contextmeny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBEC0F526D7A5330027853B /* contextmeny.swift */; };
-		9BD4954A26E0E11B00932187 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9BD4954926E0E11B00932187 /* SDWebImageSwiftUI */; };
-		9BD4956826E0EB7900932187 /* FLAnimatedImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9BD4956726E0EB7900932187 /* FLAnimatedImage */; };
 		9BD4956E26E1BA0B00932187 /* DodgeBallEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD4956D26E1BA0B00932187 /* DodgeBallEffectView.swift */; };
+		9BFF432326E5B6B800BB44AA /* BannerAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFF432226E5B6B800BB44AA /* BannerAds.swift */; };
+		9BFF432526E5B7E600BB44AA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BFF432426E5B7E600BB44AA /* GoogleService-Info.plist */; };
+		F64DB1EA3FDA9ECDC07DFF54 /* Pods_NNCK_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4971B7DB30ADC5526064693E /* Pods_NNCK_.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4971B7DB30ADC5526064693E /* Pods_NNCK_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NNCK_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		594495E0E6A9A438F6DA77DE /* Pods-NNCK!.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NNCK!.debug.xcconfig"; path = "Target Support Files/Pods-NNCK!/Pods-NNCK!.debug.xcconfig"; sourceTree = "<group>"; };
+		76269C62B656A8A98F7169A0 /* Pods-NNCK!.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NNCK!.release.xcconfig"; path = "Target Support Files/Pods-NNCK!/Pods-NNCK!.release.xcconfig"; sourceTree = "<group>"; };
 		9B093CD926E5B03900070425 /* EffectsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectsEnum.swift; sourceTree = "<group>"; };
 		9B12E32A26DF92A400898156 /* DragZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragZoom.swift; sourceTree = "<group>"; };
 		9B12E32C26DF9B8200898156 /* LadybugEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadybugEffectView.swift; sourceTree = "<group>"; };
@@ -84,6 +88,8 @@
 		9BBEC0F326D7A3FA0027853B /* CustomContextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomContextView.swift; sourceTree = "<group>"; };
 		9BBEC0F526D7A5330027853B /* contextmeny.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = contextmeny.swift; sourceTree = "<group>"; };
 		9BD4956D26E1BA0B00932187 /* DodgeBallEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DodgeBallEffectView.swift; sourceTree = "<group>"; };
+		9BFF432226E5B6B800BB44AA /* BannerAds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAds.swift; sourceTree = "<group>"; };
+		9BFF432426E5B7E600BB44AA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,14 +97,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BD4954A26E0E11B00932187 /* SDWebImageSwiftUI in Frameworks */,
-				9BD4956826E0EB7900932187 /* FLAnimatedImage in Frameworks */,
+				F64DB1EA3FDA9ECDC07DFF54 /* Pods_NNCK_.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B242DCEE803BDFDCCCBBD52 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4971B7DB30ADC5526064693E /* Pods_NNCK_.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9B2B8A1F26DCBAB000EA2CED /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +125,8 @@
 			children = (
 				9B49D0C726D33EEF0021E14C /* NNCK! */,
 				9B49D0C626D33EEF0021E14C /* Products */,
+				FFA51E24BABE93FC62D69E8E /* Pods */,
+				8B242DCEE803BDFDCCCBBD52 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,6 +149,7 @@
 				9B49D0CA26D33EEF0021E14C /* ContentView.swift */,
 				9B49D0CC26D33EF00021E14C /* Assets.xcassets */,
 				9B49D0D126D33EF00021E14C /* Info.plist */,
+				9BFF432426E5B7E600BB44AA /* GoogleService-Info.plist */,
 				9BD4956C26E1AFEB00932187 /* Customs */,
 				9B50CDBC26D7288A00D6D91F /* Tomb */,
 				9B49D0CE26D33EF00021E14C /* Preview Content */,
@@ -181,6 +197,7 @@
 		9B49D0DF26D33EFA0021E14C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9BFF432126E5B6B000BB44AA /* ADs */,
 				9B49D0E026D33EFA0021E14C /* Main */,
 				9B49D0E726D33EFA0021E14C /* Effects */,
 			);
@@ -254,6 +271,23 @@
 			path = Customs;
 			sourceTree = "<group>";
 		};
+		9BFF432126E5B6B000BB44AA /* ADs */ = {
+			isa = PBXGroup;
+			children = (
+				9BFF432226E5B6B800BB44AA /* BannerAds.swift */,
+			);
+			path = ADs;
+			sourceTree = "<group>";
+		};
+		FFA51E24BABE93FC62D69E8E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				594495E0E6A9A438F6DA77DE /* Pods-NNCK!.debug.xcconfig */,
+				76269C62B656A8A98F7169A0 /* Pods-NNCK!.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -261,9 +295,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9B49D0D426D33EF00021E14C /* Build configuration list for PBXNativeTarget "NNCK!" */;
 			buildPhases = (
+				557AB77494D628942EEBA37E /* [CP] Check Pods Manifest.lock */,
 				9B49D0C126D33EEF0021E14C /* Sources */,
 				9B49D0C226D33EEF0021E14C /* Frameworks */,
 				9B49D0C326D33EEF0021E14C /* Resources */,
+				67E6D463578A88A4D1714A01 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -271,8 +307,6 @@
 			);
 			name = "NNCK!";
 			packageProductDependencies = (
-				9BD4954926E0E11B00932187 /* SDWebImageSwiftUI */,
-				9BD4956726E0EB7900932187 /* FLAnimatedImage */,
 			);
 			productName = "NNCK!";
 			productReference = 9B49D0C526D33EEF0021E14C /* NNCK!.app */;
@@ -302,8 +336,6 @@
 			);
 			mainGroup = 9B49D0BC26D33EEF0021E14C;
 			packageReferences = (
-				9BD4954826E0E11B00932187 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
-				9BD4956626E0EB7900932187 /* XCRemoteSwiftPackageReference "FLAnimatedImage" */,
 			);
 			productRefGroup = 9B49D0C626D33EEF0021E14C /* Products */;
 			projectDirPath = "";
@@ -324,10 +356,53 @@
 				9B49D0CD26D33EF00021E14C /* Assets.xcassets in Resources */,
 				9B49D0EC26D33EFA0021E14C /* catsound_clipped.mp4 in Resources */,
 				9B49D0ED26D33EFA0021E14C /* catsound_clipped2.mp4 in Resources */,
+				9BFF432526E5B7E600BB44AA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		557AB77494D628942EEBA37E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NNCK!-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		67E6D463578A88A4D1714A01 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NNCK!/Pods-NNCK!-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-NNCK!/Pods-NNCK!-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NNCK!/Pods-NNCK!-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9B49D0C126D33EEF0021E14C /* Sources */ = {
@@ -358,6 +433,7 @@
 				9B12E32D26DF9B8200898156 /* LadybugEffectView.swift in Sources */,
 				9B2B8A1E26DCABE300EA2CED /* FirstLaunch.swift in Sources */,
 				9B49D10A26D3AB9E0021E14C /* AlbumViewModel.swift in Sources */,
+				9BFF432326E5B6B800BB44AA /* BannerAds.swift in Sources */,
 				9BBEC0F626D7A5330027853B /* contextmeny.swift in Sources */,
 				9B2B8A2326DCEA5B00EA2CED /* SettingViewModel.swift in Sources */,
 				9B49D0EF26D33EFA0021E14C /* CameraVIewModel.swift in Sources */,
@@ -488,6 +564,7 @@
 		};
 		9B49D0D526D33EF00021E14C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 594495E0E6A9A438F6DA77DE /* Pods-NNCK!.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -510,6 +587,7 @@
 		};
 		9B49D0D626D33EF00021E14C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 76269C62B656A8A98F7169A0 /* Pods-NNCK!.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -552,38 +630,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		9BD4954826E0E11B00932187 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.2;
-			};
-		};
-		9BD4956626E0EB7900932187 /* XCRemoteSwiftPackageReference "FLAnimatedImage" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Flipboard/FLAnimatedImage";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.16;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		9BD4954926E0E11B00932187 /* SDWebImageSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9BD4954826E0E11B00932187 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
-			productName = SDWebImageSwiftUI;
-		};
-		9BD4956726E0EB7900932187 /* FLAnimatedImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9BD4956626E0EB7900932187 /* XCRemoteSwiftPackageReference "FLAnimatedImage" */;
-			productName = FLAnimatedImage;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9B49D0BD26D33EEF0021E14C /* Project object */;
 }

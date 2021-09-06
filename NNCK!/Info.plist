@@ -2,6 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-2043257641094563~2324351486</string>
+	<key>Allows Arbitrary Loads In Web Content</key>
+	<true/>
+	<key>NSAllowsArbitraryLoadsForMedia</key>
+	<true/>
+	<key>Allow Arbitray Loads</key>
+	<true/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>사진을 저장, 편집하기 위해 허용해주세요. </string>
 	<key>NSPhotoLibraryAddUsageDescription</key>

@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
-import FLAnimatedImage
 
 struct AntEffectView: View {
     @EnvironmentObject var setting: CameraViewModel

@@ -55,12 +55,20 @@ class AlbumViewModel: ObservableObject {
         })
     }
     
+    func getAPhoto() -> UIImage {
+//        print(photoAssets[0])
+//        let result = photoAssets[0].thumbnailImage
+        let result = UIImage()
+        return result
+    }
+    
     init() {
         configure()
-//
-//        model.$photoAssets.sink { [weak self] (photoAssets) in
-//            self?.photoAssets = photoAssets
-//        }
-//        .store(in: &self.subscriptions)
+    }
+}
+
+extension Collection where Indices.Iterator.Element == Index {
+    subscript (safe index: Index) -> Iterator.Element? {
+        return indices.contains(index) ? self[index] : nil
     }
 }

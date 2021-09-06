@@ -11,6 +11,7 @@ struct CameraView: View {
     @ObservedObject var viewModel = CameraViewModel()
     @StateObject var soundViewModel = SoundViewModel()
     @StateObject var settingViewModel = SettingViewModel()
+    @StateObject var albumViewModel = AlbumViewModel()
     
     @State var currentZoomFactor: CGFloat = 1.0
     @State var lastScale:CGFloat = 1.0
@@ -59,6 +60,8 @@ struct CameraView: View {
                 
                 // 기능부
                 GeometryReader { geometry in
+//                    Banner().zIndex(1)
+
                     viewModel.backgroundColor.ignoresSafeArea()
                     // 왼쪽 기능 버튼
                     ZStack {
@@ -144,6 +147,7 @@ struct CameraView: View {
             .sheet(isPresented: $showAlbum) {
                 NewAlbumView(showAlbum: $showAlbum)
                     .environmentObject(viewModel)
+                    .environmentObject(albumViewModel)
             }
             .opacity(viewModel.isTaken ? 0 : 1)
             .animation(.easeInOut(duration: 0.3))
@@ -207,7 +211,7 @@ struct CameraView: View {
             HStack {
                 // 미리보기
                 CapturedPhotoThumbnail()
-                    .environmentObject(viewModel)
+                    .environmentObject(albumViewModel)
                     .contentShape(Rectangle())
                     .onTapGesture {
                         showAlbum = true
@@ -246,23 +250,24 @@ struct CameraView: View {
 }
 
 struct CapturedPhotoThumbnail: View {
-    @EnvironmentObject var viewModel: CameraViewModel
+    @EnvironmentObject var viewModel: AlbumViewModel
     @State var isTouched = false
     
     var body: some View  {
-        if let previewImage = viewModel.recentImage {
-            Image(uiImage: previewImage)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 70, height: 70)
-                .clipShape(RoundedRectangle(cornerRadius: 15))
-                .aspectRatio(1, contentMode: .fit)
-        } else {
-            RoundedRectangle(cornerRadius: 15)
-                .stroke(lineWidth: 3)
-                .foregroundColor(.white)
-                .frame(width: 70, height: 70)
-        }
+        let previewImage = viewModel.getAPhoto()
+        
+        Image(uiImage: previewImage)
+            .resizable()
+            .scaledToFill()
+            .frame(width: 70, height: 70)
+            .clipShape(RoundedRectangle(cornerRadius: 15))
+            .aspectRatio(1, contentMode: .fit)
+//        } catch {
+//            RoundedRectangle(cornerRadius: 15)
+//                .stroke(lineWidth: 3)
+//                .foregroundColor(.white)
+//                .frame(width: 70, height: 70)
+//        }
     }
 }
 
