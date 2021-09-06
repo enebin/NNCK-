@@ -55,13 +55,6 @@ class AlbumViewModel: ObservableObject {
         })
     }
     
-    func getAPhoto() -> UIImage {
-//        print(photoAssets[0])
-//        let result = photoAssets[0].thumbnailImage
-        let result = UIImage()
-        return result
-    }
-    
     init() {
         configure()
     }

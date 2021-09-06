@@ -60,8 +60,6 @@ struct CameraView: View {
                 
                 // 기능부
                 GeometryReader { geometry in
-//                    Banner().zIndex(1)
-
                     viewModel.backgroundColor.ignoresSafeArea()
                     // 왼쪽 기능 버튼
                     ZStack {
@@ -211,7 +209,7 @@ struct CameraView: View {
             HStack {
                 // 미리보기
                 CapturedPhotoThumbnail()
-                    .environmentObject(albumViewModel)
+                    .environmentObject(viewModel)
                     .contentShape(Rectangle())
                     .onTapGesture {
                         showAlbum = true
@@ -250,24 +248,23 @@ struct CameraView: View {
 }
 
 struct CapturedPhotoThumbnail: View {
-    @EnvironmentObject var viewModel: AlbumViewModel
+    @EnvironmentObject var viewModel: CameraViewModel
     @State var isTouched = false
     
     var body: some View  {
-        let previewImage = viewModel.getAPhoto()
-        
-        Image(uiImage: previewImage)
-            .resizable()
-            .scaledToFill()
-            .frame(width: 70, height: 70)
-            .clipShape(RoundedRectangle(cornerRadius: 15))
-            .aspectRatio(1, contentMode: .fit)
-//        } catch {
-//            RoundedRectangle(cornerRadius: 15)
-//                .stroke(lineWidth: 3)
-//                .foregroundColor(.white)
-//                .frame(width: 70, height: 70)
-//        }
+        if let previewImage = viewModel.recentImage {
+            Image(uiImage: previewImage)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 70, height: 70)
+                .clipShape(RoundedRectangle(cornerRadius: 15))
+                .aspectRatio(1, contentMode: .fit)
+        } else {
+            RoundedRectangle(cornerRadius: 15)
+                .stroke(lineWidth: 3)
+                .foregroundColor(.white)
+                .frame(width: 70, height: 70)
+        }
     }
 }
 

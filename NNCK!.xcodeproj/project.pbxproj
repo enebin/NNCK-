@@ -44,6 +44,7 @@
 		9BD4956E26E1BA0B00932187 /* DodgeBallEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD4956D26E1BA0B00932187 /* DodgeBallEffectView.swift */; };
 		9BFF432326E5B6B800BB44AA /* BannerAds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFF432226E5B6B800BB44AA /* BannerAds.swift */; };
 		9BFF432526E5B7E600BB44AA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9BFF432426E5B7E600BB44AA /* GoogleService-Info.plist */; };
+		9BFF432726E62B0600BB44AA /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFF432626E62B0600BB44AA /* ImageCache.swift */; };
 		F64DB1EA3FDA9ECDC07DFF54 /* Pods_NNCK_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4971B7DB30ADC5526064693E /* Pods_NNCK_.framework */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +91,7 @@
 		9BD4956D26E1BA0B00932187 /* DodgeBallEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DodgeBallEffectView.swift; sourceTree = "<group>"; };
 		9BFF432226E5B6B800BB44AA /* BannerAds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAds.swift; sourceTree = "<group>"; };
 		9BFF432426E5B7E600BB44AA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9BFF432626E62B0600BB44AA /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,6 +257,7 @@
 				9BBEC0F526D7A5330027853B /* contextmeny.swift */,
 				9B2B8A1B26DC9B3700EA2CED /* gesture.swift */,
 				9B12E32A26DF92A400898156 /* DragZoom.swift */,
+				9BFF432626E62B0600BB44AA /* ImageCache.swift */,
 			);
 			path = Tomb;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 			files = (
 				9B49D10326D365F50021E14C /* AlbumView.swift in Sources */,
 				9B093CDA26E5B03900070425 /* EffectsEnum.swift in Sources */,
+				9BFF432726E62B0600BB44AA /* ImageCache.swift in Sources */,
 				9B49D0F726D33EFA0021E14C /* Camera.swift in Sources */,
 				9B49D10526D365F50021E14C /* CameraView.swift in Sources */,
 				9B2B8A1C26DC9B3700EA2CED /* gesture.swift in Sources */,

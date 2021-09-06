@@ -9,12 +9,13 @@ import SwiftUI
 import PhotosUI
 
 struct NewAlbumView: View {
+    @EnvironmentObject var camSetting: CameraViewModel
     @EnvironmentObject var viewModel: AlbumViewModel
     @State var selection = 0
     @Binding var showAlbum: Bool
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             Group {
                 if viewModel.isSelectionMode {
                     SelectionHeader
@@ -26,6 +27,12 @@ struct NewAlbumView: View {
             ScrollView {
                 AlbumGrid
             }
+            
+            // 광고
+            Banner()
+        }
+        .onDisappear {
+            camSetting.recentImage = nil
         }
         .overlay(ImagePreview(selection: $selection, showAlbum: $showAlbum)
                     .environmentObject(viewModel))

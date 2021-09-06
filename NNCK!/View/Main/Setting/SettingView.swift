@@ -13,7 +13,7 @@ struct SettingView: View {
     @EnvironmentObject var viewModel: SettingViewModel
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             // 헤더 부분
             ZStack {
                 HStack {
@@ -35,6 +35,9 @@ struct SettingView: View {
             
             // 세팅 바디 부분
             settingBody
+            
+            // 광~고
+            Banner()
         }
     }
     
