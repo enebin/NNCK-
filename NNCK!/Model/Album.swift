@@ -8,9 +8,6 @@
 import Foundation
 import SwiftUI
 import PhotosUI
-import Foundation
-import SwiftUI
-import PhotosUI
 
 class Album: ObservableObject {
     @Published var photoAssets = PHFetchResult<PHAsset>()
@@ -19,6 +16,7 @@ class Album: ObservableObject {
 
     func fetchPhoto() -> PHFetchResult<PHAsset> {
         /// 페치 및 로컬 페치 데이터 업데이트, 에셋 리턴
+        
         // 이미지 페치 옵션
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
@@ -26,45 +24,8 @@ class Album: ObservableObject {
         let results: PHFetchResult = PHAsset.fetchAssets(with: .image, options: fetchOptions)
         self.photoAssets = results
         
-//        cacheThumbnail(assets: results)
-//        cacheImages(assets: results)
         print("[AlbumModel]: \(photoAssets.count) fetched count")
         return results
-    }
-    
-        func cacheImages(assets: PHFetchResult<PHAsset>) {
-            var tempAssets = [PHAsset]()
-            for index in 0..<assets.count {
-                tempAssets.append(assets[index])
-            }
-    
-            let requestOptions = PHImageRequestOptions()
-            let imageManager = PHCachingImageManager()
-
-            requestOptions.isSynchronous = true
-            requestOptions.deliveryMode = .highQualityFormat
-            requestOptions.isNetworkAccessAllowed = true
-            let bigSize = CGSize(width: 700, height: 700)
-                    imageManager.startCachingImages(for: tempAssets, targetSize: bigSize, contentMode: .aspectFill, options: requestOptions)
-    
-            print("[AlbumModel]: Caching is done. Count: \(tempAssets.count)")
-        }
-
-    func cacheThumbnail(assets: PHFetchResult<PHAsset>) {
-        var tempAssets = [PHAsset]()
-        for index in 0..<assets.count {
-            tempAssets.append(assets[index])
-        }
-
-        let requestOptions = PHImageRequestOptions()
-        requestOptions.isSynchronous = true
-        requestOptions.deliveryMode = .highQualityFormat
-        requestOptions.isNetworkAccessAllowed = true
-
-        let imageManager = PHCachingImageManager()
-        imageManager.startCachingImages(for: tempAssets, targetSize: CGSize(width: 200, height: 200), contentMode: .aspectFill, options: requestOptions)
-
-        print("[AlbumModel]: Caching is done. Count: \(tempAssets.count)")
     }
 
     func deletePhoto(assets: [PHAsset], ifSucess: @escaping () -> ()) {
@@ -80,7 +41,6 @@ class Album: ObservableObject {
         })
     }
 }
-
 
 extension PHAsset {
     //https://stackoverflow.com/questions/30812057/phasset-to-uiimage

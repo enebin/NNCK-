@@ -11,7 +11,6 @@ struct CameraView: View {
     @ObservedObject var viewModel = CameraViewModel()
     @StateObject var soundViewModel = SoundViewModel()
     @StateObject var settingViewModel = SettingViewModel()
-    @StateObject var albumViewModel = AlbumViewModel()
     
     @State var currentZoomFactor: CGFloat = 1.0
     @State var lastScale:CGFloat = 1.0
@@ -145,7 +144,6 @@ struct CameraView: View {
             .sheet(isPresented: $showAlbum) {
                 NewAlbumView(showAlbum: $showAlbum)
                     .environmentObject(viewModel)
-                    .environmentObject(albumViewModel)
             }
             .opacity(viewModel.isTaken ? 0 : 1)
             .animation(.easeInOut(duration: 0.3))

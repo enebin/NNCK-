@@ -10,7 +10,7 @@ import PhotosUI
 
 struct NewAlbumView: View {
     @EnvironmentObject var camSetting: CameraViewModel
-    @EnvironmentObject var viewModel: AlbumViewModel
+    @StateObject var viewModel = AlbumViewModel()
     @State var selection = 0
     @Binding var showAlbum: Bool
     
