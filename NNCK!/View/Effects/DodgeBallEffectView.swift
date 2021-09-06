@@ -19,7 +19,6 @@ struct DodgeballEffectView: View {
             Text(Effects.dodgeball.getShape())
                 .font(.system(size: 35))
                 .padding(5)
-                .border(Color.red)
                 .contentShape(Rectangle())
                 .onTapGesture {
                     print("Tapped")

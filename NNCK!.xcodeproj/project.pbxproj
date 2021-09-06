@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B093CDA26E5B03900070425 /* EffectsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B093CD926E5B03900070425 /* EffectsEnum.swift */; };
 		9B12E32B26DF92A400898156 /* DragZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B12E32A26DF92A400898156 /* DragZoom.swift */; };
 		9B12E32D26DF9B8200898156 /* LadybugEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B12E32C26DF9B8200898156 /* LadybugEffectView.swift */; };
 		9B26B65F26D9D3390083D76E /* CustomPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B26B65E26D9D3390083D76E /* CustomPager.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B093CD926E5B03900070425 /* EffectsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectsEnum.swift; sourceTree = "<group>"; };
 		9B12E32A26DF92A400898156 /* DragZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragZoom.swift; sourceTree = "<group>"; };
 		9B12E32C26DF9B8200898156 /* LadybugEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadybugEffectView.swift; sourceTree = "<group>"; };
 		9B26B65E26D9D3390083D76E /* CustomPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPager.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				9BD4956D26E1BA0B00932187 /* DodgeBallEffectView.swift */,
 				9B12E32C26DF9B8200898156 /* LadybugEffectView.swift */,
 				9B49D0E826D33EFA0021E14C /* LaserEffectView.swift */,
+				9B093CD926E5B03900070425 /* EffectsEnum.swift */,
 			);
 			path = Effects;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B49D10326D365F50021E14C /* AlbumView.swift in Sources */,
+				9B093CDA26E5B03900070425 /* EffectsEnum.swift in Sources */,
 				9B49D0F726D33EFA0021E14C /* Camera.swift in Sources */,
 				9B49D10526D365F50021E14C /* CameraView.swift in Sources */,
 				9B2B8A1C26DC9B3700EA2CED /* gesture.swift in Sources */,

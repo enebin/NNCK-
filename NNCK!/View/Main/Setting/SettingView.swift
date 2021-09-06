@@ -51,7 +51,8 @@ struct SettingView: View {
                        ))
             }
             
-            Section(header: Text("애니메이션 개수")) {
+            Section(header: Text("애니메이션 개수 & 속도")) {
+                // 개수
                 HStack {
                     Text("-")
                         .contentShape(Rectangle())
@@ -72,6 +73,22 @@ struct SettingView: View {
                         .padding(.horizontal)
                 }
                 .accentColor(.blue)
+                
+                // 속도 바
+                VStack{
+                    Text("\(cameraSetting.animationSpeed==10 ? 10/0 : cameraSetting.animationSpeed, specifier: "%.1f")")
+                        .font(.system(size: 8))
+                    
+                    HStack {
+                        Text("-")
+                        Slider(value: $cameraSetting.animationSpeed,
+                               in: 0...10)
+                            .padding(10)
+                            .accentColor(.pink)
+                            .frame(width: 150)
+                        Text("+")
+                    }
+                }
             }
             
             Section(header: Text("애니메이션 종류")) {
