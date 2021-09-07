@@ -23,22 +23,39 @@ class HuntingEffect: ObservableObject {
     init(object: String) {
         let screenRect = UIScreen.main.bounds
         
-        let leftUp = CGPoint(x: -5, y: 10)
-        let rightDown = CGPoint(x: screenRect.maxX, y: screenRect.maxY)
-        let leftDown = CGPoint(x: -5, y: screenRect.maxY)
-        let rightUp = CGPoint(x: screenRect.maxX, y: 0)
+        let groupA = 0
         
-        let leftUpCtrl = CGPoint(//
+        let X = screenRect.maxX
+        let Y = screenRect.maxY
+        
+        // ↖
+        let AB = CGPoint(x: 10, y: 0)
+        let AC = CGPoint(x: 0, y: 10)
+        // ↘
+        let DB = CGPoint(x: X, y: Y-10)
+        let DC = CGPoint(x: X-10, y: Y)
+        
+        // ↗
+        let BA = CGPoint(x: X-10, y: 0)
+        let BD = CGPoint(x: X, y: 10)
+        // ↙
+        let CD = CGPoint(x: 10, y: Y)
+        let CA = CGPoint(x: 0, y: Y-10)
+        
+        // ↖↘
+        let AD = CGPoint(//
             x: CGFloat.random(in: (-screenRect.maxX*1.5..<0)),
             y: CGFloat.random(in: (1..<screenRect.maxY/2)))
-        let lefdDownCtrl = CGPoint(//
-            x: CGFloat.random(in: (-screenRect.maxX*1.5..<0)),
+        let DA = CGPoint(
+            x: CGFloat.random(in: (screenRect.maxX..<screenRect.maxX*2)),
             y: CGFloat.random(in: (screenRect.maxY/2..<screenRect.maxY)))
-        let rightUpCtrl = CGPoint(//
+        
+        // ↙↗
+        let BC = CGPoint(
             x: CGFloat.random(in: (screenRect.maxX..<screenRect.maxX*2)),
             y: CGFloat.random(in: (1..<screenRect.maxY/2)))
-        let rightDownCtrl = CGPoint(
-            x: CGFloat.random(in: (screenRect.maxX..<screenRect.maxX*2)),
+        let CB = CGPoint(
+            x: CGFloat.random(in: (-screenRect.maxX*1.5..<0)),
             y: CGFloat.random(in: (screenRect.maxY/2..<screenRect.maxY)))
         
         let pointSets = [[leftUp, rightDown], [leftDown, rightUp],

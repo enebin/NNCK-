@@ -15,9 +15,12 @@ struct IAPView: View {
             let product = storeManager.myProducts[0]
             
             VStack(alignment: .center) {
-                Text(product.localizedTitle)
+                Text("무한으로 즐겨요")
+                    .font(.largeTitle)
+                    .bold()
+                Text("냥냥찰칵! " + product.localizedTitle)
                     .font(.headline)
-                    .padding(5)
+                    .padding(.top, 5)
                 Text(product.localizedDescription)
                     .font(.caption2)
             }
@@ -35,9 +38,9 @@ struct IAPView: View {
         GroupBox {
             HStack {
                 VStack(alignment: .leading) {
-                    Text("개인 별로 커스텀 가능한 모양들")
+                    Text("더 다양한 재미")
                         .font(.headline)
-                    Text("이것저것")
+                    Text("+35종의 설정 가능한 모양들")
                         .font(.caption2)
                 }
                 Spacer()
@@ -46,11 +49,13 @@ struct IAPView: View {
             }
             .padding()
             
+            Divider()
+            
             HStack {
                 VStack(alignment: .leading) {
-                    Text("개인 별로 커스텀 가능한 사운드")
+                    Text("더 주의를 끄는 사운드")
                         .font(.headline)
-                    Text("이것저것")
+                    Text("+5종의 엄선된 사운드들")
                         .font(.caption2)
                 }
                 Spacer()
@@ -59,11 +64,13 @@ struct IAPView: View {
             }
             .padding()
             
+            Divider()
+            
             HStack {
                 VStack(alignment: .leading) {
-                    Text("개인 별로 커스텀 가능한 배경색")
+                    Text("더 편안한 배경")
                         .font(.headline)
-                    Text("이것저것")
+                    Text("취향껏 자유롭게 커스텀 가능한 배경색")
                         .font(.caption2)
                 }
                 Spacer()
