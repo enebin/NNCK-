@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct CameraView: View {
     @ObservedObject var viewModel = CameraViewModel()
+    @StateObject var storeManager = StoreManager()
     @StateObject var soundViewModel = SoundViewModel()
     @StateObject var settingViewModel = SettingViewModel()
-    
+        
     @State var currentZoomFactor: CGFloat = 1.0
     @State var lastScale:CGFloat = 1.0
     @State var showSlider = false
@@ -20,6 +22,7 @@ struct CameraView: View {
     @State var showAlbum = false
     
     var debug = true
+    let productIDs = ["com.enebin.NNCK.full"]
     
     private func collapseAll() {
         showSlider = false
@@ -114,6 +117,9 @@ struct CameraView: View {
                     CameraPreview(session: viewModel.session)
                         .onAppear {
                             viewModel.configure()
+                            storeManager.getProducts(productIDs: productIDs)
+                            storeManager.restoreProducts()
+                            SKPaymentQueue.default().add(storeManager)
                         }
                         .ignoresSafeArea()
                         .offset(x: viewModel.screenSize == .Fullscreen ? 0 : UIScreen.main.bounds.width - width,
@@ -137,6 +143,7 @@ struct CameraView: View {
                         .environmentObject(viewModel)
                         .environmentObject(settingViewModel)
                         .environmentObject(soundViewModel)
+                        .environmentObject(storeManager)
                         .navigationBarHidden(true)
                 }
                 .accentColor(.black)

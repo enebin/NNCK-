@@ -11,6 +11,8 @@
 		9B12E32B26DF92A400898156 /* DragZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B12E32A26DF92A400898156 /* DragZoom.swift */; };
 		9B12E32D26DF9B8200898156 /* PoppingBugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B12E32C26DF9B8200898156 /* PoppingBugView.swift */; };
 		9B214DDF26E748920055B5C9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B214DDE26E748920055B5C9 /* StoreKit.framework */; };
+		9B214DE326E74B2B0055B5C9 /* IAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B214DE226E74B2B0055B5C9 /* IAP.swift */; };
+		9B214DE526E74FFA0055B5C9 /* IAPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B214DE426E74FFA0055B5C9 /* IAPView.swift */; };
 		9B26B65F26D9D3390083D76E /* CustomPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B26B65E26D9D3390083D76E /* CustomPager.swift */; };
 		9B2B8A1C26DC9B3700EA2CED /* gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A1B26DC9B3700EA2CED /* gesture.swift */; };
 		9B2B8A1E26DCABE300EA2CED /* FirstLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A1D26DCABE300EA2CED /* FirstLaunch.swift */; };
@@ -57,6 +59,8 @@
 		9B12E32A26DF92A400898156 /* DragZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragZoom.swift; sourceTree = "<group>"; };
 		9B12E32C26DF9B8200898156 /* PoppingBugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoppingBugView.swift; sourceTree = "<group>"; };
 		9B214DDE26E748920055B5C9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		9B214DE226E74B2B0055B5C9 /* IAP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAP.swift; sourceTree = "<group>"; };
+		9B214DE426E74FFA0055B5C9 /* IAPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPView.swift; sourceTree = "<group>"; };
 		9B26B65E26D9D3390083D76E /* CustomPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPager.swift; sourceTree = "<group>"; };
 		9B2B8A1B26DC9B3700EA2CED /* gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gesture.swift; sourceTree = "<group>"; };
 		9B2B8A1D26DCABE300EA2CED /* FirstLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunch.swift; sourceTree = "<group>"; };
@@ -118,6 +122,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9B214DE026E74B010055B5C9 /* Merchandises */ = {
+			isa = PBXGroup;
+			children = (
+				9B214DE126E74B200055B5C9 /* IAP */,
+				9BFF432126E5B6B000BB44AA /* ADs */,
+			);
+			path = Merchandises;
+			sourceTree = "<group>";
+		};
+		9B214DE126E74B200055B5C9 /* IAP */ = {
+			isa = PBXGroup;
+			children = (
+				9B214DE226E74B2B0055B5C9 /* IAP.swift */,
+				9B214DE426E74FFA0055B5C9 /* IAPView.swift */,
+			);
+			path = IAP;
+			sourceTree = "<group>";
+		};
 		9B2B8A1F26DCBAB000EA2CED /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,8 +169,8 @@
 		9B49D0C726D33EEF0021E14C /* NNCK! */ = {
 			isa = PBXGroup;
 			children = (
-				9BFF432126E5B6B000BB44AA /* ADs */,
 				9B49D0D726D33EFA0021E14C /* Data */,
+				9B214DE026E74B010055B5C9 /* Merchandises */,
 				9B49D0DF26D33EFA0021E14C /* View */,
 				9B49D0DC26D33EFA0021E14C /* ViewModel */,
 				9B49D0E926D33EFA0021E14C /* Model */,
@@ -420,6 +442,7 @@
 				9B093CDA26E5B03900070425 /* EffectsEnum.swift in Sources */,
 				9BFF432726E62B0600BB44AA /* ImageCache.swift in Sources */,
 				9B49D0F726D33EFA0021E14C /* Camera.swift in Sources */,
+				9B214DE326E74B2B0055B5C9 /* IAP.swift in Sources */,
 				9B49D10526D365F50021E14C /* CameraView.swift in Sources */,
 				9B2B8A1C26DC9B3700EA2CED /* gesture.swift in Sources */,
 				9B49D0F026D33EFA0021E14C /* SoundViewModel.swift in Sources */,
@@ -444,6 +467,7 @@
 				9BFF432326E5B6B800BB44AA /* BannerAds.swift in Sources */,
 				9BBEC0F626D7A5330027853B /* contextmeny.swift in Sources */,
 				9B2B8A2326DCEA5B00EA2CED /* SettingViewModel.swift in Sources */,
+				9B214DE526E74FFA0055B5C9 /* IAPView.swift in Sources */,
 				9B49D0EF26D33EFA0021E14C /* CameraVIewModel.swift in Sources */,
 				9B49D0FE26D349E90021E14C /* NewAlbumView.swift in Sources */,
 				9B2E7DA826E09B0E007CE2EC /* HuntingEffect.swift in Sources */,

@@ -39,13 +39,6 @@ struct CustomContextMenu<Content: View,Preview: View>: View {
     }
 }
 
-struct CustomContextMenu_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
-
-
 // Custom View for Context Menu....
 struct ContextMenuHelper<Content: View,Preview: View>: UIViewRepresentable{
     

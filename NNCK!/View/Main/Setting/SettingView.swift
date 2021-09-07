@@ -11,6 +11,7 @@ struct SettingView: View {
     @EnvironmentObject var soundSettting: SoundViewModel
     @EnvironmentObject var cameraSetting: CameraViewModel
     @EnvironmentObject var viewModel: SettingViewModel
+    @EnvironmentObject var storeManager: StoreManager
     
     var body: some View {
         VStack(spacing: 0) {
@@ -41,135 +42,165 @@ struct SettingView: View {
         }
     }
     
+    var CamFuctions: some View {
+        Section(header: Text("카메라 기능")) {
+            Toggle("무음 모드(셔터소리 X)",
+                   isOn:.init(
+                    get: { cameraSetting.isSilent },
+                    set: { status in
+                        cameraSetting.switchSilent()
+                        print("changed")
+                    }
+                   ))
+        }
+    }
+
     var settingBody: some View {
         List {
-            Section(header: Text("카메라 기능")) {
-                Toggle("무음 모드(셔터소리 X)",
-                       isOn:.init(
-                        get: { cameraSetting.isSilent },
-                        set: { status in
-                            cameraSetting.switchSilent()
-                            print("changed")
-                        }
-                       ))
+            CamFuctions
+            AniNumsAndSpeed
+            AniTypes
+//            SoundTypes
+            CamBackground
+            IAP
+        }
+        .listStyle(SidebarListStyle())
+    }
+    
+    var AniNumsAndSpeed: some View {
+        Section(header: Text("애니메이션 개수 & 속도")) {
+            // 개수
+            HStack {
+                Text("-")
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        cameraSetting.decreaseEffectNo()
+                    }
+                    .padding(.trailing)
+
+                Spacer()
+                Text("\(cameraSetting.numOfEffect)")
+                
+                Spacer()
+                Text("+")
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        cameraSetting.increaseEffectNo()
+                    }
+                    .padding(.leading)
             }
+            .accentColor(.blue)
             
-            Section(header: Text("애니메이션 개수 & 속도")) {
-                // 개수
+            // 속도 바
+            VStack{
+                Text("\(cameraSetting.animationSpeed==10 ? 10/0 : cameraSetting.animationSpeed, specifier: "%.1f")")
+                    .font(.system(size: 8))
+                
                 HStack {
                     Text("-")
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            cameraSetting.decreaseEffectNo()
-                        }
                         .padding(.trailing)
-
-                    Spacer()
-                    Text("\(cameraSetting.numOfEffect)")
-                    
-                    Spacer()
+                    Slider(value: $cameraSetting.animationSpeed,
+                           in: 0...10)
+                        .accentColor(.pink)
                     Text("+")
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            cameraSetting.increaseEffectNo()
-                        }
                         .padding(.leading)
                 }
-                .accentColor(.blue)
+            }
+        }
+
+    }
+    
+    var AniTypes: some View {
+        Section(header: Text("애니메이션 종류")) {
+            ForEach(Effects.allCases, id: \.self) { effect in
+                let description = effect.rawValue
+                let shape = effect.getShape()
                 
-                // 속도 바
-                VStack{
-                    Text("\(cameraSetting.animationSpeed==10 ? 10/0 : cameraSetting.animationSpeed, specifier: "%.1f")")
-                        .font(.system(size: 8))
-                    
+                ZStack {
                     HStack {
-                        Text("-")
-                            .padding(.trailing)
-                        Slider(value: $cameraSetting.animationSpeed,
-                               in: 0...10)
-                            .accentColor(.pink)
-                        Text("+")
-                            .padding(.leading)
-                    }
-                }
-            }
-            
-            Section(header: Text("애니메이션 종류")) {
-                ForEach(Effects.allCases, id: \.self) { effect in
-                    let description = effect.rawValue
-                    let shape = effect.getShape()
-                    
-                    ZStack {
-                        HStack {
-                            Text(description)
-                            Spacer()
-                            Text(shape)
-                                .padding(.trailing, 15)
-                        }
-                        
-                        if viewModel.pickedAnimationIndex == effect {
-                            HStack {
-                                Spacer()
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(.blue)
-                                    .background(Circle().fill(Color.white))
-                                    .padding(3)
-                                    .transition(.scale)
-                            }
-                        }
-                    }
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        withAnimation(.spring()){
-                            viewModel.pickedAnimationIndex = effect
-                            cameraSetting.effectType = effect
-                        }
+                        Text(description)
+                        Spacer()
+                        Text(shape)
+                            .padding(.trailing, 15)
                     }
                     
-                }
-            }
-            
-//            Section(header: Text("사운드")) {
-//                ForEach(0..<3) { index in
-//                    NavigationLink(
-//                        destination: Text("사운드 고르기"),
-//                        label: { Text("\(index+1). Sound") })
-//                }
-//            }
-            
-            Section(header: Text("카메라 배경색")) {
-                ForEach(viewModel.colors.indices) { index in
-                    let colorStruct = viewModel.colors[index]
-                    ZStack {
+                    if viewModel.pickedAnimationIndex == effect {
                         HStack {
-                            colorStruct.description
-                                .foregroundColor(colorStruct.forgroundColor)
                             Spacer()
-                        }
-                        
-                        if viewModel.pickedColorIndex == index {
-                            HStack {
-                                Spacer()
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundColor(.blue)
-                                    .background(Circle().fill(Color.white))
-                                    .padding(3)
-                                    .transition(.scale)
-                            }
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundColor(.blue)
+                                .background(Circle().fill(Color.white))
+                                .padding(3)
+                                .transition(.scale)
                         }
                     }
-                    .listRowBackground(colorStruct.backgroundColor)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        withAnimation(.spring()){
-                            viewModel.pickedColorIndex = index
-                            cameraSetting.backgroundColor = colorStruct.backgroundColor
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    withAnimation(.spring()){
+                        viewModel.pickedAnimationIndex = effect
+                        cameraSetting.effectType = effect
+                    }
+                }
+                
+            }
+        }
+
+    }
+    
+    var SoundTypes: some View {
+            Section(header: Text("사운드")) {
+                ForEach(0..<3) { index in
+                    NavigationLink(
+                        destination: Text("사운드 고르기"),
+                        label: { Text("\(index+1). Sound") })
+                }
+            }
+    }
+    
+    var CamBackground: some View {
+        Section(header: Text("카메라 배경색")) {
+            ForEach(viewModel.colors.indices) { index in
+                let colorStruct = viewModel.colors[index]
+                ZStack {
+                    HStack {
+                        colorStruct.description
+                            .foregroundColor(colorStruct.forgroundColor)
+                        Spacer()
+                    }
+                    
+                    if viewModel.pickedColorIndex == index {
+                        HStack {
+                            Spacer()
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundColor(.blue)
+                                .background(Circle().fill(Color.white))
+                                .padding(3)
+                                .transition(.scale)
                         }
+                    }
+                }
+                .listRowBackground(colorStruct.backgroundColor)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    withAnimation(.spring()){
+                        viewModel.pickedColorIndex = index
+                        cameraSetting.backgroundColor = colorStruct.backgroundColor
                     }
                 }
             }
         }
-        .listStyle(SidebarListStyle())
+
+    }
+    
+    var IAP: some View {
+        Section(header: Text("냥냥찰칵! 풀 패키지 구매")) {
+            NavigationLink(
+                destination: IAPView(storeManager: storeManager),
+                label: {
+                    Text("바로가기")
+                })
+        }
     }
 }
 

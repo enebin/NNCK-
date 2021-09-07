@@ -16,7 +16,7 @@ struct NNCK_App: App {
         FirebaseApp.configure()
         GADMobileAds.sharedInstance().start(completionHandler: nil)
     }
-    
+
     var body: some Scene {
         WindowGroup {
             ContentView()

@@ -8,14 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    let alwaysFirstLaunch = FirstLaunch.alwaysFirst()
-    
     var body: some View {
-//        if alwaysFirstLaunch.isFirstLaunch { // will always execute
-//
-//        } else {
             CameraView()
-//        }
+        
     }
 }
 
