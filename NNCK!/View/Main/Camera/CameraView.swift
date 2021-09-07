@@ -146,7 +146,7 @@ struct CameraView: View {
                         .environmentObject(storeManager)
                         .navigationBarHidden(true)
                 }
-                .accentColor(.black)
+                .accentColor(.gray)
             }
             .sheet(isPresented: $showAlbum) {
                 NewAlbumView(showAlbum: $showAlbum)
@@ -156,7 +156,7 @@ struct CameraView: View {
             .animation(.easeInOut(duration: 0.3))
             .navigationBarHidden(true)
         }
-        .accentColor(.black)
+        .accentColor(.gray)
     }
     
     var Header: some View {

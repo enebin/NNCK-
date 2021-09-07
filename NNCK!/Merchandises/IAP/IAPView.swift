@@ -12,39 +12,72 @@ struct IAPView: View {
     
     var body: some View {
         VStack {
-//            List(storeManager.myProducts, id: \.self) { product in
-//                        HStack {
-//                            VStack(alignment: .leading) {
-//                                Text(product.localizedTitle)
-//                                    .font(.headline)
-//                                Text(product.localizedDescription)
-//                                    .font(.caption2)
-//                            }
-//                            Spacer()
-//                            if UserDefaults.standard.bool(forKey: product.productIdentifier) {
-//                                Text ("Purchased")
-//                                    .foregroundColor(.green)
-//                            } else {
-//                                Button(action: {
-//                                    //Purchase particular ILO product
-//                                }) {
-//                                    Text("단돈 ￦\(product.price)")
-//                                }
-//                                    .foregroundColor(.blue)
-//                            }
-//                        }
-//                    }
             let product = storeManager.myProducts[0]
             
             VStack(alignment: .center) {
                 Text(product.localizedTitle)
                     .font(.headline)
-                    .padding()
+                    .padding(5)
                 Text(product.localizedDescription)
                     .font(.caption2)
             }
             .padding()
+            Details
+            Spacer()
+            PriceInformation
+            Spacer()
+            PurchaseButton
+            Spacer()
+        }
+    }
+    
+    var Details: some View {
+        GroupBox {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("개인 별로 커스텀 가능한 모양들")
+                        .font(.headline)
+                    Text("이것저것")
+                        .font(.caption2)
+                }
+                Spacer()
+                Text("🧶")
+                    .font(.title)
+            }
+            .padding()
             
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("개인 별로 커스텀 가능한 사운드")
+                        .font(.headline)
+                    Text("이것저것")
+                        .font(.caption2)
+                }
+                Spacer()
+                Text("🎺")
+                    .font(.title)
+            }
+            .padding()
+            
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("개인 별로 커스텀 가능한 배경색")
+                        .font(.headline)
+                    Text("이것저것")
+                        .font(.caption2)
+                }
+                Spacer()
+                Text("🪣")
+                    .font(.title)
+            }
+            .padding()
+        }
+        .padding(.horizontal, 30)
+    }
+    
+    var PriceInformation: some View {
+        let product = storeManager.myProducts[0]
+        return Group {
             if UserDefaults.standard.bool(forKey: product.productIdentifier) {
                 Text ("구매 완료")
                     .foregroundColor(.green)
@@ -52,8 +85,13 @@ struct IAPView: View {
                 Text("단돈 ￦\(product.price)")
                     .foregroundColor(.blue)
             }
-            Spacer()
-            
+        }
+        
+    }
+    
+    var PurchaseButton: some View {
+        let product = storeManager.myProducts[0]
+        return Group {
             if UserDefaults.standard.bool(forKey: product.productIdentifier) {
                 Text("구매 완료..")
                     .padding()
@@ -71,9 +109,7 @@ struct IAPView: View {
                         .background(Capsule().fill(Color.blue))
                 }
             }
-            Spacer()
         }
-        
     }
 }
 

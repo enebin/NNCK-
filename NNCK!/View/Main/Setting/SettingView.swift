@@ -56,7 +56,7 @@ struct SettingView: View {
     }
 
     var settingBody: some View {
-        List {
+        Form {
             CamFuctions
             AniNumsAndSpeed
             AniTypes
@@ -64,7 +64,6 @@ struct SettingView: View {
             CamBackground
             IAP
         }
-        .listStyle(SidebarListStyle())
     }
     
     var AniNumsAndSpeed: some View {
