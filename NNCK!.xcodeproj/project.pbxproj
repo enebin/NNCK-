@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		9B093CDA26E5B03900070425 /* EffectsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B093CD926E5B03900070425 /* EffectsEnum.swift */; };
 		9B12E32B26DF92A400898156 /* DragZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B12E32A26DF92A400898156 /* DragZoom.swift */; };
-		9B12E32D26DF9B8200898156 /* LadybugEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B12E32C26DF9B8200898156 /* LadybugEffectView.swift */; };
+		9B12E32D26DF9B8200898156 /* PoppingBugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B12E32C26DF9B8200898156 /* PoppingBugView.swift */; };
 		9B26B65F26D9D3390083D76E /* CustomPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B26B65E26D9D3390083D76E /* CustomPager.swift */; };
 		9B2B8A1C26DC9B3700EA2CED /* gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A1B26DC9B3700EA2CED /* gesture.swift */; };
 		9B2B8A1E26DCABE300EA2CED /* FirstLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A1D26DCABE300EA2CED /* FirstLaunch.swift */; };
@@ -17,7 +17,7 @@
 		9B2B8A2326DCEA5B00EA2CED /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A2226DCEA5B00EA2CED /* SettingViewModel.swift */; };
 		9B2B8A2526DCF4B700EA2CED /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A2426DCF4B700EA2CED /* CustomColors.swift */; };
 		9B2E7DA426E087E0007CE2EC /* CustomPathDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2E7DA326E087E0007CE2EC /* CustomPathDrawer.swift */; };
-		9B2E7DA626E09A37007CE2EC /* AntEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2E7DA526E09A37007CE2EC /* AntEffectView.swift */; };
+		9B2E7DA626E09A37007CE2EC /* HuntingEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2E7DA526E09A37007CE2EC /* HuntingEffectView.swift */; };
 		9B2E7DA826E09B0E007CE2EC /* HuntingEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2E7DA726E09B0E007CE2EC /* HuntingEffect.swift */; };
 		9B49D0C926D33EEF0021E14C /* NNCK_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0C826D33EEF0021E14C /* NNCK_App.swift */; };
 		9B49D0CB26D33EEF0021E14C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0CA26D33EEF0021E14C /* ContentView.swift */; };
@@ -54,7 +54,7 @@
 		76269C62B656A8A98F7169A0 /* Pods-NNCK!.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NNCK!.release.xcconfig"; path = "Target Support Files/Pods-NNCK!/Pods-NNCK!.release.xcconfig"; sourceTree = "<group>"; };
 		9B093CD926E5B03900070425 /* EffectsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectsEnum.swift; sourceTree = "<group>"; };
 		9B12E32A26DF92A400898156 /* DragZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragZoom.swift; sourceTree = "<group>"; };
-		9B12E32C26DF9B8200898156 /* LadybugEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LadybugEffectView.swift; sourceTree = "<group>"; };
+		9B12E32C26DF9B8200898156 /* PoppingBugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoppingBugView.swift; sourceTree = "<group>"; };
 		9B26B65E26D9D3390083D76E /* CustomPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPager.swift; sourceTree = "<group>"; };
 		9B2B8A1B26DC9B3700EA2CED /* gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gesture.swift; sourceTree = "<group>"; };
 		9B2B8A1D26DCABE300EA2CED /* FirstLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunch.swift; sourceTree = "<group>"; };
@@ -62,7 +62,7 @@
 		9B2B8A2226DCEA5B00EA2CED /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		9B2B8A2426DCF4B700EA2CED /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		9B2E7DA326E087E0007CE2EC /* CustomPathDrawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPathDrawer.swift; sourceTree = "<group>"; };
-		9B2E7DA526E09A37007CE2EC /* AntEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AntEffectView.swift; sourceTree = "<group>"; };
+		9B2E7DA526E09A37007CE2EC /* HuntingEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntingEffectView.swift; sourceTree = "<group>"; };
 		9B2E7DA726E09B0E007CE2EC /* HuntingEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HuntingEffect.swift; sourceTree = "<group>"; };
 		9B49D0C526D33EEF0021E14C /* NNCK!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NNCK!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B49D0C826D33EEF0021E14C /* NNCK_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NNCK_App.swift; sourceTree = "<group>"; };
@@ -144,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				9B49D0D726D33EFA0021E14C /* Data */,
+				9BFF432126E5B6B000BB44AA /* ADs */,
 				9B49D0DF26D33EFA0021E14C /* View */,
 				9B49D0DC26D33EFA0021E14C /* ViewModel */,
 				9B49D0E926D33EFA0021E14C /* Model */,
@@ -199,7 +200,6 @@
 		9B49D0DF26D33EFA0021E14C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9BFF432126E5B6B000BB44AA /* ADs */,
 				9B49D0E026D33EFA0021E14C /* Main */,
 				9B49D0E726D33EFA0021E14C /* Effects */,
 			);
@@ -229,9 +229,9 @@
 		9B49D0E726D33EFA0021E14C /* Effects */ = {
 			isa = PBXGroup;
 			children = (
-				9B2E7DA526E09A37007CE2EC /* AntEffectView.swift */,
+				9B2E7DA526E09A37007CE2EC /* HuntingEffectView.swift */,
 				9BD4956D26E1BA0B00932187 /* DodgeBallEffectView.swift */,
-				9B12E32C26DF9B8200898156 /* LadybugEffectView.swift */,
+				9B12E32C26DF9B8200898156 /* PoppingBugView.swift */,
 				9B49D0E826D33EFA0021E14C /* LaserEffectView.swift */,
 				9B093CD926E5B03900070425 /* EffectsEnum.swift */,
 			);
@@ -434,7 +434,7 @@
 				9B50CDDC26D7341600D6D91F /* Tappage.swift in Sources */,
 				9B49D0C926D33EEF0021E14C /* NNCK_App.swift in Sources */,
 				9BD4956E26E1BA0B00932187 /* DodgeBallEffectView.swift in Sources */,
-				9B12E32D26DF9B8200898156 /* LadybugEffectView.swift in Sources */,
+				9B12E32D26DF9B8200898156 /* PoppingBugView.swift in Sources */,
 				9B2B8A1E26DCABE300EA2CED /* FirstLaunch.swift in Sources */,
 				9B49D10A26D3AB9E0021E14C /* AlbumViewModel.swift in Sources */,
 				9BFF432326E5B6B800BB44AA /* BannerAds.swift in Sources */,
@@ -443,7 +443,7 @@
 				9B49D0EF26D33EFA0021E14C /* CameraVIewModel.swift in Sources */,
 				9B49D0FE26D349E90021E14C /* NewAlbumView.swift in Sources */,
 				9B2E7DA826E09B0E007CE2EC /* HuntingEffect.swift in Sources */,
-				9B2E7DA626E09A37007CE2EC /* AntEffectView.swift in Sources */,
+				9B2E7DA626E09A37007CE2EC /* HuntingEffectView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

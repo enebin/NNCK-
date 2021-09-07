@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct AntEffectView: View {
+struct HuntingEffectView: View {
     @EnvironmentObject var setting: CameraViewModel
-    @ObservedObject var model = HuntingEffectModel(object: "🐞")
+    @ObservedObject var model = HuntingEffect(object: "🐞")
     @State var localTimer = Timer()
     
     var body: some View {
@@ -44,6 +44,6 @@ struct AntEffectView: View {
 
 struct Airview_Previews: PreviewProvider {
     static var previews: some View {
-        AntEffectView()
+        HuntingEffectView()
     }
 }

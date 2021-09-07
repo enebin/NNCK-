@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LadybugEffectView: View {
+struct PoppingBugView: View {
     @EnvironmentObject var setting: CameraViewModel
     @State var offset: CGSize = .zero
 
@@ -43,6 +43,6 @@ struct LadybugEffectView: View {
 
 struct LadybugEffectView_Previews: PreviewProvider {
     static var previews: some View {
-        LadybugEffectView()
+        PoppingBugView()
     }
 }

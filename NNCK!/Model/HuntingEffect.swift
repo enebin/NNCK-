@@ -1,9 +1,10 @@
 import SwiftUI
 import Combine
 
-class HuntingEffectModel: ObservableObject {
+class HuntingEffect: ObservableObject {
     let track: ParametricCurve
     let path: Path
+    let routes: [Path]
     var speed: CGFloat
     var object: String
         
@@ -22,7 +23,7 @@ class HuntingEffectModel: ObservableObject {
     init(object: String) {
         let screenRect = UIScreen.main.bounds
         
-        let leftUp = CGPoint(x: -5, y: 0)
+        let leftUp = CGPoint(x: -5, y: 10)
         let rightDown = CGPoint(x: screenRect.maxX, y: screenRect.maxY)
         let leftDown = CGPoint(x: -5, y: screenRect.maxY)
         let rightUp = CGPoint(x: screenRect.maxX, y: 0)

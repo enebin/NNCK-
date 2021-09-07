@@ -31,7 +31,7 @@ struct SettingView: View {
                         }
                 }
             }
-            .padding(.top)
+            .padding(.vertical)
             
             // 세팅 바디 부분
             settingBody

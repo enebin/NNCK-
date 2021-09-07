@@ -37,10 +37,10 @@ struct CameraView: View {
                             LaserEffectView()
                                 .environmentObject(self.viewModel)
                         case .ladybug:
-                            LadybugEffectView()
+                            PoppingBugView()
                                 .environmentObject(self.viewModel)
                         case .mouse:
-                            AntEffectView()
+                            HuntingEffectView()
                                 .environmentObject(self.viewModel)
                         case .dodgeball:
                             DodgeballEffectView()
