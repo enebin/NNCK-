@@ -10,6 +10,7 @@
 		9B093CDA26E5B03900070425 /* EffectsEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B093CD926E5B03900070425 /* EffectsEnum.swift */; };
 		9B12E32B26DF92A400898156 /* DragZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B12E32A26DF92A400898156 /* DragZoom.swift */; };
 		9B12E32D26DF9B8200898156 /* PoppingBugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B12E32C26DF9B8200898156 /* PoppingBugView.swift */; };
+		9B214DDF26E748920055B5C9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B214DDE26E748920055B5C9 /* StoreKit.framework */; };
 		9B26B65F26D9D3390083D76E /* CustomPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B26B65E26D9D3390083D76E /* CustomPager.swift */; };
 		9B2B8A1C26DC9B3700EA2CED /* gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A1B26DC9B3700EA2CED /* gesture.swift */; };
 		9B2B8A1E26DCABE300EA2CED /* FirstLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A1D26DCABE300EA2CED /* FirstLaunch.swift */; };
@@ -55,6 +56,7 @@
 		9B093CD926E5B03900070425 /* EffectsEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectsEnum.swift; sourceTree = "<group>"; };
 		9B12E32A26DF92A400898156 /* DragZoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragZoom.swift; sourceTree = "<group>"; };
 		9B12E32C26DF9B8200898156 /* PoppingBugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoppingBugView.swift; sourceTree = "<group>"; };
+		9B214DDE26E748920055B5C9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		9B26B65E26D9D3390083D76E /* CustomPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPager.swift; sourceTree = "<group>"; };
 		9B2B8A1B26DC9B3700EA2CED /* gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gesture.swift; sourceTree = "<group>"; };
 		9B2B8A1D26DCABE300EA2CED /* FirstLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunch.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F64DB1EA3FDA9ECDC07DFF54 /* Pods_NNCK_.framework in Frameworks */,
+				9B214DDF26E748920055B5C9 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +112,7 @@
 		8B242DCEE803BDFDCCCBBD52 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9B214DDE26E748920055B5C9 /* StoreKit.framework */,
 				4971B7DB30ADC5526064693E /* Pods_NNCK_.framework */,
 			);
 			name = Frameworks;
@@ -143,16 +147,16 @@
 		9B49D0C726D33EEF0021E14C /* NNCK! */ = {
 			isa = PBXGroup;
 			children = (
-				9B49D0D726D33EFA0021E14C /* Data */,
 				9BFF432126E5B6B000BB44AA /* ADs */,
+				9B49D0D726D33EFA0021E14C /* Data */,
 				9B49D0DF26D33EFA0021E14C /* View */,
 				9B49D0DC26D33EFA0021E14C /* ViewModel */,
 				9B49D0E926D33EFA0021E14C /* Model */,
-				9B49D0C826D33EEF0021E14C /* NNCK_App.swift */,
-				9B49D0CA26D33EEF0021E14C /* ContentView.swift */,
 				9B49D0CC26D33EF00021E14C /* Assets.xcassets */,
-				9B49D0D126D33EF00021E14C /* Info.plist */,
 				9BFF432426E5B7E600BB44AA /* GoogleService-Info.plist */,
+				9B49D0D126D33EF00021E14C /* Info.plist */,
+				9B49D0CA26D33EEF0021E14C /* ContentView.swift */,
+				9B49D0C826D33EEF0021E14C /* NNCK_App.swift */,
 				9BD4956C26E1AFEB00932187 /* Customs */,
 				9B50CDBC26D7288A00D6D91F /* Tomb */,
 				9B49D0CE26D33EF00021E14C /* Preview Content */,
@@ -582,7 +586,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.enebin.NNCK-";
+				PRODUCT_BUNDLE_IDENTIFIER = com.enebin.NNCK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -605,7 +609,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.enebin.NNCK-";
+				PRODUCT_BUNDLE_IDENTIFIER = com.enebin.NNCK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

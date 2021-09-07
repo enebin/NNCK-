@@ -58,6 +58,7 @@ class HuntingEffect: ObservableObject {
         })
         self.object = object
         self.speed = 1000.0
+        self.routes = [Path]()
     }
     
     private var timer = Timer()
