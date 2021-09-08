@@ -7,7 +7,17 @@
 
 import SwiftUI
 
-struct PoppingBugView: View {
+struct FloatingMotionView: View {
+    @EnvironmentObject var setting: CameraViewModel
+
+    var body: some View {
+        ForEach(0..<setting.numOfEffect, id: \.self) { _ in
+            PopEffectBody().environmentObject(setting)
+        }
+    }
+}
+
+struct PopEffectBody: View {
     @EnvironmentObject var setting: CameraViewModel
     @State var offset: CGSize = .zero
 
@@ -15,14 +25,14 @@ struct PoppingBugView: View {
         let interval: Double = setting.animationSpeed
 
         let timer = Timer.publish(
-            every: -(1/5) * interval + 2,       // Second
+            every: -(1/5) * interval + Double.random(in: 2...3),       // Second
             tolerance: interval==0 ? 0 : 0.1, // Gives tolerance so that SwiftUI makes optimization
             on: .main,      // Main Thread
             in: .common     // Common Loop
         ).autoconnect()
         
         VStack {
-            Text("🐞")
+            Text(Effects.floating.getShape())
                 .font(.system(size: 20))
                 .offset(offset)
                 .transition(.identity)
@@ -43,6 +53,6 @@ struct PoppingBugView: View {
 
 struct LadybugEffectView_Previews: PreviewProvider {
     static var previews: some View {
-        PoppingBugView().environmentObject(CameraViewModel())
+        FloatingMotionView().environmentObject(CameraViewModel())
     }
 }

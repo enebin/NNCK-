@@ -46,6 +46,9 @@ struct DodgeballEffectView: View {
                     .offset(offset)
 
             }
+            .onAppear {
+                fireTimer()
+            }
             .onReceive(timer) { (_) in
                 let widthBound = UIScreen.main.bounds.width / 2
                 let heightBound = UIScreen.main.bounds.height / 2

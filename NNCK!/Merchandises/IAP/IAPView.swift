@@ -78,6 +78,19 @@ struct IAPView: View {
                     .font(.title)
             }
             .padding()
+            
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("워터마크 제거")
+                        .font(.headline)
+                    Text("취향껏 자유롭게 커스텀 가능한 배경색")
+                        .font(.caption2)
+                }
+                Spacer()
+                Text("🪣")
+                    .font(.title)
+            }
+            .padding()
         }
         .padding(.horizontal, 30)
     }

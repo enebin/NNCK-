@@ -7,16 +7,7 @@ class HuntingEffect: ObservableObject {
     var speed: CGFloat
     var object: String
         
-    var aircraft: some View {
-        let t = track.curveParameter(arcLength: alongTrackDistance)
-        let p = track.point(t: t)
-        let dp = track.derivate(t: t)
-        let h = Angle(radians: atan2(Double(dp.dy), Double(dp.dx)))
-        return Text(object)
-            .rotationEffect(Angle(degrees: 90))
-            .font(.system(size: 35))
-            .rotationEffect(h).position(p)
-    }
+   
     
     @Published var alongTrackDistance = CGFloat.zero
     init(object: String) {
@@ -91,11 +82,11 @@ class HuntingEffect: ObservableObject {
     }
     
     @Published var isAnimating = true
-    private var timer = Timer()
-    private var isTimerAvailable = true
-    private var currentTime: Double = 0
-    private var randomWaiting = Array(stride(from: 0.5, to: 2, by: 0.5))
-    private var randomInterval = Array(stride(from: 2.0, to: 3.0, by: 0.5))
+    var timer = Timer()
+    var isTimerAvailable = true
+    var currentTime: Double = 0
+    var randomWaiting = Array(stride(from: 0.5, to: 2, by: 0.5))
+    var randomInterval = Array(stride(from: 2.0, to: 3.0, by: 0.5))
     
     func setSpeed(_ speed: CGFloat) {
         self.speed = speed
@@ -153,52 +144,5 @@ class HuntingEffect: ObservableObject {
             path.move(to: from)
             path.addCurve(to: to, control1: ctrl1, control2: ctrl2)
         })
-    }
-
-    func play() {
-        if isTimerAvailable {
-            isAnimating = true
-
-            randomWaiting.shuffle()
-            randomInterval.shuffle()
-            
-            timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { timer in
-                self.currentTime += 0.01
-                self.alongTrackDistance += self.track.totalArcLength / self.speed
-                
-                if self.currentTime >= Double(self.randomInterval[0]) - 0.01 &&
-                    self.currentTime <= Double(self.randomInterval[0]) + 0.01 {
-                    DispatchQueue.main.asyncAfter(
-                        deadline: .now() + TimeInterval(self.randomWaiting[0])) {
-                        self.play()
-                    }
-                    self.randomWaiting.shuffle()
-                    self.randomInterval.shuffle()
-                    self.stop()
-                }
-                
-                if self.alongTrackDistance > self.track.totalArcLength {
-                    self.alongTrackDistance = CGFloat.zero
-                }
-            }
-        }
-        isTimerAvailable = false
-    }
-        
-    func stop() {
-        if !isTimerAvailable {
-            timer.invalidate()
-        }
-        currentTime = 0
-        isTimerAvailable = true
-    }
-    
-    func quitAndPlay() {
-        self.stop()
-        self.alongTrackDistance = CGFloat.zero
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.play()
-            self.drawPath()
-        }
     }
 }

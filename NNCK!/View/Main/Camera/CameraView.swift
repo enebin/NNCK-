@@ -39,18 +39,12 @@ struct CameraView: View {
                         case .laser:
                             LaserEffectView()
                                 .environmentObject(self.viewModel)
-                        case .ladybug:
-                            PoppingBugView()
+                        case .floating:
+                            FloatingMotionView()
                                 .environmentObject(self.viewModel)
                         case .realistic:
                             HuntingEffectView()
                                 .environmentObject(self.viewModel)
-                                .transition(.opacity)
-                                .onTapGesture {
-                                    withAnimation(.easeIn(duration: 0.3)) {
-
-                                    }
-                                }
                         case .dodgeball:
                             DodgeballEffectView()
                                 .environmentObject(self.viewModel)
@@ -243,7 +237,6 @@ struct CameraView: View {
             Slider(value: $viewModel.animationSpeed,
                    in: 0...10)
                 .padding(10)
-                .background(Capsule().fill(Color.black.opacity(0.3)))
                 .accentColor(.pink)
                 .frame(width: 150)
             Text("+")
