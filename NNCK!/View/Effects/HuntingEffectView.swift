@@ -34,8 +34,9 @@ struct HuntingEffectBody: View {
                     fireTimer()
                 }
                 .onReceive(timer) { (_) in
+                    let correctedSpeed = -(1/3) * speed + 1000
                     model.currentTime += 0.01
-                    model.alongTrackDistance += model.track.totalArcLength / CGFloat(speed)
+                    model.alongTrackDistance += model.track.totalArcLength / CGFloat(correctedSpeed)
                     
                     if model.currentTime >= Double(model.randomInterval[0]) - 0.01 &&
                         model.currentTime <= Double(model.randomInterval[0]) + 0.01 {
@@ -56,9 +57,12 @@ struct HuntingEffectBody: View {
                     withAnimation(.easeIn(duration: 0.5)) {
                         model.isAnimating = false
                         cancelTimer()
+                        model.currentTime = 0
+                        model.isTimerAvailable = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                             model.alongTrackDistance = CGFloat.zero
                             fireTimer()
+                            model.drawPath()
                             model.isAnimating = true
                         }
                     }

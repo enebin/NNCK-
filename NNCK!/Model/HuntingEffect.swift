@@ -145,4 +145,5 @@ class HuntingEffect: ObservableObject {
             path.addCurve(to: to, control1: ctrl1, control2: ctrl2)
         })
     }
+
 }
