@@ -21,11 +21,18 @@ struct HuntingEffectView: View {
 //                .frame(width: 70, height: 70)
             
             ZStack {
-//                model.path.stroke(style: StrokeStyle(lineWidth: 0.0))
-                model.aircraft
-                    .onTapGesture {
-                        model.quitAndPlay()
-                    }
+                model.path.stroke(style: StrokeStyle(lineWidth: 0.5))
+                Text("\(model.isAnimating) "as String)
+                if model.isAnimating {
+                    model.aircraft
+                        .transition(.asymmetric(insertion: .identity, removal: .opacity.combined(with: .scale)))
+                        .onTapGesture {
+                            withAnimation(.easeIn(duration: 0.5)) {
+                                model.isAnimating = false
+                                model.quitAndPlay()
+                            }
+                        }
+                }
             }
             .onAppear {
                 model.play()

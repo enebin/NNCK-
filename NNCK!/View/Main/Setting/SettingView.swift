@@ -58,7 +58,7 @@ struct SettingView: View {
     var settingBody: some View {
         Form {
             CamFuctions
-            AniNumsAndSpeed
+            AniFunctions
             AniTypes
 //            SoundTypes
             CamBackground
@@ -66,8 +66,8 @@ struct SettingView: View {
         }
     }
     
-    var AniNumsAndSpeed: some View {
-        Section(header: Text("애니메이션 개수 & 속도")) {
+    var AniFunctions: some View {
+        Section(header: Text("애니메이션 세부설정")) {
             // 개수
             HStack {
                 Text("-")
@@ -103,6 +103,16 @@ struct SettingView: View {
                         .accentColor(.pink)
                     Text("+")
                         .padding(.leading)
+                }
+            }
+
+            // 모양
+            // (PRO) 더 많은 모양
+            NavigationLink(destination: Text("여러가지 모양")) {
+                HStack {
+                    Text("모양 변경하기")
+                    Spacer()
+                    Text("🔴")
                 }
             }
         }

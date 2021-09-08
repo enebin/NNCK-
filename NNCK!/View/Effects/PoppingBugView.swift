@@ -43,6 +43,6 @@ struct PoppingBugView: View {
 
 struct LadybugEffectView_Previews: PreviewProvider {
     static var previews: some View {
-        PoppingBugView()
+        PoppingBugView().environmentObject(CameraViewModel())
     }
 }

@@ -2,9 +2,8 @@ import SwiftUI
 import Combine
 
 class HuntingEffect: ObservableObject {
-    let track: ParametricCurve
-    let path: Path
-    let routes: [Path]
+    var track: ParametricCurve
+    var path: Path
     var speed: CGFloat
     var object: String
         
@@ -21,75 +20,145 @@ class HuntingEffect: ObservableObject {
     
     @Published var alongTrackDistance = CGFloat.zero
     init(object: String) {
-        let screenRect = UIScreen.main.bounds
-        
-        let groupA = 0
-        
-        let X = screenRect.maxX
-        let Y = screenRect.maxY
+        let X = UIScreen.main.bounds.maxX
+        let Y = UIScreen.main.bounds.maxY
         
         // ↖
         let AB = CGPoint(x: 10, y: 0)
         let AC = CGPoint(x: 0, y: 10)
+        let A = [AB, AC]
+        
         // ↘
         let DB = CGPoint(x: X, y: Y-10)
         let DC = CGPoint(x: X-10, y: Y)
+        let D = [DB, DC]
         
         // ↗
         let BA = CGPoint(x: X-10, y: 0)
         let BD = CGPoint(x: X, y: 10)
+        let B = [BA, BD]
+        
         // ↙
         let CD = CGPoint(x: 10, y: Y)
         let CA = CGPoint(x: 0, y: Y-10)
+        let C = [CD, CA]
+        let all = [AB, AC, DB, DC, BA, BD, CD, CA]
         
         // ↖↘
-        let AD = CGPoint(//
-            x: CGFloat.random(in: (-screenRect.maxX*1.5..<0)),
-            y: CGFloat.random(in: (1..<screenRect.maxY/2)))
+        let AD = CGPoint(
+            x: CGFloat.random(in: (-X*1.5..<0)),
+            y: CGFloat.random(in: (1..<Y/2)))
         let DA = CGPoint(
-            x: CGFloat.random(in: (screenRect.maxX..<screenRect.maxX*2)),
-            y: CGFloat.random(in: (screenRect.maxY/2..<screenRect.maxY)))
+            x: CGFloat.random(in: (X..<X*2)),
+            y: CGFloat.random(in: (Y/2..<Y)))
+        let LR = [AD, DA]
         
         // ↙↗
         let BC = CGPoint(
-            x: CGFloat.random(in: (screenRect.maxX..<screenRect.maxX*2)),
-            y: CGFloat.random(in: (1..<screenRect.maxY/2)))
+            x: CGFloat.random(in: (X..<X*2)),
+            y: CGFloat.random(in: (1..<Y/2)))
         let CB = CGPoint(
-            x: CGFloat.random(in: (-screenRect.maxX*1.5..<0)),
-            y: CGFloat.random(in: (screenRect.maxY/2..<screenRect.maxY)))
+            x: CGFloat.random(in: (-X*1.5..<0)),
+            y: CGFloat.random(in: (Y/2..<Y)))
+        let RL = [BC, CB]
         
-        let pointSets = [[leftUp, rightDown], [leftDown, rightUp],
-                         [rightUp, leftDown], [rightDown, leftUp]]
-        let ctrlPointSets = [[rightUpCtrl, lefdDownCtrl], [rightDownCtrl, leftUpCtrl],
-                             [leftUpCtrl, rightDownCtrl], [lefdDownCtrl, rightUpCtrl]]
+        let allRL = [AD, DA, BC, CB]
+//        let pointSets = [[leftUp, rightDown], [leftDown, rightUp],
+//                         [rightUp, leftDown], [rightDown, leftUp]]
+//        let ctrlPointSets = [[rightUpCtrl, lefdDownCtrl], [rightDownCtrl, leftUpCtrl],
+//                             [leftUpCtrl, rightDownCtrl], [lefdDownCtrl, rightUpCtrl]]
+//
+//        let from = pointSets[0][0]
+//        let to = pointSets[0][1]
+//        let ctrl1 = ctrlPointSets[0][0]
+//        let ctrl2 = ctrlPointSets[0][1]
         
-        let from = pointSets[0][0]
-        let to = pointSets[0][1]
-        let ctrl1 = ctrlPointSets[0][0]
-        let ctrl2 = ctrlPointSets[0][1]
+        let randInt1 = Int.random(in: 0..<2)
+        let randInt2 = (randInt1 != 0) ? 0 : 1
+        let from = A[0]
+        let to = D[0]
+        let ctrl1 = LR[0]
+        let ctrl2 = LR[1]
         
-        track = Bezier3(from: from, to: to, control1: ctrl1, control2: ctrl2)
-        path = Path({ (path) in
+        self.track = Bezier3(from: from, to: to, control1: ctrl1, control2: ctrl2)
+        self.path = Path({ (path) in
             path.move(to: from)
             path.addCurve(to: to, control1: ctrl1, control2: ctrl2)
         })
+
         self.object = object
         self.speed = 1000.0
-        self.routes = [Path]()
     }
     
+    @Published var isAnimating = true
     private var timer = Timer()
     private var isTimerAvailable = true
     private var currentTime: Double = 0
     private var randomWaiting = Array(stride(from: 0.5, to: 2, by: 0.5))
     private var randomInterval = Array(stride(from: 2.0, to: 3.0, by: 0.5))
     
-    func draw() {
+    func setSpeed(_ speed: CGFloat) {
+        self.speed = speed
+    }
+    
+    func drawPath() {
+        let X = UIScreen.main.bounds.maxX
+        let Y = UIScreen.main.bounds.maxY
         
+        // ↖
+        let AB = CGPoint(x: 10, y: 0)
+        let AC = CGPoint(x: 0, y: 10)
+        let A = [AB, AC]
+        
+        // ↘
+        let DB = CGPoint(x: X, y: Y-10)
+        let DC = CGPoint(x: X-10, y: Y)
+        let D = [DB, DC]
+        
+        // ↗
+        let BA = CGPoint(x: X-10, y: 0)
+        let BD = CGPoint(x: X, y: 10)
+        let B = [BA, BD]
+        
+        // ↙
+        let CD = CGPoint(x: 10, y: Y)
+        let CA = CGPoint(x: 0, y: Y-10)
+        let C = [CD, CA]
+        
+        // ↖↘
+        let AD = CGPoint(
+            x: CGFloat.random(in: (-X*1.5..<0)),
+            y: CGFloat.random(in: (1..<Y/2)))
+        let DA = CGPoint(
+            x: CGFloat.random(in: (X..<X*2)),
+            y: CGFloat.random(in: (Y/2..<Y)))
+        let LR = [AD, DA]
+        
+        // ↙↗
+        let BC = CGPoint(
+            x: CGFloat.random(in: (X..<X*2)),
+            y: CGFloat.random(in: (1..<Y/2)))
+        let CB = CGPoint(
+            x: CGFloat.random(in: (-X*1.5..<0)),
+            y: CGFloat.random(in: (Y/2..<Y)))
+        let RL = [BC, CB]
+        
+        let from = AB
+        let to = DB
+        let ctrl1 = BC
+        let ctrl2 = CB
+        
+        self.track = Bezier3(from: from, to: to, control1: ctrl1, control2: ctrl2)
+        self.path = Path({ (path) in
+            path.move(to: from)
+            path.addCurve(to: to, control1: ctrl1, control2: ctrl2)
+        })
     }
 
     func play() {
         if isTimerAvailable {
+            isAnimating = true
+
             randomWaiting.shuffle()
             randomInterval.shuffle()
             
@@ -99,7 +168,8 @@ class HuntingEffect: ObservableObject {
                 
                 if self.currentTime >= Double(self.randomInterval[0]) - 0.01 &&
                     self.currentTime <= Double(self.randomInterval[0]) + 0.01 {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(self.randomWaiting[0])) {
+                    DispatchQueue.main.asyncAfter(
+                        deadline: .now() + TimeInterval(self.randomWaiting[0])) {
                         self.play()
                     }
                     self.randomWaiting.shuffle()
@@ -125,9 +195,10 @@ class HuntingEffect: ObservableObject {
     
     func quitAndPlay() {
         self.stop()
-        alongTrackDistance = CGFloat.zero
-        currentTime = 0
-        isTimerAvailable = true
-        self.play()
+        self.alongTrackDistance = CGFloat.zero
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.play()
+            self.drawPath()
+        }
     }
 }

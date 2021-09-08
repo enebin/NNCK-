@@ -42,9 +42,15 @@ struct CameraView: View {
                         case .ladybug:
                             PoppingBugView()
                                 .environmentObject(self.viewModel)
-                        case .mouse:
+                        case .realistic:
                             HuntingEffectView()
                                 .environmentObject(self.viewModel)
+                                .transition(.opacity)
+                                .onTapGesture {
+                                    withAnimation(.easeIn(duration: 0.3)) {
+
+                                    }
+                                }
                         case .dodgeball:
                             DodgeballEffectView()
                                 .environmentObject(self.viewModel)

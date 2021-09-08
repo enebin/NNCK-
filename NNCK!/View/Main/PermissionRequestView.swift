@@ -67,7 +67,7 @@ struct PermissionRequestView: View {
                         .background(Capsule().fill(Color.black.opacity(1)))
                 })
             }
-            .foregroundColor(.white)
+            .foregroundColor(.black)
         }
     }
 }
