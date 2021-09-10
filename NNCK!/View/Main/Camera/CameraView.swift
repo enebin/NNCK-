@@ -150,6 +150,7 @@ struct CameraView: View {
             .sheet(isPresented: $showAlbum) {
                 NewAlbumView(showAlbum: $showAlbum)
                     .environmentObject(viewModel)
+                    .environmentObject(storeManager)
             }
             .opacity(viewModel.isTaken ? 0 : 1)
             .animation(.easeInOut(duration: 0.3))

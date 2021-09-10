@@ -10,6 +10,7 @@ import SwiftUI
 class SettingViewModel: ObservableObject {
     @Published var pickedColorIndex: Int = 0
     @Published var pickedAnimationIndex: Effects = .laser
+    @Published var pickedSoundIndex: Int = 0
     
     @Published var showAlert = false
     @Published var showNumbersAlert = false

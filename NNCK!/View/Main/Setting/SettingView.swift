@@ -78,7 +78,7 @@ struct SettingView: View {
                 CamFuctions
                 AniFunctions
                 AniTypes
-                //            SoundTypes
+                SoundTypes
                 CamBackground
                 IAP
             }
@@ -277,18 +277,42 @@ struct SettingView: View {
         }
         
         var SoundTypes: some View {
-            Section(header: Text("사운드")) {
-                ForEach(0..<3) { index in
-                    NavigationLink(
-                        destination: Text("사운드 고르기"),
-                        label: { Text("\(index+1). Sound") })
+            let isPro = storeManager.isPurchased(0)
+            
+            return Section(header: Text("사운드")) {
+                ForEach(soundSettting.sounds.indices, id: \.self) { index in
+                    ZStack {
+                        HStack {
+                            Text("🎼")
+                            Spacer()
+                            Image(systemName: "\(index + 1).circle.fill")
+                                .padding(.trailing, 15)
+                        }
+                        
+                        if viewModel.pickedSoundIndex == index {
+                            HStack {
+                                Spacer()
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundColor(.blue)
+                                    .background(Circle().fill(Color.white))
+                                    .padding(3)
+                                    .transition(.scale)
+                            }
+                        }
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        withAnimation(.spring()){
+                            viewModel.pickedSoundIndex = index
+                            soundSettting.chooseSound(of: index)
+                            soundSettting.stopSound()
+                        }
+                    }
                 }
             }
         }
         
         var CamBackground: some View {
-            let isPro = storeManager.isPurchased(0)
-            
             return Section(header: Text("카메라 배경색")) {
                 ForEach(viewModel.colors.indices) { index in
                     let colorStruct = viewModel.colors[index]

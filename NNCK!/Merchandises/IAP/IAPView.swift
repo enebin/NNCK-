@@ -104,7 +104,7 @@ struct IAPView: View {
         let product = storeManager.myProducts[0]
         return Group {
             if storeManager.isPurchased(0) {
-                Text("구매 완료..")
+                Text("구매 완료")
                     .frame(width: 150, height: 50)
                     .foregroundColor(.white)
                     .background(Capsule().fill(Color.gray.opacity(0.5)))

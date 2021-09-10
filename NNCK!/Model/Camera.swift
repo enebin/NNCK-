@@ -231,7 +231,7 @@ class Camera: NSObject, ObservableObject {
     
     
     func savePhoto() {
-        var watermark = UIImage(named: "")
+        var watermark: UIImage?
 
         if self.isWaterMarked {
             watermark = UIImage(named: "pawpaw")
@@ -239,7 +239,7 @@ class Camera: NSObject, ObservableObject {
         
         guard let image = UIImage(data: self.photoData) else { return }
         
-        let newImage = image.overlayWith(image: watermark!,
+        let newImage = image.overlayWith(image: watermark ?? UIImage(),
                                          posX: UIScreen.main.bounds.maxX*2.4,
                                          posY: UIScreen.main.bounds.maxY*2.6)
         

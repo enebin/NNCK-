@@ -22,10 +22,15 @@ struct SoundButtonView: View {
             Group {
                 if viewModel.showSound {
                     ForEach(0..<3) { index in
-                        ConditionalButton(action: { viewModel.chooseSound(of: index); viewModel.stopSound() }, longPressAction: {}, condition: !(viewModel.chosenIndex == index), imageName: ["\(index+1).circle.fill", "\(index+1).circle"])
+                        ConditionalButton(
+                            action: {
+                                viewModel.chooseSound(of: index)
+                                viewModel.stopSound()
+                            },
+                            longPressAction: {},
+                            condition: !(viewModel.chosenIndex == index),
+                            imageName: ["\(index+1).circle.fill", "\(index+1).circle"])
                     }
-//                    ConditionalButton(action: { viewModel.chooseSound(of: index); viewModel.stopSound() }, longPressAction: {}, condition: !(viewModel.chosenIndex == index), imageName: ["c.circle.fill", "c.circle"])
-//                    ConditionalButton(action: { viewModel.chooseSound(of: index); viewModel.stopSound() }, longPressAction: {}, condition: !(viewModel.chosenIndex == index), imageName: ["c.circle.fill", "c.circle"])
                 }
             }
             .transition(.move(edge: .leading).combined(with: .opacity))
