@@ -27,6 +27,7 @@ class CameraViewModel: ObservableObject {
     // 사진 관련 변수
     @Published var recentImage: UIImage?
     @Published var isSilent = true
+    @Published var isWatermark = true
     @Published var isTaken = false
     @Published var animationSpeed: Double = 5
 
@@ -58,6 +59,11 @@ class CameraViewModel: ObservableObject {
     func switchSilent() {
         isSilent = isSilent == true ? false : true
         model.switchSilent(to: isSilent)
+    }
+    
+    func switchWatermark() {
+        isWatermark = isWatermark == true ? false : true
+        model.switchWaterMark(to: isWatermark)
     }
     
     func switchShowEffect() { // 참고할 곳: LaserEffectView

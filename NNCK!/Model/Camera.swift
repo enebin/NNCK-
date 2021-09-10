@@ -36,6 +36,7 @@ class Camera: NSObject, ObservableObject {
     @Published var isSaved = false
     @Published var isTaken = false
     @Published var isSilent = true
+    @Published var isWaterMarked = true
     
     @Published var cameraAuth: SessionSetupResult = .success
     @Published var albumAuth: SessionSetupResult = .success
@@ -118,6 +119,10 @@ class Camera: NSObject, ObservableObject {
     // MARK: - 카메라 변수 관리
     func switchSilent(to result: Bool) {
         self.isSilent = result
+    }
+    
+    func switchWaterMark(to result: Bool) {
+        self.isWaterMarked = result
     }
     
     func switchFlash() {
@@ -211,11 +216,6 @@ class Camera: NSObject, ObservableObject {
         }
     }
     
-    // TODO: - Shake 제스처에 미리보기
-    func shake() {
-        
-    }
-    
     // 사진 캡처
     func capturePhoto() {
         isSaved = false; isTaken = false
@@ -231,7 +231,12 @@ class Camera: NSObject, ObservableObject {
     
     
     func savePhoto() {
-        let watermark = UIImage(named: "pawpaw")
+        var watermark = UIImage(named: "")
+
+        if self.isWaterMarked {
+            watermark = UIImage(named: "pawpaw")
+        }
+        
         guard let image = UIImage(data: self.photoData) else { return }
         
         let newImage = image.overlayWith(image: watermark!,

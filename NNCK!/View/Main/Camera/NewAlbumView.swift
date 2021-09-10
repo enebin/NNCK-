@@ -10,11 +10,14 @@ import PhotosUI
 
 struct NewAlbumView: View {
     @EnvironmentObject var camSetting: CameraViewModel
+    @EnvironmentObject var storeManager: StoreManager
+
     @StateObject var viewModel = AlbumViewModel()
     @State var selection = 0
     @Binding var showAlbum: Bool
     
     var body: some View {
+        let isPro = storeManager.isPurchased(0)
         VStack(spacing: 0) {
             Group {
                 if viewModel.isSelectionMode {
@@ -29,7 +32,9 @@ struct NewAlbumView: View {
             }
             
             // 광고
-            Banner()
+            if isPro == false {
+                Banner()
+            }
         }
         .onDisappear {
             camSetting.recentImage = nil

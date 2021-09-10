@@ -11,26 +11,31 @@ struct IAPView: View {
     @StateObject var storeManager: StoreManager
     
     var body: some View {
-        VStack {
-            let product = storeManager.myProducts[0]
-            
-            VStack(alignment: .center) {
-                Text("무한으로 즐겨요")
-                    .font(.largeTitle)
-                    .bold()
-                Text("냥냥찰칵! " + product.localizedTitle)
-                    .font(.headline)
+        ScrollView(showsIndicators: false) {
+            VStack {
+                let product = storeManager.myProducts[0]
+                
+                VStack(alignment: .center) {
+                    Text("무한으로 즐겨요")
+                        .font(.largeTitle)
+                        .bold()
+                    HStack {
+                        Text("냥냥찰칵! " + product.localizedTitle)
+                            .font(.headline)
+                        Full
+                    }
                     .padding(.top, 5)
-                Text(product.localizedDescription)
-                    .font(.caption2)
+                    
+                    Text(product.localizedDescription)
+                        .font(.caption2)
+                }
+                .padding()
+                Details
+                Spacer()
+                PurchaseButton
+                    .padding()
+                Spacer()
             }
-            .padding()
-            Details
-            Spacer()
-            PriceInformation
-            Spacer()
-            PurchaseButton
-            Spacer()
         }
     }
     
@@ -64,30 +69,30 @@ struct IAPView: View {
             }
             .padding()
             
+//            Divider()
+//            HStack {
+//                VStack(alignment: .leading) {
+//                    Text("더 편안한 배경")
+//                        .font(.headline)
+//                    Text("취향껏 자유롭게 커스텀 가능한 배경색")
+//                        .font(.caption2)
+//                }
+//                Spacer()
+//                Text("🪣")
+//                    .font(.title)
+//            }
+//            .padding()
+            
             Divider()
-            
             HStack {
                 VStack(alignment: .leading) {
-                    Text("더 편안한 배경")
+                    Text("워터마크 온오프 & 광고 제거")
                         .font(.headline)
-                    Text("취향껏 자유롭게 커스텀 가능한 배경색")
+                    Text("보기 싫은 곁다리들. 치워버리세요.")
                         .font(.caption2)
                 }
                 Spacer()
-                Text("🪣")
-                    .font(.title)
-            }
-            .padding()
-            
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("워터마크 제거")
-                        .font(.headline)
-                    Text("취향껏 자유롭게 커스텀 가능한 배경색")
-                        .font(.caption2)
-                }
-                Spacer()
-                Text("🪣")
+                Text("🚫")
                     .font(.title)
             }
             .padding()
@@ -95,40 +100,33 @@ struct IAPView: View {
         .padding(.horizontal, 30)
     }
     
-    var PriceInformation: some View {
-        let product = storeManager.myProducts[0]
-        return Group {
-            if UserDefaults.standard.bool(forKey: product.productIdentifier) {
-                Text ("구매 완료")
-                    .foregroundColor(.green)
-            } else {
-                Text("단돈 ￦\(product.price)")
-                    .foregroundColor(.blue)
-            }
-        }
-        
-    }
-    
     var PurchaseButton: some View {
         let product = storeManager.myProducts[0]
         return Group {
-            if UserDefaults.standard.bool(forKey: product.productIdentifier) {
+            if storeManager.isPurchased(0) {
                 Text("구매 완료..")
-                    .padding()
-                    .padding(.horizontal)
+                    .frame(width: 150, height: 50)
                     .foregroundColor(.white)
                     .background(Capsule().fill(Color.gray.opacity(0.5)))
+                    .onAppear {
+                        print(UserDefaults.standard.bool(forKey: product.productIdentifier))
+                    }
             } else {
-                Button(action: {
-                    storeManager.purchaseProduct(product: product)
-                }) {
-                    Text("구매하기..!")
-                        .padding()
-                        .padding(.horizontal)
-                        .foregroundColor(.white)
-                        .background(Capsule().fill(Color.blue))
+                if storeManager.transactionState == .purchasing {
+                    ProgressView().progressViewStyle(CircularProgressViewStyle())
+                        .frame(width: 100, height: 50)
+                } else {
+                    Button(action: {
+                        storeManager.purchaseProduct(product: product)
+                    }) {
+                        Text("￦\(Int(truncating: product.price).withCommas())에 구매")
+                            .frame(width: 150, height: 50)
+                            .foregroundColor(.white)
+                            .background(Capsule().fill(Color.blue))
+                    }
                 }
             }
+            
         }
     }
 }

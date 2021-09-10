@@ -15,7 +15,7 @@ struct PermissionRequestView: View {
     
     var body: some View {
         ZStack {
-            Color.catmint.opacity(0.8).ignoresSafeArea()
+            Color.black.opacity(0.8).ignoresSafeArea()
             VStack {
                 Text(informationTitle)
                     .underline(color: Color.yellow)
@@ -60,14 +60,15 @@ struct PermissionRequestView: View {
                     .foregroundColor(.black)
                 Button(action: {
                         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!) }, label: {
-                    Text("👉 설정하러 가기 👈")
+                    Text("👉 설정 👈")
+                        .foregroundColor(.black)
                         .font(.subheadline)
                         .bold()
                         .padding()
-                        .background(Capsule().fill(Color.black.opacity(1)))
+                        .background(Capsule().fill(Color.white.opacity(0.8)))
                 })
             }
-            .foregroundColor(.black)
+            .foregroundColor(.white)
         }
     }
 }

@@ -56,9 +56,9 @@ struct HuntingEffectBody: View {
                 .onTapGesture {
                     withAnimation(.easeIn(duration: 0.5)) {
                         model.isAnimating = false
+                        model.isTimerAvailable = true
                         cancelTimer()
                         model.currentTime = 0
-                        model.isTimerAvailable = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                             model.alongTrackDistance = CGFloat.zero
                             fireTimer()

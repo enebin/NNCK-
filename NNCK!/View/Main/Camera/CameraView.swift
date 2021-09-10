@@ -118,7 +118,6 @@ struct CameraView: View {
                         .onAppear {
                             viewModel.configure()
                             storeManager.getProducts(productIDs: productIDs)
-                            storeManager.restoreProducts()
                             SKPaymentQueue.default().add(storeManager)
                         }
                         .ignoresSafeArea()

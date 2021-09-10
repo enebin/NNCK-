@@ -13,6 +13,7 @@
 		9B214DDF26E748920055B5C9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B214DDE26E748920055B5C9 /* StoreKit.framework */; };
 		9B214DE326E74B2B0055B5C9 /* IAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B214DE226E74B2B0055B5C9 /* IAP.swift */; };
 		9B214DE526E74FFA0055B5C9 /* IAPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B214DE426E74FFA0055B5C9 /* IAPView.swift */; };
+		9B214DE726E9D44E0055B5C9 /* CustomComma.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B214DE626E9D44E0055B5C9 /* CustomComma.swift */; };
 		9B26B65F26D9D3390083D76E /* CustomPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B26B65E26D9D3390083D76E /* CustomPager.swift */; };
 		9B2B8A1C26DC9B3700EA2CED /* gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A1B26DC9B3700EA2CED /* gesture.swift */; };
 		9B2B8A1E26DCABE300EA2CED /* FirstLaunch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B8A1D26DCABE300EA2CED /* FirstLaunch.swift */; };
@@ -61,6 +62,7 @@
 		9B214DDE26E748920055B5C9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		9B214DE226E74B2B0055B5C9 /* IAP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAP.swift; sourceTree = "<group>"; };
 		9B214DE426E74FFA0055B5C9 /* IAPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPView.swift; sourceTree = "<group>"; };
+		9B214DE626E9D44E0055B5C9 /* CustomComma.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomComma.swift; sourceTree = "<group>"; };
 		9B26B65E26D9D3390083D76E /* CustomPager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPager.swift; sourceTree = "<group>"; };
 		9B2B8A1B26DC9B3700EA2CED /* gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gesture.swift; sourceTree = "<group>"; };
 		9B2B8A1D26DCABE300EA2CED /* FirstLaunch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLaunch.swift; sourceTree = "<group>"; };
@@ -215,10 +217,10 @@
 		9B49D0DC26D33EFA0021E14C /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				9B49D0DD26D33EFA0021E14C /* CameraVIewModel.swift */,
-				9B49D0DE26D33EFA0021E14C /* SoundViewModel.swift */,
 				9B49D10926D3AB9E0021E14C /* AlbumViewModel.swift */,
+				9B49D0DD26D33EFA0021E14C /* CameraVIewModel.swift */,
 				9B2B8A2226DCEA5B00EA2CED /* SettingViewModel.swift */,
+				9B49D0DE26D33EFA0021E14C /* SoundViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -267,9 +269,9 @@
 		9B49D0E926D33EFA0021E14C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9B2E7DA726E09B0E007CE2EC /* HuntingEffect.swift */,
-				9B49D0EA26D33EFA0021E14C /* Camera.swift */,
 				9B49D10726D3A37A0021E14C /* Album.swift */,
+				9B49D0EA26D33EFA0021E14C /* Camera.swift */,
+				9B2E7DA726E09B0E007CE2EC /* HuntingEffect.swift */,
 				9B49D0EB26D33EFA0021E14C /* Sound.swift */,
 			);
 			path = Model;
@@ -296,6 +298,7 @@
 				9B26B65E26D9D3390083D76E /* CustomPager.swift */,
 				9B2B8A2426DCF4B700EA2CED /* CustomColors.swift */,
 				9B2E7DA326E087E0007CE2EC /* CustomPathDrawer.swift */,
+				9B214DE626E9D44E0055B5C9 /* CustomComma.swift */,
 			);
 			path = Customs;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				9B49D0F026D33EFA0021E14C /* SoundViewModel.swift in Sources */,
 				9B49D10626D365F50021E14C /* SoundButtonView.swift in Sources */,
 				9B49D0CB26D33EEF0021E14C /* ContentView.swift in Sources */,
+				9B214DE726E9D44E0055B5C9 /* CustomComma.swift in Sources */,
 				9B49D0F626D33EFA0021E14C /* LaserEffectView.swift in Sources */,
 				9BBEC0F426D7A3FA0027853B /* CustomContextView.swift in Sources */,
 				9B26B65F26D9D3390083D76E /* CustomPager.swift in Sources */,
