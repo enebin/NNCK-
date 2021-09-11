@@ -38,8 +38,15 @@ class CameraViewModel: ObservableObject {
     
     // 디자인 관련 변수
     @Published var backgroundColor = Color.yellow
+    @Published var effectObjectIndex: Int?
+    @Published var effectObject: String?
     
     let debug = false
+    let objectSet =
+        ["기본값" ,"😀", "😃", "😄", "😁", "👺",
+         "🤡", "💩", "👻", "💀", "☠️", "👽",
+         "👾", "🤖", "🎃", "😺", "😸", "😹",
+         "😻", "😼", "😽", "🙀", "😿", "😾"]
     
     var notYetPermitted: Bool {
         return self.debug ? !self.debug : self.cameraAuth != .success || self.albumAuth != .success
@@ -87,7 +94,8 @@ class CameraViewModel: ObservableObject {
     }
     
     func increaseEffectNo() {
-        if numOfEffect >= 6 {
+        let maximum = 10
+        if numOfEffect >= maximum {
             return
         } else {
             self.numOfEffect = self.numOfEffect + 1

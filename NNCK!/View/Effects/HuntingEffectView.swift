@@ -21,7 +21,8 @@ struct HuntingEffectView: View {
 
 struct HuntingEffectBody: View {
     @EnvironmentObject var setting: CameraViewModel
-    @ObservedObject var model = HuntingEffect(object: "🐞")
+    @ObservedObject var model = HuntingEffect(object: Effects.realistic.getShape())
+    
     @State var timer = Timer.publish(every: 0.01, tolerance: 0, on: .main, in: .common)
     @State var offset: CGSize = .zero
     
@@ -32,6 +33,9 @@ struct HuntingEffectBody: View {
                 .transition(.asymmetric(insertion: .identity, removal: .opacity.combined(with: .scale)))
                 .onAppear {
                     fireTimer()
+                    if let object = setting.effectObject {
+                        model.object = object
+                    }
                 }
                 .onReceive(timer) { (_) in
                     let correctedSpeed = -(1/3) * speed + 1000
@@ -96,44 +100,3 @@ struct Airview_Previews: PreviewProvider {
         HuntingEffectView()
     }
 }
-
-
-//
-//    @EnvironmentObject var setting: CameraViewModel
-//    @ObservedObject var model = HuntingEffect(object: "🐞")
-//    @State var localTimer = Timer()
-//
-//    var body: some View {
-//        let speed = setting.animationSpeed
-//        VStack {
-////            AnimatedImage(url: URL(string: "https://media.giphy.com/media/cJpBcOBU3jLTerZepI/giphy.gif?cid=790b7611e306006394715cf5d6614bb25281ff1ee8a9f610&rid=giphy.gif&ct=s"))
-////                .resizable()
-////                .playbackMode(.bounce)
-////                .scaledToFit()
-////                .frame(width: 70, height: 70)
-//
-//            ZStack {
-//                model.path.stroke(style: StrokeStyle(lineWidth: 0.5))
-//                Text("\(model.isAnimating) "as String)
-//                    .onChange(of: speed) { value in
-//                        model.setSpeed(CGFloat(speed))
-//                    }
-//                if model.isAnimating {
-//                    aircraft
-//                        .transition(.asymmetric(insertion: .identity, removal: .opacity.combined(with: .scale)))
-//                        .onAppear {
-//                            model.play()
-//                        }
-//                        .onTapGesture {
-//                            withAnimation(.easeIn(duration: 0.5)) {
-//                                model.isAnimating = false
-//                                model.quitAndPlay()
-//                            }
-//                        }
-//                }
-//            }
-//        }
-//    }
-//
-    
-//}

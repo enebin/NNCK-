@@ -32,7 +32,7 @@ struct PopEffectBody: View {
         ).autoconnect()
         
         VStack {
-            Text(Effects.floating.getShape())
+            Text(setting.effectObject ?? Effects.floating.getShape())
                 .font(.system(size: 20))
                 .offset(offset)
                 .transition(.identity)

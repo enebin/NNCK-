@@ -19,13 +19,15 @@ struct DodgeballEffectView: View {
     }
     
     struct Effect: View {
+        @EnvironmentObject var setting: CameraViewModel
+
         @State var offset: CGSize = .zero
         @State var timer: Timer.TimerPublisher = Timer.publish (every: 5, on: .main, in: .common)
         let interval: Double = 3
         
         var body: some View {
             VStack {
-                Text(Effects.dodgeball.getShape())
+                Text(setting.effectObject ?? Effects.dodgeball.getShape())
                     .font(.system(size: 35))
                     .padding(5)
                     .contentShape(Rectangle())

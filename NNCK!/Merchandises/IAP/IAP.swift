@@ -58,10 +58,10 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
                 transactionState = .restored
             case .failed, .deferred:
                 print("Payment Queue Error: \(String(describing: transaction.error))")
-                    queue.finishTransaction(transaction)
-                    transactionState = .failed
-                    default:
-                    queue.finishTransaction(transaction)
+                queue.finishTransaction(transaction)
+                transactionState = .failed
+            default:
+                queue.finishTransaction(transaction)
             }
         }
     }

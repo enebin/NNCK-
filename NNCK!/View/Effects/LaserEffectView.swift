@@ -34,10 +34,15 @@ struct EffectBody: View {
         ).autoconnect()
         
         VStack {
-            Circle()
-                .foregroundColor(.red)
-                .frame(width: 25, height: 25, alignment: .center)
-                .offset(offset)
+            if setting.effectObject == nil {
+                Circle()
+                    .foregroundColor(.red)
+                    .frame(width: 25, height: 25, alignment: .center)
+                    .offset(offset)
+            } else {
+                Text(setting.effectObject!)
+                    .font(.system(size: 20))
+            }
         }
         .onReceive(timer) { (_) in
             let widthBound = UIScreen.main.bounds.width / 2

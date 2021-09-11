@@ -114,6 +114,7 @@ struct SettingView: View {
                                ))
                             .disabled(true)
                     }
+                    .opacity(0.5)
                     .alert(isPresented: $viewModel.showProAlert) {
                         ProAlert
                     }
@@ -142,7 +143,7 @@ struct SettingView: View {
                         .contentShape(Rectangle())
                         .onTapGesture {
                             cameraSetting.increaseEffectNo()
-                            if cameraSetting.numOfEffect > 2 {
+                            if cameraSetting.numOfEffect > 4 && isPro == false {
                                 viewModel.showNumbersAlert = true
                             }
                         }
@@ -151,9 +152,9 @@ struct SettingView: View {
                 .accentColor(.blue)
                 .alert(isPresented: $viewModel.showNumbersAlert) {
                        Alert(title: Text("안내"),
-                             message: Text("무료버전은 2개까지 지원합니다."),
+                             message: Text("무료버전은 4개까지 지원합니다."),
                              dismissButton: .default(Text("OK"), action: {
-                                cameraSetting.numOfEffect = 2
+                                cameraSetting.numOfEffect = 4
                              }))
                 }
                 
@@ -169,7 +170,7 @@ struct SettingView: View {
                                 if cameraSetting.animationSpeed >= 1 {
                                     cameraSetting.animationSpeed -= 1
                                 } else {
-                                    cameraSetting.animationSpeed -= 0
+                                    cameraSetting.animationSpeed = 0
                                 }
                             }
                             .padding(.trailing)
@@ -183,26 +184,25 @@ struct SettingView: View {
                         Text("+")
                             .contentShape(Rectangle())
                             .onTapGesture {
-                                if cameraSetting.animationSpeed <= 9 {
+                                if cameraSetting.animationSpeed < 9 {
                                     cameraSetting.animationSpeed += 1
                                 } else {
-                                    cameraSetting.animationSpeed += 0
+                                    cameraSetting.animationSpeed = 10
                                 }
                             }
                             .padding(.leading)
                     }
                 }
 
-                // 모양
-                // (PRO) 더 많은 모양
+                // 더 많은 모양
                 ZStack {
                     if isPro {
-                        NavigationLink(destination: Text("여러가지 모양")) {
+                        NavigationLink(destination: MoreObjectsView().environmentObject(cameraSetting)) {
                                                 ZStack {
                                                     HStack {
                                                         Text("모양 변경하기")
                                                         Spacer()
-                                                        Text("🔴")
+                                                        Text(cameraSetting.effectObject ?? "🔴")
                                                     }
                                                 }
                                             }
@@ -283,7 +283,7 @@ struct SettingView: View {
                 ForEach(soundSettting.sounds.indices, id: \.self) { index in
                     ZStack {
                         HStack {
-                            Text("🎼")
+                            Text("🤹‍♂️")
                             Spacer()
                             Image(systemName: "\(index + 1).circle.fill")
                                 .padding(.trailing, 15)
@@ -307,6 +307,20 @@ struct SettingView: View {
                             soundSettting.chooseSound(of: index)
                             soundSettting.stopSound()
                         }
+                    }
+                }
+                
+                if isPro {
+                    NavigationLink(destination: Text("ddd")) {
+                        Text("더 보기...")
+                    }
+                } else {
+                    Button(action: { viewModel.showProAlert = true }) {
+                        Text("더 보기...")
+                    }
+                    .opacity(0.5)
+                    .alert(isPresented: $viewModel.showProAlert) {
+                        ProAlert
                     }
                 }
             }
@@ -344,29 +358,6 @@ struct SettingView: View {
                         }
                     }
                 }
-//                
-//                if isPro {
-//                    NavigationLink(destination: Text("")) {
-//                        HStack {
-//                            Text("커스텀 컬러")
-//                            Spacer()
-//                            ColorPickerView()
-//                        }
-//                    }
-//                } else {
-//                    Button(action: {viewModel.showProAlert = true}) {
-//                        HStack {
-//                            Text("커스텀 컬러")
-//                            Spacer()
-//                            ColorPickerView()
-//                                .disabled(true)
-//                        }
-//                    }
-//                    .opacity(0.5)
-//                    .alert(isPresented: $viewModel.showProAlert) {
-//                        ProAlert
-//                    }
-//                }
             }
 
         }
@@ -384,14 +375,15 @@ struct SettingView: View {
         
         var restore: some View {
             HStack {
-                Button("구매 복구", action: {storeManager.restoreProducts()})
+                Button("구매 복구", action: { storeManager.restoreProducts() })
+                
                 Button(action: { viewModel.showAlert = true }) {
                     Image(systemName: "questionmark.circle")
                 }
-            }
-            .alert(isPresented: $viewModel.showAlert) {
-                Alert(title: Text("구매복구?"),
-                      message: Text("이전에 이미 결제했다면 '구매복구'를 눌러 내역을 복구합니다."))
+                .alert(isPresented: $viewModel.showAlert) {
+                    Alert(title: Text("구매복구?"),
+                          message: Text("이전에 이미 결제했다면 '구매복구'를 눌러 내역을 복구합니다."))
+                }
             }
         }
         

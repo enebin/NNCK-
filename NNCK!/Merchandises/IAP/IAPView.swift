@@ -45,7 +45,7 @@ struct IAPView: View {
                 VStack(alignment: .leading) {
                     Text("더 다양한 재미")
                         .font(.headline)
-                    Text("+35종의 설정 가능한 모양들")
+                    Text("최대 10개, +35종의 설정 가능한 모양들")
                         .font(.caption2)
                 }
                 Spacer()
@@ -68,20 +68,6 @@ struct IAPView: View {
                     .font(.title)
             }
             .padding()
-            
-//            Divider()
-//            HStack {
-//                VStack(alignment: .leading) {
-//                    Text("더 편안한 배경")
-//                        .font(.headline)
-//                    Text("취향껏 자유롭게 커스텀 가능한 배경색")
-//                        .font(.caption2)
-//                }
-//                Spacer()
-//                Text("🪣")
-//                    .font(.title)
-//            }
-//            .padding()
             
             Divider()
             HStack {
