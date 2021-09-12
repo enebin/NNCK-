@@ -15,6 +15,7 @@ class SettingViewModel: ObservableObject {
     @Published var showAlert = false
     @Published var showNumbersAlert = false
     @Published var showProAlert = false
+    @Published var showSoundInfo = [false, false, false, false]
     
     @Published var action: Int? = nil
     

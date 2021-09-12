@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -27,9 +27,6 @@
 		9B49D0CB26D33EEF0021E14C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0CA26D33EEF0021E14C /* ContentView.swift */; };
 		9B49D0CD26D33EF00021E14C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B49D0CC26D33EF00021E14C /* Assets.xcassets */; };
 		9B49D0D026D33EF00021E14C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B49D0CF26D33EF00021E14C /* Preview Assets.xcassets */; };
-		9B49D0EC26D33EFA0021E14C /* catsound_clipped.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9B49D0D926D33EFA0021E14C /* catsound_clipped.mp4 */; };
-		9B49D0ED26D33EFA0021E14C /* catsound_clipped2.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9B49D0DA26D33EFA0021E14C /* catsound_clipped2.mp4 */; };
-		9B49D0EE26D33EFA0021E14C /* bird-clipped.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 9B49D0DB26D33EFA0021E14C /* bird-clipped.mp4 */; };
 		9B49D0EF26D33EFA0021E14C /* CameraVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0DD26D33EFA0021E14C /* CameraVIewModel.swift */; };
 		9B49D0F026D33EFA0021E14C /* SoundViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0DE26D33EFA0021E14C /* SoundViewModel.swift */; };
 		9B49D0F526D33EFA0021E14C /* PermissionRequestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D0E626D33EFA0021E14C /* PermissionRequestView.swift */; };
@@ -43,6 +40,12 @@
 		9B49D10826D3A37A0021E14C /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D10726D3A37A0021E14C /* Album.swift */; };
 		9B49D10A26D3AB9E0021E14C /* AlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D10926D3AB9E0021E14C /* AlbumViewModel.swift */; };
 		9B50CDDC26D7341600D6D91F /* Tappage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CDDB26D7341600D6D91F /* Tappage.swift */; };
+		9B550E2E26EDDF570051BB98 /* 어미 고양이를 찾는 소리.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9B550E2B26EDDF560051BB98 /* 어미 고양이를 찾는 소리.mp3 */; };
+		9B550E2F26EDDF570051BB98 /* 동료를 부르는 소리.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9B550E2C26EDDF560051BB98 /* 동료를 부르는 소리.mp3 */; };
+		9B550E3026EDDF570051BB98 /* 짝을 찾는 소리.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9B550E2D26EDDF570051BB98 /* 짝을 찾는 소리.mp3 */; };
+		9B550E3226EDE0160051BB98 /* 어미가 새끼를 찾는 소리.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9B550E3126EDE0160051BB98 /* 어미가 새끼를 찾는 소리.mp3 */; };
+		9B932D1A26EDEB3B008C6C15 /* PermissionsSwiftUIPhoto in Frameworks */ = {isa = PBXBuildFile; productRef = 9B932D1926EDEB3B008C6C15 /* PermissionsSwiftUIPhoto */; };
+		9B932D1C26EDEB3B008C6C15 /* PermissionsSwiftUICamera in Frameworks */ = {isa = PBXBuildFile; productRef = 9B932D1B26EDEB3B008C6C15 /* PermissionsSwiftUICamera */; };
 		9BBEC0F426D7A3FA0027853B /* CustomContextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBEC0F326D7A3FA0027853B /* CustomContextView.swift */; };
 		9BBEC0F626D7A5330027853B /* contextmeny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBEC0F526D7A5330027853B /* contextmeny.swift */; };
 		9BD0009326EB79D500CA41B6 /* MoreObjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD0009226EB79D500CA41B6 /* MoreObjectsView.swift */; };
@@ -79,9 +82,6 @@
 		9B49D0CC26D33EF00021E14C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9B49D0CF26D33EF00021E14C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9B49D0D126D33EF00021E14C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9B49D0D926D33EFA0021E14C /* catsound_clipped.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = catsound_clipped.mp4; sourceTree = "<group>"; };
-		9B49D0DA26D33EFA0021E14C /* catsound_clipped2.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = catsound_clipped2.mp4; sourceTree = "<group>"; };
-		9B49D0DB26D33EFA0021E14C /* bird-clipped.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "bird-clipped.mp4"; sourceTree = "<group>"; };
 		9B49D0DD26D33EFA0021E14C /* CameraVIewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraVIewModel.swift; sourceTree = "<group>"; };
 		9B49D0DE26D33EFA0021E14C /* SoundViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundViewModel.swift; sourceTree = "<group>"; };
 		9B49D0E626D33EFA0021E14C /* PermissionRequestView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionRequestView.swift; sourceTree = "<group>"; };
@@ -95,6 +95,10 @@
 		9B49D10726D3A37A0021E14C /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		9B49D10926D3AB9E0021E14C /* AlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModel.swift; sourceTree = "<group>"; };
 		9B50CDDB26D7341600D6D91F /* Tappage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tappage.swift; sourceTree = "<group>"; };
+		9B550E2B26EDDF560051BB98 /* 어미 고양이를 찾는 소리.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "어미 고양이를 찾는 소리.mp3"; sourceTree = "<group>"; };
+		9B550E2C26EDDF560051BB98 /* 동료를 부르는 소리.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "동료를 부르는 소리.mp3"; sourceTree = "<group>"; };
+		9B550E2D26EDDF570051BB98 /* 짝을 찾는 소리.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "짝을 찾는 소리.mp3"; sourceTree = "<group>"; };
+		9B550E3126EDE0160051BB98 /* 어미가 새끼를 찾는 소리.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "어미가 새끼를 찾는 소리.mp3"; sourceTree = "<group>"; };
 		9BBEC0F326D7A3FA0027853B /* CustomContextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomContextView.swift; sourceTree = "<group>"; };
 		9BBEC0F526D7A5330027853B /* contextmeny.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = contextmeny.swift; sourceTree = "<group>"; };
 		9BD0009226EB79D500CA41B6 /* MoreObjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreObjectsView.swift; sourceTree = "<group>"; };
@@ -109,8 +113,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B932D1C26EDEB3B008C6C15 /* PermissionsSwiftUICamera in Frameworks */,
 				F64DB1EA3FDA9ECDC07DFF54 /* Pods_NNCK_.framework in Frameworks */,
 				9B214DDF26E748920055B5C9 /* StoreKit.framework in Frameworks */,
+				9B932D1A26EDEB3B008C6C15 /* PermissionsSwiftUIPhoto in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,9 +216,10 @@
 		9B49D0D826D33EFA0021E14C /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				9B49D0D926D33EFA0021E14C /* catsound_clipped.mp4 */,
-				9B49D0DA26D33EFA0021E14C /* catsound_clipped2.mp4 */,
-				9B49D0DB26D33EFA0021E14C /* bird-clipped.mp4 */,
+				9B550E2B26EDDF560051BB98 /* 어미 고양이를 찾는 소리.mp3 */,
+				9B550E3126EDE0160051BB98 /* 어미가 새끼를 찾는 소리.mp3 */,
+				9B550E2C26EDDF560051BB98 /* 동료를 부르는 소리.mp3 */,
+				9B550E2D26EDDF570051BB98 /* 짝을 찾는 소리.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -274,8 +281,8 @@
 			children = (
 				9B49D10726D3A37A0021E14C /* Album.swift */,
 				9B49D0EA26D33EFA0021E14C /* Camera.swift */,
-				9B2E7DA726E09B0E007CE2EC /* HuntingEffect.swift */,
 				9B49D0EB26D33EFA0021E14C /* Sound.swift */,
+				9B2E7DA726E09B0E007CE2EC /* HuntingEffect.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -342,6 +349,8 @@
 			);
 			name = "NNCK!";
 			packageProductDependencies = (
+				9B932D1926EDEB3B008C6C15 /* PermissionsSwiftUIPhoto */,
+				9B932D1B26EDEB3B008C6C15 /* PermissionsSwiftUICamera */,
 			);
 			productName = "NNCK!";
 			productReference = 9B49D0C526D33EEF0021E14C /* NNCK!.app */;
@@ -371,6 +380,7 @@
 			);
 			mainGroup = 9B49D0BC26D33EEF0021E14C;
 			packageReferences = (
+				9B932D1826EDEB3B008C6C15 /* XCRemoteSwiftPackageReference "PermissionsSwiftUI" */,
 			);
 			productRefGroup = 9B49D0C626D33EEF0021E14C /* Products */;
 			projectDirPath = "";
@@ -386,11 +396,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B49D0EE26D33EFA0021E14C /* bird-clipped.mp4 in Resources */,
+				9B550E3026EDDF570051BB98 /* 짝을 찾는 소리.mp3 in Resources */,
+				9B550E2E26EDDF570051BB98 /* 어미 고양이를 찾는 소리.mp3 in Resources */,
+				9B550E3226EDE0160051BB98 /* 어미가 새끼를 찾는 소리.mp3 in Resources */,
 				9B49D0D026D33EF00021E14C /* Preview Assets.xcassets in Resources */,
 				9B49D0CD26D33EF00021E14C /* Assets.xcassets in Resources */,
-				9B49D0EC26D33EFA0021E14C /* catsound_clipped.mp4 in Resources */,
-				9B49D0ED26D33EFA0021E14C /* catsound_clipped2.mp4 in Resources */,
+				9B550E2F26EDDF570051BB98 /* 동료를 부르는 소리.mp3 in Resources */,
 				9BFF432526E5B7E600BB44AA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -670,6 +681,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9B932D1826EDEB3B008C6C15 /* XCRemoteSwiftPackageReference "PermissionsSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jevonmao/PermissionsSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9B932D1926EDEB3B008C6C15 /* PermissionsSwiftUIPhoto */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9B932D1826EDEB3B008C6C15 /* XCRemoteSwiftPackageReference "PermissionsSwiftUI" */;
+			productName = PermissionsSwiftUIPhoto;
+		};
+		9B932D1B26EDEB3B008C6C15 /* PermissionsSwiftUICamera */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9B932D1826EDEB3B008C6C15 /* XCRemoteSwiftPackageReference "PermissionsSwiftUI" */;
+			productName = PermissionsSwiftUICamera;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9B49D0BD26D33EEF0021E14C /* Project object */;
 }

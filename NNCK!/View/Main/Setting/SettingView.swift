@@ -35,6 +35,7 @@ struct SettingView: View {
         }
     }
     
+    // 헤더 정의
     var Header: some View {
         let isPro = storeManager.isPurchased(0)
         return ZStack {
@@ -66,6 +67,7 @@ struct SettingView: View {
         .padding(.vertical)
     }
     
+    // 바디
     struct SettingBody: View {
         @EnvironmentObject var soundSettting: SoundViewModel
         @EnvironmentObject var cameraSetting: CameraViewModel
@@ -84,6 +86,7 @@ struct SettingView: View {
             }
         }
         
+        // 카메라 기능(토글)
         var CamFuctions: some View {
             let isPro = storeManager.isPurchased(0)
             return Section(header: Text("카메라 기능")) {
@@ -122,6 +125,7 @@ struct SettingView: View {
             }
         }
         
+        // 애니메이션 세부설정. 속도, 개수 등
         var AniFunctions: some View {
             let isPro = storeManager.isPurchased(0)
             
@@ -223,6 +227,7 @@ struct SettingView: View {
             }
         }
         
+        // 애니메이션 행동 종류
         var AniTypes: some View {
             let isPro = storeManager.isPurchased(0)
             
@@ -276,14 +281,30 @@ struct SettingView: View {
             }
         }
         
+        // 사운드 효과 종류
         var SoundTypes: some View {
             let isPro = storeManager.isPurchased(0)
             
-            return Section(header: Text("사운드")) {
+            return Section(header: Text("사운드"), footer: Text("⚠️ 과도한 이용은 고양이를 지치게 할 수 있음!")) {
                 ForEach(soundSettting.sounds.indices, id: \.self) { index in
+                    let thisSound = soundSettting.sounds[index]
+                    let name = thisSound.name
+                    let description = thisSound.description
+                    
                     ZStack {
                         HStack {
-                            Text("🤹‍♂️")
+                            Text(name)
+                            Image(systemName: "info.circle").padding(.trailing)
+                                .foregroundColor(.gray)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    viewModel.showSoundInfo[index] = true
+                                }
+                                .alert(isPresented: $viewModel.showSoundInfo[index]) {
+                                    Alert(title: Text("안내"),
+                                          message: Text(description),
+                                          dismissButton: .default(Text("OK")))
+                                }
                             Spacer()
                             Image(systemName: "\(index + 1).circle.fill")
                                 .padding(.trailing, 15)
@@ -307,20 +328,6 @@ struct SettingView: View {
                             soundSettting.chooseSound(of: index)
                             soundSettting.stopSound()
                         }
-                    }
-                }
-                
-                if isPro {
-                    NavigationLink(destination: Text("ddd")) {
-                        Text("더 보기...")
-                    }
-                } else {
-                    Button(action: { viewModel.showProAlert = true }) {
-                        Text("더 보기...")
-                    }
-                    .opacity(0.5)
-                    .alert(isPresented: $viewModel.showProAlert) {
-                        ProAlert
                     }
                 }
             }

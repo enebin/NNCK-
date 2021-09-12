@@ -11,17 +11,25 @@ import MediaPlayer
 import SwiftUI
 
 struct SoundPlayer {
+    // 확장자 무조건 mp3. 무조건 무조건 -> 싫으면 아래에 타입 바꾸기
+    // 아래에 디코드 함수도 고쳐줘야됨. 아주 귀찮음.
     var sounds: Array<Sound> = [
-        Sound(name: "catsound_clipped", id: UUID()),
-        Sound(name: "bird-clipped", id: UUID()),
-        Sound(name: "catsound_clipped2", id: UUID())
+        Sound(name: "동료를 부르는 소리",
+              description: "고양이가 평소 동료를 부를 때 내는 소리입니다.", id: UUID()),
+        Sound(name: "어미 고양이를 찾는 소리",
+              description: "새끼 고양이가 어미 고양이를 부를 때 내는 소리입니다.",id: UUID()),
+        Sound(name: "어미가 새끼를 찾는 소리",
+              description: "어미 고양이가 새끼를 찾을 때 내는 소리입니다.", id: UUID()),
+        Sound(name: "짝을 찾는 소리",
+              description: "짝짓기 철에 암컷 고양이가 수컷 고양이를 부를 때 내는 소리입니다.", id: UUID()),
     ]
     
     struct Sound: Codable, Identifiable, Hashable {
+        // 아래에 init이 있습니다.
         let name: String
         let type: String
+        let description: String
         var path: URL?
-        var description: String?
         var emoji: String?
         var isPlaying: Bool
         var isPaused: Bool
@@ -67,11 +75,13 @@ struct SoundPlayer {
             return Int(self.getDuration())
         }
         
-        init(name: String, id: UUID) {
+        init(name: String, description: String, id: UUID) {
             self.name = name
+            self.description = description
+            
             self.isPlaying = false
             self.isPaused = false
-            self.type = "mp4"
+            self.type = "mp3"
             self.id = id
             guard let path = Bundle.main.path(forResource: name, ofType: type) else { return }
             self.audioPlayer = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
@@ -82,11 +92,11 @@ struct SoundPlayer {
         init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             name = try container.decode(String.self, forKey: .name)
+            description = try container.decode(String.self, forKey: .description)
             type = try container.decode(String.self, forKey: .type)
             path = try container.decode(URL?.self, forKey: .path)
             isPlaying = try container.decode(Bool.self, forKey: .isPlaying)
             isPaused = try container.decode(Bool.self, forKey: .isPaused)
-            description = try container.decode(String?.self, forKey: .description)
             duration = try container.decode(Int.self, forKey: .duration)
             id = try container.decode(UUID.self, forKey: .id)
         }
