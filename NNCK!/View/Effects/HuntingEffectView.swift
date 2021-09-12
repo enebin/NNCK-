@@ -21,21 +21,20 @@ struct HuntingEffectView: View {
 
 struct HuntingEffectBody: View {
     @EnvironmentObject var setting: CameraViewModel
-    @ObservedObject var model = HuntingEffect(object: Effects.realistic.getShape())
+    @ObservedObject var model = HuntingEffect()
     
     @State var timer = Timer.publish(every: 0.01, tolerance: 0, on: .main, in: .common)
     @State var offset: CGSize = .zero
+    
+    let haptic = UIImpactFeedbackGenerator(style: .heavy)
     
     var body: some View {
         let speed = setting.animationSpeed * 200
         if model.isAnimating {
             aircraft
-                .transition(.asymmetric(insertion: .identity, removal: .opacity.combined(with: .scale)))
+                .transition(.asymmetric(insertion: .identity, removal: .opacity))
                 .onAppear {
                     fireTimer()
-                    if let object = setting.effectObject {
-                        model.object = object
-                    }
                 }
                 .onReceive(timer) { (_) in
                     let correctedSpeed = -(1/3) * speed + 1000
@@ -54,7 +53,18 @@ struct HuntingEffectBody: View {
                     }
                     
                     if model.alongTrackDistance > model.track.totalArcLength {
-                        model.alongTrackDistance = CGFloat.zero
+                        withAnimation(.easeIn(duration: 0.5)) {
+                            model.isAnimating = false
+                            model.isTimerAvailable = true
+                            cancelTimer()
+                            model.currentTime = 0
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                model.alongTrackDistance = CGFloat.zero
+                                fireTimer()
+                                model.drawPath()
+                                model.isAnimating = true
+                            }
+                        }
                     }
                 }
                 .onTapGesture {
@@ -63,13 +73,14 @@ struct HuntingEffectBody: View {
                         model.isTimerAvailable = true
                         cancelTimer()
                         model.currentTime = 0
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             model.alongTrackDistance = CGFloat.zero
                             fireTimer()
                             model.drawPath()
                             model.isAnimating = true
                         }
                     }
+                    haptic.impactOccurred()
                 }
         }
     }
@@ -79,7 +90,7 @@ struct HuntingEffectBody: View {
         let p = model.track.point(t: t)
         let dp = model.track.derivate(t: t)
         let h = Angle(radians: atan2(Double(dp.dy), Double(dp.dx)))
-        return Text(model.object)
+        return Text(setting.effectObject ?? "🐞")
             .rotationEffect(Angle(degrees: 90))
             .font(.system(size: 35))
             .rotationEffect(h).position(p)

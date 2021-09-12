@@ -42,6 +42,7 @@ struct EffectBody: View {
             } else {
                 Text(setting.effectObject!)
                     .font(.system(size: 20))
+                    .offset(offset)
             }
         }
         .onReceive(timer) { (_) in
