@@ -37,11 +37,11 @@ struct EffectBody: View {
             if setting.effectObject == nil {
                 Circle()
                     .foregroundColor(.red)
-                    .frame(width: 25, height: 25, alignment: .center)
+                    .frame(width: setting.sizeOfEffect-10, height: setting.sizeOfEffect-10, alignment: .center)
                     .offset(offset)
             } else {
                 Text(setting.effectObject!)
-                    .font(.system(size: 20))
+                    .font(.system(size: setting.sizeOfEffect))
                     .offset(offset)
             }
         }

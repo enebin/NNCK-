@@ -28,7 +28,7 @@ struct DodgeballEffectView: View {
         var body: some View {
             VStack {
                 Text(setting.effectObject ?? Effects.dodgeball.getShape())
-                    .font(.system(size: 35))
+                    .font(.system(size: setting.sizeOfEffect))
                     .padding(5)
                     .contentShape(Rectangle())
                     .onTapGesture {

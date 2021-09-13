@@ -26,7 +26,7 @@ struct IAPView: View {
                     }
                     .padding(.top, 5)
                     
-                    Text(product.localizedDescription)
+                    Text("단 한번의 결제 후 모든 기능과 업데이트를 제한 없이 이용하세요.")
                         .font(.caption2)
                 }
                 .padding()

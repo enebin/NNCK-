@@ -191,7 +191,7 @@ struct CameraView: View {
                 ConditionalButton(action: {
                                     viewModel.switchShowEffect();
                                     collapseAll() },
-                                  longPressAction: { showSlider.toggle() },
+                                  longPressAction: { },
                                   condition: !viewModel.showEffect, imageName: ["sparkles", "sparkles"])
                 if showSlider {
                     EffectSlider

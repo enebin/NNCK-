@@ -33,7 +33,7 @@ struct PopEffectBody: View {
         
         VStack {
             Text(setting.effectObject ?? Effects.floating.getShape())
-                .font(.system(size: 20))
+                .font(.system(size: setting.sizeOfEffect))
                 .offset(offset)
                 .transition(.identity)
         }

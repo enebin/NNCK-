@@ -75,14 +75,18 @@ struct SettingView: View {
         
         @EnvironmentObject var viewModel: SettingViewModel
         
+        @Namespace var bottomID
+        
         var body: some View {
-            Form {
-                CamFuctions
-                AniFunctions
-                AniTypes
-                SoundTypes
-                CamBackground
-                IAP
+            ScrollViewReader { proxy in
+                Form {
+                    CamFuctions
+                    AniFunctions
+                    AniTypes
+                    SoundTypes
+                    CamBackground
+                    IAP
+                }
             }
         }
         
@@ -140,7 +144,7 @@ struct SettingView: View {
                         .padding(.trailing)
 
                     Spacer()
-                    Text("\(cameraSetting.numOfEffect)")
+                    Text("\(cameraSetting.numOfEffect)개")
                     
                     Spacer()
                     Text("+")
@@ -161,6 +165,36 @@ struct SettingView: View {
                                 cameraSetting.numOfEffect = 4
                              }))
                 }
+                
+                // 크기
+                HStack {
+                    Text("-")
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            if cameraSetting.sizeOfEffect >= 2 {
+                                cameraSetting.sizeOfEffect -= 2
+                            } else {
+                                cameraSetting.sizeOfEffect = 0
+                            }
+                        }
+                        .padding(.trailing)
+
+                    Spacer()
+                    Text("\(Int(cameraSetting.sizeOfEffect/2)) 사이즈")
+                    
+                    Spacer()
+                    Text("+")
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            if cameraSetting.sizeOfEffect < 70 {
+                                cameraSetting.sizeOfEffect += 2
+                            } else {
+                                cameraSetting.sizeOfEffect = 70
+                            }
+                        }
+                        .padding(.leading)
+                }
+                .accentColor(.blue)
                 
                 // 속도 바
                 VStack {
@@ -306,8 +340,8 @@ struct SettingView: View {
                                           dismissButton: .default(Text("OK")))
                                 }
                             Spacer()
-                            Image(systemName: "\(index + 1).circle.fill")
-                                .padding(.trailing, 15)
+//                            Image(systemName: "\(index + 1).circle.fill")
+//                                .padding(.trailing, 15)
                         }
                         
                         if viewModel.pickedSoundIndex == index {
@@ -378,6 +412,7 @@ struct SettingView: View {
                         Text("바로가기")
                     })
             }
+            .id(bottomID)
         }
         
         var restore: some View {

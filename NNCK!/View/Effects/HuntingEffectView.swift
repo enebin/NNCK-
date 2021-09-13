@@ -92,7 +92,7 @@ struct HuntingEffectBody: View {
         let h = Angle(radians: atan2(Double(dp.dy), Double(dp.dx)))
         return Text(setting.effectObject ?? "🐞")
             .rotationEffect(Angle(degrees: 90))
-            .font(.system(size: 35))
+            .font(.system(size: setting.sizeOfEffect))
             .rotationEffect(h).position(p)
     }
     

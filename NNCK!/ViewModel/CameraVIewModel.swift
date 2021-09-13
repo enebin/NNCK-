@@ -23,6 +23,7 @@ class CameraViewModel: ObservableObject {
     @Published var showEffect = false
     @Published var effectType: Effects = .laser
     @Published var numOfEffect = 1
+    @Published var sizeOfEffect: CGFloat = 34
     
     // 사진 관련 변수
     @Published var recentImage: UIImage?
@@ -43,10 +44,10 @@ class CameraViewModel: ObservableObject {
     
     let debug = false
     let objectSet =
-        ["기본값" ,"😀", "😃", "😄", "😁", "👺",
-         "🤡", "💩", "👻", "💀", "☠️", "👽",
-         "👾", "🤖", "🎃", "😺", "😸", "😹",
-         "😻", "😼", "😽", "🙀", "😿", "😾"]
+        ["기본값" ,"🐶", "🐸", "🐛", "🪲", "🪰",
+         "🦀", "🦎", "👻", "💀", "☠️", "👽",
+         "🐝", "🪱", "🎃", "🪳", "🌕", "⭐️",
+         "🥩", "🍗", "🥎", "👁", "☄️", "🐽"]
     
     var notYetPermitted: Bool {
         return self.debug ? !self.debug : self.cameraAuth != .success || self.albumAuth != .success

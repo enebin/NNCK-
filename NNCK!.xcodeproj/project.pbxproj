@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -44,8 +44,6 @@
 		9B550E2F26EDDF570051BB98 /* 동료를 부르는 소리.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9B550E2C26EDDF560051BB98 /* 동료를 부르는 소리.mp3 */; };
 		9B550E3026EDDF570051BB98 /* 짝을 찾는 소리.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9B550E2D26EDDF570051BB98 /* 짝을 찾는 소리.mp3 */; };
 		9B550E3226EDE0160051BB98 /* 어미가 새끼를 찾는 소리.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9B550E3126EDE0160051BB98 /* 어미가 새끼를 찾는 소리.mp3 */; };
-		9B932D1A26EDEB3B008C6C15 /* PermissionsSwiftUIPhoto in Frameworks */ = {isa = PBXBuildFile; productRef = 9B932D1926EDEB3B008C6C15 /* PermissionsSwiftUIPhoto */; };
-		9B932D1C26EDEB3B008C6C15 /* PermissionsSwiftUICamera in Frameworks */ = {isa = PBXBuildFile; productRef = 9B932D1B26EDEB3B008C6C15 /* PermissionsSwiftUICamera */; };
 		9BBEC0F426D7A3FA0027853B /* CustomContextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBEC0F326D7A3FA0027853B /* CustomContextView.swift */; };
 		9BBEC0F626D7A5330027853B /* contextmeny.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBEC0F526D7A5330027853B /* contextmeny.swift */; };
 		9BD0009326EB79D500CA41B6 /* MoreObjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD0009226EB79D500CA41B6 /* MoreObjectsView.swift */; };
@@ -113,10 +111,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B932D1C26EDEB3B008C6C15 /* PermissionsSwiftUICamera in Frameworks */,
 				F64DB1EA3FDA9ECDC07DFF54 /* Pods_NNCK_.framework in Frameworks */,
 				9B214DDF26E748920055B5C9 /* StoreKit.framework in Frameworks */,
-				9B932D1A26EDEB3B008C6C15 /* PermissionsSwiftUIPhoto in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,8 +345,6 @@
 			);
 			name = "NNCK!";
 			packageProductDependencies = (
-				9B932D1926EDEB3B008C6C15 /* PermissionsSwiftUIPhoto */,
-				9B932D1B26EDEB3B008C6C15 /* PermissionsSwiftUICamera */,
 			);
 			productName = "NNCK!";
 			productReference = 9B49D0C526D33EEF0021E14C /* NNCK!.app */;
@@ -380,7 +374,6 @@
 			);
 			mainGroup = 9B49D0BC26D33EEF0021E14C;
 			packageReferences = (
-				9B932D1826EDEB3B008C6C15 /* XCRemoteSwiftPackageReference "PermissionsSwiftUI" */,
 			);
 			productRefGroup = 9B49D0C626D33EEF0021E14C /* Products */;
 			projectDirPath = "";
@@ -681,30 +674,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		9B932D1826EDEB3B008C6C15 /* XCRemoteSwiftPackageReference "PermissionsSwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/jevonmao/PermissionsSwiftUI";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.5.4;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		9B932D1926EDEB3B008C6C15 /* PermissionsSwiftUIPhoto */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9B932D1826EDEB3B008C6C15 /* XCRemoteSwiftPackageReference "PermissionsSwiftUI" */;
-			productName = PermissionsSwiftUIPhoto;
-		};
-		9B932D1B26EDEB3B008C6C15 /* PermissionsSwiftUICamera */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9B932D1826EDEB3B008C6C15 /* XCRemoteSwiftPackageReference "PermissionsSwiftUI" */;
-			productName = PermissionsSwiftUICamera;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9B49D0BD26D33EEF0021E14C /* Project object */;
 }
