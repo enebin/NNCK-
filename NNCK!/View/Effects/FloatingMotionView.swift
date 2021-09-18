@@ -22,7 +22,7 @@ struct PopEffectBody: View {
     @State var offset: CGSize = .zero
 
     var body: some View {
-        let interval: Double = setting.animationSpeed
+        let interval: Double = setting.animationSpeed * 1.5
 
         let timer = Timer.publish(
             every: -(1/5) * interval + Double.random(in: 2...3),       // Second

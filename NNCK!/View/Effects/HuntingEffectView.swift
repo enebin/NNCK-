@@ -29,7 +29,7 @@ struct HuntingEffectBody: View {
     let haptic = UIImpactFeedbackGenerator(style: .heavy)
     
     var body: some View {
-        let speed = setting.animationSpeed * 200
+        let speed = setting.animationSpeed * 300
         if model.isAnimating {
             aircraft
                 .transition(.asymmetric(insertion: .identity, removal: .opacity))

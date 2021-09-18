@@ -177,9 +177,26 @@ struct CameraPreview: UIViewRepresentable {
     }
     
     let session: AVCaptureSession
+    let orientationChanged = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
+                .makeConnectable()
+                .autoconnect()
     
     func makeUIView(context: Context) -> VideoPreviewView {
         let view = VideoPreviewView()
+//        let app = UIApplication.shared.windows
+//        switch app.first(where: { $0.isKeyWindow })?.windowScene?.interfaceOrientation {
+//        case .portrait:
+//            view.videoPreviewLayer.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
+//        case .portraitUpsideDown:
+//            view.videoPreviewLayer.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
+//        case .landscapeLeft:
+//            view.videoPreviewLayer.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
+//        case .landscapeRight:
+//            view.videoPreviewLayer.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
+//        default:
+//            view.videoPreviewLayer.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
+//        }
+        
         view.backgroundColor = .black
         view.videoPreviewLayer.videoGravity = .resizeAspectFill
         view.videoPreviewLayer.cornerRadius = 0
