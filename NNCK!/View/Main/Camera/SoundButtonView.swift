@@ -13,11 +13,16 @@ struct SoundButtonView: View {
     
     var body: some View {
         HStack {
-            ConditionalButton(action: { viewModel.isPlaying ?
-                                viewModel.stopSound() : viewModel.playSound()},
-                              longPressAction: { viewModel.switchShowSound() },
-                              condition: !viewModel.isPlaying,
-                              imageName: ["music.note", "music.note"])
+            ConditionalButton(action: {
+                viewModel.isPlaying ?
+                    viewModel.stopSound() : viewModel.playSound()
+                if setting.soundAlertIsChecked == false && viewModel.isPlaying == false{
+                    setting.soundAlert = true
+                }
+            },
+            longPressAction: { viewModel.switchShowSound() },
+            condition: !viewModel.isPlaying,
+            imageName: ["music.note", "music.note"])
             
             Group {
                 if viewModel.showSound {
@@ -35,6 +40,11 @@ struct SoundButtonView: View {
             }
             .transition(.move(edge: .leading).combined(with: .opacity))
         }
+        .alert(isPresented: $setting.soundAlert, content: {
+            Alert(title: Text("안내"), message: Text("기기의 무음 모드를 해제하지 않으면 소리가 들리지 않아요!"), primaryButton: .default(Text("Ok")), secondaryButton: .destructive(Text("다시 보지 않기"), action: {
+                setting.soundAlertIsChecked = true
+            }) )
+        })
     }
 }
 

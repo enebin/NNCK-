@@ -25,6 +25,9 @@ class CameraViewModel: ObservableObject {
     @Published var numOfEffect = 1
     @Published var sizeOfEffect: CGFloat = 34
     
+    @Published var soundAlert = false
+    @Published var soundAlertIsChecked = false
+    
     // 사진 관련 변수
     @Published var recentImage: UIImage?
     @Published var isSilent = true

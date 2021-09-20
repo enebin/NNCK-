@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>Allow Arbitray Loads</key>
 	<true/>
 	<key>Allows Arbitrary Loads In Web Content</key>
@@ -21,7 +23,7 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>GADApplicationIdentifier</key>
@@ -31,11 +33,11 @@
 	<key>NSAllowsArbitraryLoadsForMedia</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>사진을 촬영하기 위해 허용해주세요.</string>
+	<string>카메라 접근 권한을 허용하시겠어요? 사진을 촬영하기 위해서는 해당 권한이 필요해요.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>사진을 저장, 편집하기 위해 허용해주세요. </string>
+	<string>사진 앨범에 쓰기 권한을 허용하시겠어요? 사진을 저장, 편집하기 위해서는 해당 권한이 필요해요.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>사진을 저장, 편집하기 위해 허용해주세요. </string>
+	<string>사진 앨범 접근 권한을 허용하시겠어요? 사진을 탐색, 저장, 편집하기 위해서는 해당 권한이 필요해요.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

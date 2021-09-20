@@ -430,7 +430,7 @@ struct SettingView: View {
         }
         
         var ProAlert: Alert {
-            Alert(title: Text("알림"), message: Text("유료버전에서만 가능한 기능입니다."),
+            Alert(title: Text("알림"), message: Text("Full 버전에서만 가능한 기능입니다."),
                   dismissButton: .default(Text("OK")))
         }
     }

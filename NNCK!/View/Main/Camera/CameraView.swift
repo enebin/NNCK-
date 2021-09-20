@@ -114,6 +114,7 @@ struct CameraView: View {
                     let width = screenSizes[0]
                     let height = screenSizes[1]
                     
+                    
                     CameraPreview(session: viewModel.session)
                         .onAppear {
                             viewModel.configure()
