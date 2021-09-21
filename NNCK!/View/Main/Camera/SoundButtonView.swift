@@ -16,7 +16,7 @@ struct SoundButtonView: View {
             ConditionalButton(action: {
                 viewModel.isPlaying ?
                     viewModel.stopSound() : viewModel.playSound()
-                if setting.soundAlertIsChecked == false && viewModel.isPlaying == false{
+                if setting.soundAlertIsChecked == false && viewModel.isPlaying == true {
                     setting.soundAlert = true
                 }
             },

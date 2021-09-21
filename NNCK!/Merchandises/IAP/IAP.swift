@@ -16,8 +16,11 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
     var request: SKProductsRequest!
     
     func isPurchased(_ index: Int) -> Bool{
-        print(myProducts[index])
-        return UserDefaults.standard.bool(forKey: self.myProducts[index].productIdentifier)
+        if self.myProducts == [] {
+            return false
+        } else {
+            return UserDefaults.standard.bool(forKey: self.myProducts[index].productIdentifier)
+        }
     }
     
     func getProducts(productIDs: [String]) {
