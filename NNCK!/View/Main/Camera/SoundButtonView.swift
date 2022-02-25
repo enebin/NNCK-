@@ -40,11 +40,12 @@ struct SoundButtonView: View {
             }
             .transition(.move(edge: .leading).combined(with: .opacity))
         }
-        .alert(isPresented: $setting.soundAlert, content: {
-            Alert(title: Text("안내"), message: Text("기기의 무음 모드를 해제하지 않으면 소리가 들리지 않아요!"), primaryButton: .default(Text("Ok")), secondaryButton: .destructive(Text("다시 보지 않기"), action: {
-                setting.soundAlertIsChecked = true
-            }) )
-        })
+//        .alert(isPresented: $setting.soundAlert, content: {
+//            Alert(title: Text("안내"), message: Text("기기의 무음 모드를 해제하지 않으면 소리가 들리지 않아요!"), primaryButton: .default(Text("Ok")), secondaryButton: .destructive(Text("다시 보지 않기"), action: {
+//                UserDefaults.standard.set(true, forKey: "soundChecked")
+////                setting.soundAlertIsChecked = true
+//            }) )
+//        })
     }
 }
 
@@ -53,3 +54,4 @@ struct SoundButtonView_Previews: PreviewProvider {
         SoundButtonView()
     }
 }
+

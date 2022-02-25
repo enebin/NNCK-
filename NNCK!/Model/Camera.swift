@@ -35,7 +35,7 @@ class Camera: NSObject, ObservableObject {
     // 각종 파라미터
     @Published var isSaved = false
     @Published var isTaken = false
-    @Published var isSilent = true
+    @Published var isSilent = false
     @Published var isWaterMarked = true
     
     @Published var cameraAuth: SessionSetupResult = .success
@@ -130,9 +130,7 @@ class Camera: NSObject, ObservableObject {
     }
     
     // MARK: - 카메라 기능에 관한 것들
-    
-    // TODO: 카메라 프리뷰 켜기 아님 끄기 + 비율 조정
-    
+        
     func changeCamera() {
         let currentPosition = self.videoDeviceInput.device.position
         let preferredPosition: AVCaptureDevice.Position

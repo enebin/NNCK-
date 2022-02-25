@@ -15,6 +15,10 @@ class StoreManager: NSObject, ObservableObject, SKProductsRequestDelegate, SKPay
 
     var request: SKProductsRequest!
     
+    func showReview() {
+        if let windowScene = UIApplication.shared.windows.first?.windowScene { SKStoreReviewController.requestReview(in: windowScene) }
+    }
+    
     func isPurchased(_ index: Int) -> Bool{
         if self.myProducts == [] {
             return false

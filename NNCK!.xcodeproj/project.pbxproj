@@ -40,6 +40,7 @@
 		9B49D10826D3A37A0021E14C /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D10726D3A37A0021E14C /* Album.swift */; };
 		9B49D10A26D3AB9E0021E14C /* AlbumViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49D10926D3AB9E0021E14C /* AlbumViewModel.swift */; };
 		9B50CDDC26D7341600D6D91F /* Tappage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B50CDDB26D7341600D6D91F /* Tappage.swift */; };
+		9B54316627080C4600FE3A1D /* Localized.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9B54316827080C4600FE3A1D /* Localized.strings */; };
 		9B550E2E26EDDF570051BB98 /* 어미 고양이를 찾는 소리.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9B550E2B26EDDF560051BB98 /* 어미 고양이를 찾는 소리.mp3 */; };
 		9B550E2F26EDDF570051BB98 /* 동료를 부르는 소리.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9B550E2C26EDDF560051BB98 /* 동료를 부르는 소리.mp3 */; };
 		9B550E3026EDDF570051BB98 /* 짝을 찾는 소리.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9B550E2D26EDDF570051BB98 /* 짝을 찾는 소리.mp3 */; };
@@ -93,6 +94,8 @@
 		9B49D10726D3A37A0021E14C /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		9B49D10926D3AB9E0021E14C /* AlbumViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewModel.swift; sourceTree = "<group>"; };
 		9B50CDDB26D7341600D6D91F /* Tappage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tappage.swift; sourceTree = "<group>"; };
+		9B54316727080C4600FE3A1D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localized.strings; sourceTree = "<group>"; };
+		9B54316927080D7400FE3A1D /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localized.strings; sourceTree = "<group>"; };
 		9B550E2B26EDDF560051BB98 /* 어미 고양이를 찾는 소리.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "어미 고양이를 찾는 소리.mp3"; sourceTree = "<group>"; };
 		9B550E2C26EDDF560051BB98 /* 동료를 부르는 소리.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "동료를 부르는 소리.mp3"; sourceTree = "<group>"; };
 		9B550E2D26EDDF570051BB98 /* 짝을 찾는 소리.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "짝을 찾는 소리.mp3"; sourceTree = "<group>"; };
@@ -181,14 +184,15 @@
 				9B49D0DF26D33EFA0021E14C /* View */,
 				9B49D0DC26D33EFA0021E14C /* ViewModel */,
 				9B49D0E926D33EFA0021E14C /* Model */,
+				9B49D0CA26D33EEF0021E14C /* ContentView.swift */,
+				9B49D0C826D33EEF0021E14C /* NNCK_App.swift */,
 				9B49D0CC26D33EF00021E14C /* Assets.xcassets */,
 				9BFF432426E5B7E600BB44AA /* GoogleService-Info.plist */,
 				9B49D0D126D33EF00021E14C /* Info.plist */,
-				9B49D0CA26D33EEF0021E14C /* ContentView.swift */,
-				9B49D0C826D33EEF0021E14C /* NNCK_App.swift */,
 				9BD4956C26E1AFEB00932187 /* Customs */,
 				9B50CDBC26D7288A00D6D91F /* Tomb */,
 				9B49D0CE26D33EF00021E14C /* Preview Content */,
+				9B54316827080C4600FE3A1D /* Localized.strings */,
 			);
 			path = "NNCK!";
 			sourceTree = "<group>";
@@ -371,6 +375,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 9B49D0BC26D33EEF0021E14C;
 			packageReferences = (
@@ -389,6 +394,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B54316627080C4600FE3A1D /* Localized.strings in Resources */,
 				9B550E3026EDDF570051BB98 /* 짝을 찾는 소리.mp3 in Resources */,
 				9B550E2E26EDDF570051BB98 /* 어미 고양이를 찾는 소리.mp3 in Resources */,
 				9B550E3226EDE0160051BB98 /* 어미가 새끼를 찾는 소리.mp3 in Resources */,
@@ -489,11 +495,24 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		9B54316827080C4600FE3A1D /* Localized.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9B54316727080C4600FE3A1D /* en */,
+				9B54316927080D7400FE3A1D /* ko */,
+			);
+			name = Localized.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		9B49D0D226D33EF00021E14C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -555,6 +574,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -613,6 +633,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"NNCK!/Preview Content\"";
 				DEVELOPMENT_TEAM = W6QHM4Y43Z;
 				ENABLE_PREVIEWS = YES;
@@ -622,7 +643,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.enebin.NNCK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -637,6 +658,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"NNCK!/Preview Content\"";
 				DEVELOPMENT_TEAM = W6QHM4Y43Z;
 				ENABLE_PREVIEWS = YES;
@@ -646,7 +668,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.enebin.NNCK;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

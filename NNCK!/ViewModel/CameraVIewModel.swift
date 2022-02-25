@@ -26,11 +26,11 @@ class CameraViewModel: ObservableObject {
     @Published var sizeOfEffect: CGFloat = 34
     
     @Published var soundAlert = false
-    @Published var soundAlertIsChecked = false
+    @Published var soundAlertIsChecked = UserDefaults.standard.optionalBool(forKey: "soundChecked") ?? false
     
     // 사진 관련 변수
     @Published var recentImage: UIImage?
-    @Published var isSilent = true
+    @Published var isSilent = false
     @Published var isWatermark = true
     @Published var isTaken = false
     @Published var animationSpeed: Double = 5
@@ -239,5 +239,25 @@ extension CaseIterable where Self: Equatable {
         let idx = all.firstIndex(of: self)!
         let next = all.index(after: idx)
         return all[next == all.endIndex ? all.startIndex : next]
+    }
+}
+
+
+extension UserDefaults {
+
+    public func optionalInt(forKey defaultName: String) -> Int? {
+        let defaults = self
+        if let value = defaults.value(forKey: defaultName) {
+            return value as? Int
+        }
+        return nil
+    }
+
+    public func optionalBool(forKey defaultName: String) -> Bool? {
+        let defaults = self
+        if let value = defaults.value(forKey: defaultName) {
+            return value as? Bool
+        }
+        return nil
     }
 }

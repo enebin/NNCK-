@@ -94,13 +94,13 @@ struct SettingView: View {
         var CamFuctions: some View {
             let isPro = storeManager.isPurchased(0)
             return Section(header: Text("카메라 기능")) {
-                Toggle("무음 모드(셔터소리 X)",
-                       isOn:.init(
-                        get: { cameraSetting.isSilent },
-                        set: { status in
-                            cameraSetting.switchSilent()
-                        }
-                       ))
+//                Toggle("무음 모드(셔터소리 X)",
+//                       isOn:.init(
+//                        get: { cameraSetting.isSilent },
+//                        set: { status in
+//                            cameraSetting.switchSilent()
+//                        }
+//                       ))
                 
                 if isPro {
                     Toggle("워터마크",
@@ -317,8 +317,6 @@ struct SettingView: View {
         
         // 사운드 효과 종류
         var SoundTypes: some View {
-            let isPro = storeManager.isPurchased(0)
-            
             return Section(header: Text("사운드"), footer: Text("⚠️ 과도한 이용은 고양이를 지치게 할 수 있음!")) {
                 ForEach(soundSettting.sounds.indices, id: \.self) { index in
                     let thisSound = soundSettting.sounds[index]

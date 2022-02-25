@@ -22,6 +22,7 @@ class AlbumViewModel: ObservableObject {
     
     @Published var photoAssets = PHFetchResult<PHAsset>()
     @Published var currentPhoto = UIImage()
+    @Published var chosenIndex: [Int] = [Int]()
     @Published var chosenMultipleAssets: [PHAsset] = [PHAsset]()
     
     @Published var showImageViewer = true
@@ -35,6 +36,10 @@ class AlbumViewModel: ObservableObject {
         print("[AlbumViewModel]: \(photoAssets.count) fetched count")
     }
     
+    // 선택?
+    func isChecked(asset: PHAsset) -> Bool {
+        return chosenMultipleAssets.contains(asset)
+    }
     
     // 앨범 관련
     func switchSelectionMode(to result: Bool) {

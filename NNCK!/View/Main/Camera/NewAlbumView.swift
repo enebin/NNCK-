@@ -11,13 +11,14 @@ import PhotosUI
 struct NewAlbumView: View {
     @EnvironmentObject var camSetting: CameraViewModel
     @EnvironmentObject var storeManager: StoreManager
-
+    
     @StateObject var viewModel = AlbumViewModel()
     @State var selection = 0
     @Binding var showAlbum: Bool
     
     var body: some View {
         let isPro = storeManager.isPurchased(0)
+        
         VStack(spacing: 0) {
             Group {
                 if viewModel.isSelectionMode {
@@ -36,6 +37,11 @@ struct NewAlbumView: View {
                 Banner()
             }
         }
+        .onAppear {
+            viewModel.configure()
+            print("중요한 디버그 정보!########")
+            print(viewModel.photoAssets.count)
+        }
         .onDisappear {
             camSetting.recentImage = nil
         }
@@ -46,7 +52,6 @@ struct NewAlbumView: View {
                           data: viewModel.chosenMultipleAssets.map({
             $0.originalImage(targetSize: viewModel.originalSize)
         })))
-        .animation(.easeInOut(duration: 0.4))
     }
     
     var AlbumGrid: some View {
@@ -54,13 +59,16 @@ struct NewAlbumView: View {
                             GridItem(.flexible(minimum: 80), spacing: viewModel.gridSpacing),
                             GridItem(.flexible(minimum: 80), spacing: viewModel.gridSpacing)],
                   spacing: viewModel.gridSpacing) {
-            ForEach(0..<viewModel.photoAssets.count, id: \.self) { index in
-                let asset = viewModel.photoAssets[index]
-                AlbumElement(selection: $selection, asset: asset, index: index)
-                    .environmentObject(viewModel)
+            if viewModel.photoAssets.count == 0 {
+                Text("")
+            } else {
+                ForEach(0..<viewModel.photoAssets.count, id: \.self) { index in
+                    let asset = viewModel.photoAssets[index]
+                    AlbumElement(selection: $selection, asset: asset, index: index)
+                        .environmentObject(viewModel)
+                }
             }
         }
-        .transition(.opacity)
     }
     
     var MainHeader: some View {
@@ -77,7 +85,11 @@ struct NewAlbumView: View {
                 .font(.system(size: 18))
             
             Spacer()
-            Button(action: {viewModel.switchSelectionMode(to: true)}) {
+            Button(action: {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    viewModel.switchSelectionMode(to: true)
+                }
+            }) {
                 Image(systemName: "checkmark.circle")
                     .foregroundColor(.yellow)
                     .font(.system(size: 20))
@@ -97,14 +109,17 @@ struct NewAlbumView: View {
                     .foregroundColor(.yellow)
             }
             Spacer()
-            Button(action: {viewModel.switchSelectionMode(to: false)}) {
+            Button(action: {
+                withAnimation(.easeInOut(duration: 0.3)) {
+                    viewModel.switchSelectionMode(to: false)}
+            }) {
                 Image(systemName: "checkmark.circle.fill")
                     .foregroundColor(.yellow)
             }
         }
         .font(.system(size: 20))
     }
-        
+    
     struct AlbumElement: View {
         @EnvironmentObject var viewModel: AlbumViewModel
         @Binding var selection: Int
@@ -113,7 +128,7 @@ struct NewAlbumView: View {
         
         var body: some View {
             ZStack {
-                if (viewModel.chosenMultipleAssets.firstIndex(of: asset) != nil) {
+                if viewModel.chosenMultipleAssets.firstIndex(of: asset) != nil {
                     checkMark.zIndex(1.0)
                 }
                 thumbnailImage
@@ -135,6 +150,7 @@ struct NewAlbumView: View {
                 Spacer()
             }
             .transition(.identity)
+            .animation(.easeInOut(duration: 0.4))
         }
         
         var thumbnailImage: some View {
@@ -165,8 +181,10 @@ struct NewAlbumView: View {
                     }
                     .onTapGesture {
                         if viewModel.isSelectionMode == false {
-                            viewModel.showImageViewer = true
-                            selection = index
+                            withAnimation(.easeInOut(duration: 0.3)) {
+                                viewModel.showImageViewer = true
+                                selection = index
+                            }
                         } else {
                             if let index = viewModel.chosenMultipleAssets.firstIndex(of: asset) { // 셀렉션이 이미 되었다면
                                 viewModel.chosenMultipleAssets.remove(at: index)
@@ -201,24 +219,30 @@ struct NewAlbumView: View {
                     .zIndex(1.0)
                     TabPage
                 }
-                .transition(.asymmetric(insertion: .opacity, removal: .opacity))
+                .transition(.asymmetric(insertion: .opacity, removal: .move(edge: .bottom)))
             }
         }
-
+        
         var TabPage: some View {
-            return TabView(selection: $selection) {
-                ForEach(0..<viewModel.photoAssets.count, id: \.self) { index in
-                    VStack {
-                        Spacer()
-                        ChildImageView(hidePreviewHeader: $hidePreviewHeader, index: index)
-                        Spacer()
+            Group {
+                if viewModel.photoAssets.count == 0 {
+                    Text("")
+                } else {
+                    TabView(selection: $selection) {
+                        ForEach(0..<viewModel.photoAssets.count, id: \.self) { index in
+                            VStack {
+                                Spacer()
+                                ChildImageView(hidePreviewHeader: $hidePreviewHeader, index: index)
+                                Spacer()
+                            }
+                            
+                        }
                     }
-                    
+                    .tabViewStyle(PageTabViewStyle())
+                    .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
+                    .background(Color.black.ignoresSafeArea(.all))
                 }
             }
-            .tabViewStyle(PageTabViewStyle())
-            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
-            .background(Color.black.ignoresSafeArea(.all))
         }
         
         
@@ -234,10 +258,12 @@ struct NewAlbumView: View {
                 .foregroundColor(.yellow)
                 .contentShape(Rectangle())
                 .onTapGesture {
-                    viewModel.showImageViewer = false
-                    viewModel.switchSelectionMode(to: false)
+                    withAnimation(.easeInOut(duration: 0.3)) {
+                        viewModel.showImageViewer = false
+                        viewModel.switchSelectionMode(to: false)
+                    }
                 }
-            
+                
                 HStack {
                     Spacer()
                     Button(action: { viewModel.deletePhoto(assets: [viewModel.photoAssets[selection]]) }) {
@@ -267,7 +293,7 @@ struct NewAlbumView: View {
         @State var drag = CGSize.zero
         
         let haptic = UIImpactFeedbackGenerator(style: .light)
-
+        
         let index: Int
         var body: some View {
             let image = viewModel.photoAssets[index].originalImage(targetSize: viewModel.originalSize)
@@ -281,22 +307,22 @@ struct NewAlbumView: View {
                         imageScale = imageScale > 1 ? 1 : 4
                     }
                     hidePreviewHeader = imageScale > 1 ?
-                        true : false
+                    true : false
                 }))
                 .simultaneousGesture(TapGesture(count: 1).onEnded({
                     hidePreviewHeader.toggle()
                 }))
                 .simultaneousGesture(MagnificationGesture()
                                         .onChanged({ (value) in
-                                            imageScale = value
-                                            hidePreviewHeader = true
-                                        }).onEnded({ (_) in
-                                            withAnimation(.spring()){
-                                                imageScale = 1
-                                            }
-                                            haptic.impactOccurred()
-                                            hidePreviewHeader = false
-                                        }))
+                    imageScale = value
+                    hidePreviewHeader = true
+                }).onEnded({ (_) in
+                    withAnimation(.spring()){
+                        imageScale = 1
+                    }
+                    haptic.impactOccurred()
+                    hidePreviewHeader = false
+                }))
         }
     }
 }

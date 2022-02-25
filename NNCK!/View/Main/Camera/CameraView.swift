@@ -91,11 +91,10 @@ struct CameraView: View {
                                             let delta = val / lastScale
                                             lastScale = val
                                             
-                                            print(lastScale)
                                             let newScale = min(max(currentZoomFactor * delta, 1), 5)
                                             let zoomFactor: CGFloat = newScale
                                             viewModel.zoom(with: zoomFactor)
-                                            currentZoomFactor = newScale
+                                            currentZoomFactor = newScale 
                                         }
                                         .onEnded { _ in
                                             self.lastScale = 1.0
@@ -167,6 +166,8 @@ struct CameraView: View {
                 .contentShape(Rectangle())
                 .onTapGesture {
                     viewModel.switchSetting()
+                    storeManager.getProducts(productIDs: ["com.enebin.NNCK.full"])
+//                    storeManager.showReview()
                     collapseAll()
                 }
             
